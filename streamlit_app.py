@@ -33,6 +33,18 @@ def main():
 
     st.write("You selected:", route)
 
+    st.markdown("""
+            <style>
+                div[data-testid="stColumn"] {
+                    width: fit-content !important;
+                    flex: unset;
+                }
+                div[data-testid="stColumn"] * {
+                    width: fit-content !important;
+                }
+            </style>
+            """, unsafe_allow_html=True)
+
     col1, col2, col3, col4, col5 = st.columns([1,1,1,1,1])  # Adjust column ratios as needed
 
     with col1:
