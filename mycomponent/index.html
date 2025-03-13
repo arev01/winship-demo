@@ -41,9 +41,6 @@
 </head>
 <body>
 
-<!--<input type="range" id="brightnessSlider" min="0" max="100" step= "1" value="50" onchange="updateColor()">
-<div id="colorBox" style="width: 200px; height: 50px; background-color: rgb(0,0,0);"></div>-->
-
 <div class="container">
     <div class="swiper">
         <!-- Additional required wrapper -->
@@ -67,8 +64,6 @@
     </div>
 </div>
 
-<h1 id="heading">Hello world</h1>
-
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
 <script>
@@ -91,25 +86,10 @@
 
     });
 
-    // Assign all parameters to object
-    //Object.assign(mySwiper, myParams);
-
-    // and now initialize it
-    //mySwiper.initialize();
-
-    // Attach an event handler
-    //mySwiper.addEventListener('swiper-slidechange', (event) => {
-    //    onSliderChange();
-    //});
-
-    //var activeSlide = document.querySelector('.swiper-slide-active img');
-
-    //function myCallbackfunction(){
-    //    const activeSlide = document.querySelector('.swiper-slide-active img');
-    //    //document.getElementById("heading").innerHTML = activeSlide.id;
-    //    return activeSlide.id;
-    //};
-    //myCallbackfunction();
+    mySwiper.on('slideChange', () => {
+        const activeSlide = document.querySelector('.swiper-slide-active img');
+        onSliderChange(activeSlide);
+    });
 
     // ----------------------------------------------------
     // Just copy/paste these functions as-is:
@@ -138,20 +118,9 @@
     // ----------------------------------------------------
     // Now modify this part of the code to fit your needs:
 
-    //var mySlider = document.getElementById("brightnessSlider");
-
-    //function updateColor() {{
-    //    var sliderValue = document.getElementById('brightnessSlider').value;
-    //    var grayValue = 255 - (sliderValue * 2.55);
-    //    document.getElementById('colorBox').style.backgroundColor = 'rgb(' + grayValue + ',' + grayValue + ',' + grayValue + ')';
-    //}}
-    // Call the function initially to set the initial color
-    //updateColor();
-
     // Function to send slider value to Streamlit
     function onSliderChange(data) {
         sendDataToPython({
-          //value: mySlider.value,
           value: data.id,
           dataType: "json",
         });
@@ -161,33 +130,6 @@
         if (event.data.type !== "streamlit:render") return;
         // Access data sent from the Streamlit app here, if needed
     }
-
-    //mySlider.addEventListener("input", onSliderChange);
-    //mySwiper.addEventListener("swiper-slidechange", onSliderChange);
-
-    mySwiper.on('slideChange', () => {
-        const activeSlide = document.querySelector('.swiper-slide-active img');
-        onSliderChange(activeSlide);
-        //myCallbackfunction();
-        //document.getElementById("heading").innerHTML = activeSlide.id;
-    });
-    //mySwiper.init();
-
-// Call On Page Load
-
-var observer = new IntersectionObserver( (entries, observer) => {
-    entries.forEach(entry => {
-        if (entry.intersectionRatio > 0) {
-            window.dispatchEvent(new Event('resize')); 
-            observer.unobserve(entry.target);
-            if (entry.target.swiper) {
-                entry.target.swiper.slideTo(0);
-            }
-        };
-    });
-}, null);
-  
-observer.observe(document.querySelector('#yepss .swiper'));
 
     // Hook things up!
     window.addEventListener("message", onDataFromPython);
