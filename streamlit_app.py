@@ -53,21 +53,26 @@ def main():
         ("Wing", "Rotor", "Sail", "Kite"),
     )
 
-    def reset():
-        st.session_state.selection = 'Please Select'
+    pref_ports = [
+        "Abidjan", "Bergen", "Busan", "Constanta",
+        "Gdansk", "Hong Kong", "Jeddah", "Los Angeles",
+        "Marseille", "Miami", "Mumbai", "New York",
+        "Ras Tanura", "Rotterdam", "Sao Paulo", "Shanghai",
+        "Singapore", "Sydney", "Tokyo", "Trieste", "Turku"
+    ]
 
-    route = st.selectbox(
-        "Start/end port:",
-        ("Please Select", "Abidjan", "Bergen", "Busan", "Constanta",
-         "Gdansk", "Hong Kong", "Jeddah", "Los Angeles",
-         "Marseille", "Miami", "Mumbai", "New York",
-         "Ras Tanura", "Rotterdam", "Sao Paulo", "Shanghai",
-         "Singapore", "Sydney", "Tokyo", "Trieste", "Turku"),
-        key='selection',
-        on_change=reset,
-    )
+    tab1, tab2 = st.tabs(["Origin", "Destination"])
 
-    st.write("You selected:", route)
+    with tab1:
+        origin = st.selectbox(
+            "Select port of origin:",
+            pref_ports
+        )
+    with tab2:
+        dest = st.selectbox(
+            "Select port of destination:",
+            pref_ports
+        )
 
     buttons = [
         "Spring",
