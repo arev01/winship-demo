@@ -86,7 +86,7 @@
 
     });
 
-    mySwiper.on('slideChange', () => {
+    mySwiper.on('slideChangeTransitionEnd', () => {
         const activeSlide = document.querySelector('.swiper-slide-active img');
         onSliderChange(activeSlide);
     });
