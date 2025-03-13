@@ -31,7 +31,7 @@ def main():
 
     st.write("You selected:", route)
 
-    st.markdown("""
+    HORIZONTAL_STYLE = """
             <style class="hide-element">
                 /* Hides the style container and removes the extra spacing */
                 .element-container:has(.hide-element) {
@@ -60,7 +60,6 @@ def main():
                 */
             </style>
             """
-    )
 
     @contextmanager
     def st_horizontal():
