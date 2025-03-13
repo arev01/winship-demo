@@ -22,13 +22,11 @@ def main():
 
     route = st.selectbox(
         "Start/end port:",
-        ("Abidjan", "Bergen", "Busan", "Constanta",
+        ("Please Select", "Abidjan", "Bergen", "Busan", "Constanta",
          "Gdansk", "Hong Kong", "Jeddah", "Los Angeles",
          "Marseille", "Miami", "Mumbai", "New York",
          "Ras Tanura", "Rotterdam", "Sao Paulo", "Shanghai",
          "Singapore", "Sydney", "Tokyo", "Trieste", "Turku"),
-        index=None,
-        placeholder="Please select",
         key='selection',
         on_change=reset,
     )
