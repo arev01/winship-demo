@@ -24,6 +24,8 @@ def main():
          "Marseille", "Miami", "Mumbai", "New York",
          "Ras Tanura", "Rotterdam", "Sao Paulo", "Shanghai",
          "Singapore", "Sydney", "Tokyo", "Trieste", "Turku"),
+        index=None,
+        placeholder="Select port...",
     )
 
     st.write("You selected:", route)
