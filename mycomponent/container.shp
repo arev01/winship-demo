@@ -1,0 +1,6 @@
+# Kommentar
+L       = 30. # : length (m)
+B       = 12.65 # : beam (m)
+T       = 4.50 # : draft (m)
+SL      = 3.32 # : slenderness coefficient (-)
+CB      = .434 # : block coefficient (-)
