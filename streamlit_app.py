@@ -44,7 +44,7 @@ def main():
         if st.button("Autumn"):
             st.write("Autumn selected")
 
-    with col4
+    with col4:
         if st.button("Winter"):
             st.write("Winter selected")
 
