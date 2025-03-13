@@ -30,7 +30,7 @@ def main():
         index=None,
         placeholder="Please select",
         key='selection',
-        on_click=reset,
+        on_change=reset,
     )
 
     st.write("You selected:", route)
