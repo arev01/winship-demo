@@ -1,2 +1,2 @@
 # winship
-A program that estimates the performance of a ship equipped with wind powered devices
+A tool that estimates the performance of a SHIP equipped with WINd powered devices
