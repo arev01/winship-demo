@@ -17,15 +17,20 @@ def main():
 
     st.write("You selected:", option)
 
+    def reset():
+        st.session_state.selection = 'Please Select'
+
     route = st.selectbox(
-        "Maritime route:",
+        "Start/end port:",
         ("Abidjan", "Bergen", "Busan", "Constanta",
          "Gdansk", "Hong Kong", "Jeddah", "Los Angeles",
          "Marseille", "Miami", "Mumbai", "New York",
          "Ras Tanura", "Rotterdam", "Sao Paulo", "Shanghai",
          "Singapore", "Sydney", "Tokyo", "Trieste", "Turku"),
         index=None,
-        placeholder="Select port...",
+        placeholder="Please select",
+        key='selection',
+        on_click=reset,
     )
 
     st.write("You selected:", route)
