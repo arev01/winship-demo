@@ -1,0 +1,7 @@
+streamlit
+numpy
+astropy
+plotly
+scipy
+scgraph
+streamlit_lottie
