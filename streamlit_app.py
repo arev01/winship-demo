@@ -69,10 +69,17 @@ def main():
 
     st.write("You selected:", route)
 
+    buttons = [
+        "Spring",
+        "Summer",
+        "Autumn",
+        "Winter",
+        "All year",
+    ] * 2
+
     with st_horizontal():
-        st.button("Spring")
-        st.button("Summer")
-        st.button("Autumn")
+        for i, option in enumerate(buttons):
+            st.button(option, key=f"button_{i}")
 
 if __name__=='__main__':
     main()
