@@ -2,7 +2,7 @@
 A tool that estimates the performance of a SHIP equipped with WINd powered devices.
 
 ## Getting started
-The program the open-source Python framework [Streamlit](https://docs.streamlit.io/#).
+The tool uses the open-source Python framework [Streamlit](https://docs.streamlit.io/#).
 
 First, install all the packages listed in the *requirements.txt* file by using the following command in your terminal:
 ```
