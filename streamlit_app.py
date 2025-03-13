@@ -6,10 +6,10 @@ st.write("# Welcome to winship! 👋")
 # ---- MAIN FUNCTION ----
 def main():
     #---- ONGOING PROJECTS ----
-    st.markdown("*First, select a ship type:*")
+    st.markdown("## First, select a ship type:")
     out = mycomponent(my_input_value=50)
     
-    # Display the output in streamlit
+    # Display the output in Streamlit
     st.write("Received:", out)
 
 if __name__=='__main__':
