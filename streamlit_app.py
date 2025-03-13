@@ -48,17 +48,21 @@ def main():
     # Display the output in Streamlit
     st.write("Ship type:", out.capitalize())
 
+    st.divider()
+
     option = st.selectbox(
         "Wind assisted device:",
         ("Wing", "Rotor", "Sail", "Kite"),
     )
+
+    st.divider()
 
     pref_ports = [
         "Abidjan", "Bergen", "Busan", "Constanta",
         "Gdansk", "Hong Kong", "Jeddah", "Los Angeles",
         "Marseille", "Miami", "Mumbai", "New York",
         "Ras Tanura", "Rotterdam", "Sao Paulo", "Shanghai",
-        "Singapore", "Sydney", "Tokyo", "Trieste", "Turku"
+        "Singapore", "Sydney", "Tokyo", "Trieste", "Turku",
     ]
 
     tab1, tab2 = st.tabs(["Origin", "Destination"])
@@ -74,13 +78,15 @@ def main():
             pref_ports
         )
 
+    st.divider()
+
     buttons = [
         "Spring",
         "Summer",
         "Autumn",
         "Winter",
         "All year",
-    ] * 2
+    ]
 
     with st_horizontal():
         for i, option in enumerate(buttons):
