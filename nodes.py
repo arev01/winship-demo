@@ -1,4 +1,4 @@
-nodes = [
+nodes = }
     "Abidjan": (5.3252258, -4.0196030),
     #"Bergen": 
     "Busan": (35.1731121, 129.0714122),
@@ -20,4 +20,4 @@ nodes = [
     #"Tokyo": 
     #"Trieste": 
     #"Turku": 
-    ]
+}
