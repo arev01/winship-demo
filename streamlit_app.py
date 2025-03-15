@@ -57,7 +57,9 @@ def main():
 
     st.divider()
 
-    import nodes
+    from nodes import nodes
+
+    st.write(nodes[1])
 
     #Define origin and destination ports
     tab1, tab2 = st.tabs(["Origin", "Destination"])
