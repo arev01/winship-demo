@@ -91,7 +91,7 @@ def main():
     # show route distance with unit
     st.write("{:.1f} {}".format(route.properties['length'], route.properties['units']))
 
-    st.write(dir(route))
+    st.write(route)
     
     import pandas as pd
     import numpy as np
