@@ -65,6 +65,7 @@ def main():
         "Singapore", "Sydney", "Tokyo", "Trieste", "Turku",
     ]
 
+    #Define origin and destination ports
     tab1, tab2 = st.tabs(["Origin", "Destination"])
 
     with tab1:
@@ -73,19 +74,25 @@ def main():
             pref_ports
         )
     with tab2:
-        dest = st.selectbox(
+        destination = st.selectbox(
             "Select port of destination:",
             pref_ports
         )
 
     import searoute as sr
 
-    #Define origin and destination points:
-    origin = [0.3515625, 50.064191736659104]
+    # Import the required library
+    from geopy.geocoders import Nominatim
 
-    destination = [117.42187500000001, 39.36827914916014]
+    # Initialize Nominatim API
+    geolocator = Nominatim(user_agent="MyApp")
 
+    location = geolocator.geocode(origin)
+    origin = [location.latitude, location.longitude]
 
+    location = geolocator.geocode(destination)
+    destination = [location.latitude, location.longitude]
+    
     route = sr.searoute(origin, destination)
     # > Returns a GeoJSON LineString Feature
     # show route distance with unit
@@ -99,9 +106,7 @@ def main():
         route.geometry['coordinates'],
         columns=["lat", "lon"],
     )
-    st.write(route.geometry['coordinates'])
-    st.write(df)
-    st.map(df)
+    st.map(df, height=300)
 
     st.divider()
 
