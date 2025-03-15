@@ -99,6 +99,8 @@ def main():
         route.geometry['coordinates'],
         columns=["lat", "lon"],
     )
+    st.write(route.geometry['coordinates'])
+    st.write(df)
     st.map(df)
 
     st.divider()
