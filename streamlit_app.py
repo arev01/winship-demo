@@ -59,7 +59,7 @@ def main():
 
     from nodes import nodes
 
-    st.write(nodes[1])
+    st.write(nodes["Abidjan"])
 
     #Define origin and destination ports
     tab1, tab2 = st.tabs(["Origin", "Destination"])
@@ -67,17 +67,17 @@ def main():
     with tab1:
         origin = st.selectbox(
             "Select port of origin:",
-            pref_ports
+            nodes.keys()
         )
     with tab2:
         destination = st.selectbox(
             "Select port of destination:",
-            pref_ports
+            nodes.keys()
         )
 
     import searoute as sr
     
-    route = sr.searoute(origin, destination)
+    route = sr.searoute(nodes[origin], nodes[destination])
     # > Returns a GeoJSON LineString Feature
     # show route distance with unit
     st.write("{:.1f} {}".format(route.properties['length'], route.properties['units']))
