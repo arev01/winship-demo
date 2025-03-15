@@ -92,8 +92,8 @@ def main():
     st.write("{:.1f} {}".format(route.properties['length'], route.properties['units']))
 
     toto = route.geometry['coordinates']
-    st.write(toto)
-    st.write(type(toto))
+    st.write(toto[0])
+    st.write(type(toto[0]))
     
     import pandas as pd
     import numpy as np
