@@ -91,18 +91,15 @@ def main():
     # show route distance with unit
     st.write("{:.1f} {}".format(route.properties['length'], route.properties['units']))
 
-    toto = route.geometry['coordinates']
-    st.write(toto[0])
-    st.write(type(toto[0]))
-    
     import pandas as pd
     import numpy as np
 
-    #df = pd.DataFrame(
-    #    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-    #    columns=["lat", "lon"],
-    #)
-    #st.map(df)
+    df = pd.DataFrame(
+        #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+        route.geometry['coordinates'],
+        columns=["lat", "lon"],
+    )
+    st.map(df)
 
     st.divider()
 
