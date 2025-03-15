@@ -57,13 +57,7 @@ def main():
 
     st.divider()
 
-    pref_ports = [
-        "Abidjan", "Bergen", "Busan", "Constanta",
-        "Gdansk", "Hong Kong", "Jeddah", "Los Angeles",
-        "Marseille", "Miami", "Mumbai", "New York",
-        "Ras Tanura", "Rotterdam", "Sao Paulo", "Shanghai",
-        "Singapore", "Sydney", "Tokyo", "Trieste", "Turku",
-    ]
+    import nodes
 
     #Define origin and destination ports
     tab1, tab2 = st.tabs(["Origin", "Destination"])
@@ -80,18 +74,6 @@ def main():
         )
 
     import searoute as sr
-
-    # Import the required library
-    from geopy.geocoders import Nominatim
-
-    # Initialize Nominatim API
-    geolocator = Nominatim(user_agent="MyApp")
-
-    location = geolocator.geocode(origin)
-    origin = [location.latitude, location.longitude]
-
-    location = geolocator.geocode(destination)
-    destination = [location.latitude, location.longitude]
     
     route = sr.searoute(origin, destination)
     # > Returns a GeoJSON LineString Feature
