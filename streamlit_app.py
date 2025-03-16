@@ -112,6 +112,21 @@ def main():
     )
     st.map(df2, height=300)
 
+    import pydeck as pdk
+    
+    layer = pdk.Layer(
+        type="PathLayer",
+        data=df2,
+        pickable=True,
+        #get_color="color",
+        width_scale=20,
+        width_min_pixels=2,
+        #get_path="path",
+        #get_width=5,
+    )
+
+    r = pdk.Deck(layers=[layer])
+
     st.divider()
 
     buttons = [
