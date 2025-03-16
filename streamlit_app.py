@@ -103,7 +103,7 @@ def main():
         destination_node={"latitude": nodes[destination][0],"longitude": nodes[destination][1]}
     )
     st.write('Length: ',output['length']) #=> Length:  19596.4653
-    st.write(str([[i['latitude'],i['longitude']] for i in output['coordinate_path']]))
+    #st.write(str([[i['latitude'],i['longitude']] for i in output['coordinate_path']]))
 
     df2 = pd.DataFrame(
         #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
