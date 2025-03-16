@@ -90,7 +90,7 @@ def main():
     df = pd.DataFrame(
         #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
         output['coordinate_path'],
-        columns = ["latitude", "longitude"],
+        columns = list(tup)
     )
     st.map(df, height=300)
 
