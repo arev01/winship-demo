@@ -59,8 +59,6 @@ def main():
 
     from nodes import nodes
 
-    st.write(nodes["Abidjan"])
-
     #Define origin and destination ports
     tab1, tab2 = st.tabs(["Origin", "Destination"])
 
@@ -80,12 +78,11 @@ def main():
 
     # Get the shortest path between 
     output = marnet_geograph.get_shortest_path(
-        tup=("latitude", "longitude"), 
-        origin_node={tup[i]: nodes[origin][i] for i, _ in enumerate(tup)}, 
-        destination_node={tup[i]: nodes[destination][i] for i, _ in enumerate(tup)}
+        tup = ("latitude", "longitude"), 
+        origin_node = {tup[i]: nodes[origin][i] for i, _ in enumerate(tup)}, 
+        destination_node = {tup[i]: nodes[destination][i] for i, _ in enumerate(tup)}
     )
-    st.write("Distance: ",output['length']) #=> Length:  19596.4653
-    #st.write(str([[i['latitude'],i['longitude']] for i in output['coordinate_path']]))
+    st.write("Distance: ",output['length'])
 
     import pandas as pd
     import numpy as np
@@ -93,7 +90,7 @@ def main():
     df = pd.DataFrame(
         #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
         output['coordinate_path'],
-        columns=["latitude", "longitude"],
+        columns = ["latitude", "longitude"],
     )
     st.map(df, height=300)
 
