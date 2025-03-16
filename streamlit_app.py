@@ -46,7 +46,7 @@ def main():
     out = mycomponent(my_input_value=50)
     
     # Display the output in Streamlit
-    st.write("Ship type:", out.capitalize())
+    st.write("You selected: ", out.capitalize())
 
     st.divider()
 
@@ -75,57 +75,27 @@ def main():
             nodes.keys()
         )
 
-    import searoute as sr
-    
-    route = sr.searoute(nodes[origin], nodes[destination])
-    # > Returns a GeoJSON LineString Feature
-    # show route distance with unit
-    st.write("{:.1f} {}".format(route.properties['length'], route.properties['units']))
+    # Use a maritime network geograph
+    from scgraph.geographs.marnet import marnet_geograph
+
+    # Get the shortest path between 
+    output = marnet_geograph.get_shortest_path(
+        tup=("latitude", "longitude"), 
+        origin_node={tup[i]: nodes[origin][i] for i, _ in enumerate(tup)}, 
+        destination_node={tup[i]: nodes[destination][i] for i, _ in enumerate(tup)}
+    )
+    st.write("Distance: ",output['length']) #=> Length:  19596.4653
+    #st.write(str([[i['latitude'],i['longitude']] for i in output['coordinate_path']]))
 
     import pandas as pd
     import numpy as np
 
     df = pd.DataFrame(
         #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-        route.geometry['coordinates'],
-        columns=["lat", "lon"],
-    )
-    st.map(df, height=300)
-
-    # Use a maritime network geograph
-    from scgraph.geographs.marnet import marnet_geograph
-
-    # Get the shortest path between 
-    output = marnet_geograph.get_shortest_path(
-        #origin_node={"latitude": 31.23, "longitude": 121.47}, 
-        #destination_node={"latitude": 32.08,"longitude": -81.09}
-        origin_node={"latitude": nodes[origin][0], "longitude": nodes[origin][1]}, 
-        destination_node={"latitude": nodes[destination][0],"longitude": nodes[destination][1]}
-    )
-    st.write('Length: ',output['length']) #=> Length:  19596.4653
-    #st.write(str([[i['latitude'],i['longitude']] for i in output['coordinate_path']]))
-
-    df2 = pd.DataFrame(
-        #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
         output['coordinate_path'],
         columns=["latitude", "longitude"],
     )
-    st.map(df2, height=300)
-
-    import pydeck as pdk
-    
-    layer = pdk.Layer(
-        type="PathLayer",
-        data=df2,
-        pickable=True,
-        #get_color="color",
-        width_scale=20,
-        width_min_pixels=2,
-        #get_path="path",
-        #get_width=5,
-    )
-
-    r = pdk.Deck(layers=[layer])
+    st.map(df, height=300)
 
     st.divider()
 
