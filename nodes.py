@@ -2,22 +2,20 @@ nodes = {
     "Abidjan": (5.3252258, -4.0196030),
     #"Bergen": 
     "Busan": (35.1731121, 129.0714122),
-    "Constanta": (44.1759147, 28.6519359),
-    #"Gdansk": 
-    #"Hong Kong": 
-    #"Jeddah": 
-    #"Los Angeles": 
-    #"Marseille": 
-    #"Miami": 
+    #"Riga": 
+    "Hong Kong": (22.3193039, 114.1693611),
+    "Los Angeles": (34.0549076, -118.2426430),
+    "Marseille": (43.3025742, 5.3690743),
+    "Miami": (25.7616798, -80.1917902),
     "Mumbai": (19.0759837, 72.8776559),
-    #"New York": 
-    #"Ras Tanura": 
+    "New York": (40.7127753, -74.0059728),
+    "Ras Tanura": (26.7730080, 49.9982360),
     #"Rotterdam":  
-    #"Sao Paulo": 
-    #"Shanghai": 
-    #"Singapore": 
-    #"Sydney": 
-    #"Tokyo": 
-    #"Trieste": 
-    #"Turku": 
+    "Sao Paulo": (-23.5557714, -46.6395571),
+    "Shanghai": (31.2304160, 121.4737010),
+    "Singapore": (1.3520830, 103.8198360),
+    "Sydney": (-33.8688197, 151.2092955),
+    "Tokyo": (35.6764225, 139.6500270),
+    "Trieste": (45.6508342, 13.7674486),
+    "Varna": (43.2140504, 27.9147333)
 }
