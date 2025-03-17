@@ -47,7 +47,7 @@ if prev_page:
     # Switch to the selected page
     page_file = "./pages/1_first_page.py"
     st.switch_page(page_file)
-next_page = st.button(">")
+next_page = st.button("\>")
 if next_page:
     # Switch to the selected page
     page_file = "./pages/1_first_page.py"
@@ -77,11 +77,12 @@ with tab2:
 # Use a maritime network geograph
 from scgraph.geographs.marnet import marnet_geograph
 
+col = ["latitude", "longitude"]
+
 # Get the shortest path between 
 output = marnet_geograph.get_shortest_path(
-    tup = ("latitude", "longitude"), 
-    origin_node = {tup[i]: nodes[origin][i] for i, _ in enumerate(tup)}, 
-    destination_node = {tup[i]: nodes[destination][i] for i, _ in enumerate(tup)}
+    origin_node = {col[i]: nodes[origin][i] for i, _ in enumerate(col)},
+    destination_node = {col[i]: nodes[destination][i] for i, _ in enumerate(col)}
 )
 st.write("Distance: ",output['length'])
 
@@ -91,6 +92,6 @@ import numpy as np
 df = pd.DataFrame(
     #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
     output['coordinate_path'],
-    columns = list(tup)
+    columns = col,
 )
 st.map(df, height=300)
