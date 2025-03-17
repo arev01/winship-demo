@@ -102,7 +102,7 @@ def pageThree(sesh):
     st.map(df, height=300)
 
 sesh = SessionState.get(curr_page = 0)
-PAGES = [pageZero, pageOne, pageTwo, pageThree)
+PAGES = [pageZero, pageOne, pageTwo, pageThree]
 
 def greet(person):
     match person:
