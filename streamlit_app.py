@@ -40,42 +40,14 @@ def st_horizontal():
         st.markdown('<span class="hide-element horizontal-marker"></span>', unsafe_allow_html=True)
         yield
 
-def greet(person):
-    match person:
-        case "container":
-            st.write("""A ship specifically designed 
-            to carry dry cargo in intermodal containers.""")
-        case "cargo":
-            st.write("""A multi-purpose ship designed 
-            to transport a wide variety of goods and commodities.""")
-        case "tanker":
-            st.write("""A ship specifically designed 
-            to carry liquid cargo, including petroleum, chemicals 
-            and pressurized gases.""")
-        case "bulker":
-            st.write("""A ship specifically designed 
-            to transport unpackaged bulk cargo such as grain, coal, 
-            ore, steel coils and cement.""")
-        case "frigate":
-            st.write("""A small, fast military ship used 
-            to protect other ships.""")
-        case "passenger":
-            st.write("""A large ship designed 
-            to carry people on voyages for vacationing.""")
+import SessionState
 
-# ---- MAIN FUNCTION ----
-def main():
-    #---- ONGOING PROJECTS ----
-    st.write("# Welcome to winship! 👋")
-    buttons = [
-        "<",
-        ">",
-    ]
+def pageZero(sesh):
+    st.title("# Welcome to winship! 👋")
+    st.write('some text for zeroth page. Welcome to the app. Follow the nav buttons above to move forward and backwards one page')
 
-    with st_horizontal():
-        for i, option in enumerate(buttons):
-            st.button(option, key=f"button_{i}")
-
+def pageOne(sesh):
+    st.title('page ONE')
     out = mycomponent(my_input_value=50)
     
     # Display the output in Streamlit
@@ -83,15 +55,15 @@ def main():
 
     greet(out)
 
-    st.divider()
-
+def pageTwo(sesh):
+    st.title('TWO')
     option = st.selectbox(
         "Wind assisted device:",
         ("Wing", "Rotor", "Sail", "Kite"),
     )
 
-    st.divider()
-
+def pageThree(sesh):
+    st.title('THREE')
     from nodes import nodes
 
     #Define origin and destination ports
@@ -128,6 +100,50 @@ def main():
         columns = list(tup)
     )
     st.map(df, height=300)
+
+sesh = SessionState.get(curr_page = 0)
+PAGES = [pageZero, pageOne, pageTwo, pageThree)
+
+def greet(person):
+    match person:
+        case "container":
+            st.write("""A ship specifically designed 
+            to carry dry cargo in intermodal containers.""")
+        case "cargo":
+            st.write("""A multi-purpose ship designed 
+            to transport a wide variety of goods and commodities.""")
+        case "tanker":
+            st.write("""A ship specifically designed 
+            to carry liquid cargo, including petroleum, chemicals 
+            and pressurized gases.""")
+        case "bulker":
+            st.write("""A ship specifically designed 
+            to transport unpackaged bulk cargo such as grain, coal, 
+            ore, steel coils and cement.""")
+        case "frigate":
+            st.write("""A small, fast military ship used 
+            to protect other ships.""")
+        case "passenger":
+            st.write("""A large ship designed 
+            to carry people on voyages for vacationing.""")
+
+# ---- MAIN FUNCTION ----
+def main():
+    st.markdown(' ### Navigation')
+    st.markdown('Click Next to go to the next page')
+    with st_horizontal():
+        if st.button('Back:'):
+            sesh.curr_page = max(0, sesh.curr_page-1)
+        if st.button('Next page:'):
+            sesh.curr_page = min(len(PAGES)-1, sesh.curr_page+1)
+    st.markdown('----------------------------------')
+
+
+    #####MAIN PAGE APP:
+    st.write('PAGE NUMBER:', sesh.curr_page)
+    page_turning_function = PAGES[sesh.curr_page]
+    st.write(sesh.curr_page)
+    page_turning_function(sesh)
 
 if __name__=='__main__':
     main()
