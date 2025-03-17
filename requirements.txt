@@ -3,4 +3,3 @@ numpy
 pandas
 searoute
 scgraph
-SessionState
