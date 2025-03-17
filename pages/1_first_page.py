@@ -42,7 +42,7 @@ def st_horizontal():
         yield
 
 # Button to switch page
-next_page = st.button(">"))
+next_page = st.button(">")
 if next_page:
     # Switch to the selected page
     page_file = "./pages/2_second_page.py"
