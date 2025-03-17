@@ -45,10 +45,12 @@ def st_horizontal():
 with st_horizontal():
     if st.button("<"):
         page_file = "./pages/1_first_page.py"
+        # Switch to the selected page
+        st.switch_page(page_file)
     if st.button("\>"):
         page_file = "./pages/1_first_page.py"
-    # Switch to the selected page
-    st.switch_page(page_file)
+        # Switch to the selected page
+        st.switch_page(page_file)
 
 option = st.selectbox(
     "Wind assisted device:",
