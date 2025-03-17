@@ -56,3 +56,5 @@ option = st.selectbox(
     "Wind assisted device:",
     ("Wing", "Rotor", "Sail", "Kite"),
 )
+
+greet(option.lower())
