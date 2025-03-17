@@ -17,7 +17,7 @@ HORIZONTAL_STYLE = """
         flex-direction: row !important;
         flex-wrap: wrap;
         gap: 0.5rem;
-        align-items: baseline;
+        align-items: end;
     }
     /* Buttons and their parent container all have a width of 704px, which we need to override */
     div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) div {
@@ -66,6 +66,15 @@ def greet(person):
 def main():
     #---- ONGOING PROJECTS ----
     st.write("# Welcome to winship! 👋")
+    buttons = [
+        "<",
+        ">",
+    ]
+
+    with st_horizontal():
+        for i, option in enumerate(buttons):
+            st.button(option, key=f"button_{i}")
+
     out = mycomponent(my_input_value=50)
     
     # Display the output in Streamlit
@@ -118,20 +127,6 @@ def main():
         columns = list(tup)
     )
     st.map(df, height=300)
-
-    st.divider()
-
-    buttons = [
-        "Spring",
-        "Summer",
-        "Autumn",
-        "Winter",
-        "All year",
-    ]
-
-    with st_horizontal():
-        for i, option in enumerate(buttons):
-            st.button(option, key=f"button_{i}")
 
 if __name__=='__main__':
     main()
