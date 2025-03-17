@@ -1,5 +1,5 @@
 import streamlit as st
-from mycomponent import mycomponent
+from .mycomponent import mycomponent
 
 def greet(person):
     match person:
