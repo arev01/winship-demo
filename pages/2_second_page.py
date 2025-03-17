@@ -19,7 +19,7 @@ HORIZONTAL_STYLE = """
         flex-wrap: wrap;
         gap: 0.5rem;
         align-items: baseline;
-        /*justify-content: flex-end;*/
+        justify-content: flex-end;
     }
     /* Buttons and their parent container all have a width of 704px, which we need to override */
     div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) div {
@@ -42,15 +42,12 @@ def st_horizontal():
         yield
 
 # Button to switch page
-prev_page = st.button("<")
-if prev_page:
+with st_horizontal():
+    if st.button("<"):
+        page_file = "./pages/1_first_page.py"
+    if st.button("\>"):
+        page_file = "./pages/1_first_page.py"
     # Switch to the selected page
-    page_file = "./pages/1_first_page.py"
-    st.switch_page(page_file)
-next_page = st.button("\>")
-if next_page:
-    # Switch to the selected page
-    page_file = "./pages/1_first_page.py"
     st.switch_page(page_file)
 
 option = st.selectbox(
