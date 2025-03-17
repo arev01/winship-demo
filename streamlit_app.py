@@ -1,49 +1,34 @@
 import streamlit as st
-from contextlib import contextmanager
 
-HORIZONTAL_STYLE = """
-<style class="hide-element">
-    /* Hides the style container and removes the extra spacing */
-    .element-container:has(.hide-element) {
-        display: none;
+st.set_page_config(initial_sidebar_state="collapsed")
+
+st.markdown(
+    """
+<style>
+    [data-testid="collapsedControl"] {
+        display: none
     }
-    /*
-        The selector for >.element-container is necessary to avoid selecting the whole
-        body of the streamlit app, which is also a stVerticalBlock.
-    */
-    div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) {
-        display: flex;
-        flex-direction: row !important;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        align-items: baseline;
-        /*justify-content: flex-end;*/
-    }
-    /* Buttons and their parent container all have a width of 704px, which we need to override */
-    div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) div {
-        width: max-content !important;
-    }
-    /* Just an example of how you would style buttons, if desired */
-    /*
-    div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) button {
-        border-color: red;
-    }
-    */
 </style>
-"""
-
-@contextmanager
-def st_horizontal():
-    st.markdown(HORIZONTAL_STYLE, unsafe_allow_html=True)
-    with st.container():
-        st.markdown('<span class="hide-element horizontal-marker"></span>', unsafe_allow_html=True)
-        yield
+""",
+    unsafe_allow_html=True,
+)
     
 # ---- MAIN FUNCTION ----
 def main():
     st.title("Welcome to winship! 👋")
+    st.write(
+        """
+        A tool that estimates the performance of a ship equipped with wind powered devices in 3 simple steps: select ship type & size, choose device configuration and select a course.
+
+        Accurate results plus a graphical output will be available in just a few seconds.
+
+        The code works by balancing the aerodynamic and hydrodynamic forces of the ship. It takes into account the most important eﬀects of the wind powered devices to predict the ship speeds at various wind conditions.
+
+        By determining the elapsed time around the course, a direct measure of the fuel and emission savings can be assessed.
+        """
+    )
     # Button to switch page
-    next_page = st.button("Next")
+    next_page = st.button("Start"))
     if next_page:
         # Switch to the selected page
         page_file = "./pages/1_first_page.py"
