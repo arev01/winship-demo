@@ -52,3 +52,45 @@ if next_page:
     # Switch to the selected page
     page_file = "./pages/1_first_page.py"
     st.switch_page(page_file)
+
+option = st.selectbox(
+    "Wind assisted device:",
+    ("Wing", "Rotor", "Sail", "Kite"),
+)
+
+from nodes import nodes
+
+#Define origin and destination ports
+tab1, tab2 = st.tabs(["Origin", "Destination"])
+
+with tab1:
+    origin = st.selectbox(
+        "Select port of origin:",
+        nodes.keys()
+    )
+with tab2:
+    destination = st.selectbox(
+        "Select port of destination:",
+        nodes.keys()
+    )
+
+# Use a maritime network geograph
+from scgraph.geographs.marnet import marnet_geograph
+
+# Get the shortest path between 
+output = marnet_geograph.get_shortest_path(
+    tup = ("latitude", "longitude"), 
+    origin_node = {tup[i]: nodes[origin][i] for i, _ in enumerate(tup)}, 
+    destination_node = {tup[i]: nodes[destination][i] for i, _ in enumerate(tup)}
+)
+st.write("Distance: ",output['length'])
+
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame(
+    #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+    output['coordinate_path'],
+    columns = list(tup)
+)
+st.map(df, height=300)
