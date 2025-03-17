@@ -22,3 +22,15 @@ def greet(person):
         case "passenger":
             st.write("""A large ship designed 
             to carry people on voyages for vacationing.""")
+        case "rotor":
+            st.write("""A rotating cylinder that generates lift 
+            at right angles to the wind to drive the ship forward.""")
+        case "wing":
+            st.write("""A rigid aerofoil shape mounted vertically 
+            on the ship to provide a propulsive force.""")
+        case "sail":
+            st.write("""A traditional concept using new, 
+            robust materials and automated control systems.""")
+        case "kite":
+            st.write("""A gigantic rig deployed above the ship 
+            to assist in pulling the ship through the water.""")
