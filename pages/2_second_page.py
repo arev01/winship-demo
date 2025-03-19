@@ -52,7 +52,7 @@ with st_horizontal():
         # Switch to the selected page
         st.switch_page(page_file)
 
-option = st.segmented_control("Wind assisted device:,"
+option = st.segmented_control("Wind assisted device:",
     ["Wing", "Rotor", "Sail", "Kite"],
 )
 
