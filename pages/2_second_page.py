@@ -52,9 +52,26 @@ with st_horizontal():
         # Switch to the selected page
         st.switch_page(page_file)
 
-option = st.selectbox(
-    "Wind assisted device:",
-    ("Wing", "Rotor", "Sail", "Kite"),
+option = st.segmented_control("Wind assisted device:,"
+    ["Wing", "Rotor", "Sail", "Kite"],
 )
 
-greet(option.lower())
+with st.container(height=393, border=True):
+    cols_mr = st.columns([10.9, 0.2, 10.9])
+    with cols_mr[0].container(height=350, border=False):
+        st.image("./img/" + option.lower())
+    with cols_mr[1]:
+        st.html(
+            '''
+                <div class="divider-vertical-line"></div>
+                <style>
+                    .divider-vertical-line {
+                        border-left: 2px solid rgba(49, 51, 63, 0.2);
+                        height: 320px;
+                        margin: auto;
+                    }
+                </style>
+            '''
+        )
+    with cols_mr[2].container(height=350, border=False):
+        greet(option.lower())
