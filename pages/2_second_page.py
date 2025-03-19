@@ -59,7 +59,7 @@ option = st.segmented_control("Wind assisted device:,"
 with st.container(height=393, border=True):
     cols_mr = st.columns([10.9, 0.2, 10.9])
     with cols_mr[0].container(height=350, border=False):
-        st.image("./img/" + option.lower())
+        st.image("./img/" + option.lower() + ".jpg")
     with cols_mr[1]:
         st.html(
             '''
