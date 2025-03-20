@@ -61,7 +61,7 @@ option = st.segmented_control("Wind assisted device:",
 )
 
 col1, col2 = st.columns(2)
-with col1.container(height=300, border=False):
+with col1.container(height=150, border=False):
     st.image("./img/" + option.lower() + ".jpg")
-with col2.container(height=300, border=False):
+with col2.container(height=150, border=False):
     greet(option.lower())
