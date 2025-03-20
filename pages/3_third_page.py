@@ -3,7 +3,7 @@ from mycomponent import mycomponent
 from functions import greet
 from navigation import menu
 
-menu()
+menu(counter=3)
 
 from nodes import nodes
 
