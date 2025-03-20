@@ -40,8 +40,9 @@ def st_horizontal():
         yield
 
 # Button to switch page
-def menu():
-    counter = 0
+def menu(counter):
+    if counter == None:
+        counter = 0
     page_lst = [
         "./pages/1_first_page.py",
         "./pages/2_second_page.py",
@@ -55,11 +56,11 @@ def menu():
             st.switch_page(page_file)
         if st.button("<"):
             counter -= 1
-            page_file = page_lst[counter]
+            page_file = page_lst[counter-1]
             # Switch to the selected page
             st.switch_page(page_file)
         if st.button("\>"):
             counter += 1
-            page_file = page_lst[counter]
+            page_file = page_lst[counter-1]
             # Switch to the selected page
             st.switch_page(page_file)
