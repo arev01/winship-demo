@@ -41,16 +41,25 @@ def st_horizontal():
 
 # Button to switch page
 def menu():
+    counter = 0
+    page_lst = [
+        "./pages/1_first_page.py",
+        "./pages/2_second_page.py",
+        "./pages/3_third_page.py"
+    ]
     with st_horizontal():
         if st.button(":material/home:"):
+            counter = 0
             page_file = "./streamlit_app.py"
             # Switch to the selected page
             st.switch_page(page_file)
         if st.button("<"):
-            page_file = "./pages/1_first_page.py"
+            counter -= 1
+            page_file = page_lst[counter]
             # Switch to the selected page
             st.switch_page(page_file)
         if st.button("\>"):
-            page_file = "./pages/3_third_page.py"
+            counter += 1
+            page_file = page_lst[counter]
             # Switch to the selected page
             st.switch_page(page_file)
