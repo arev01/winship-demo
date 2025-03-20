@@ -43,6 +43,10 @@ def st_horizontal():
 
 # Button to switch page
 with st_horizontal():
+    if st.button(":material/home:"):
+        page_file = "./streamlit_app.py"
+        # Switch to the selected page
+        st.switch_page(page_file)
     if st.button("<"):
         page_file = "./pages/1_first_page.py"
         # Switch to the selected page
