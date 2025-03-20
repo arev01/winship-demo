@@ -3,7 +3,7 @@ from mycomponent import mycomponent
 from functions import greet
 from navigation import menu
 
-menu()
+menu(counter=2)
 
 option = st.segmented_control("Wind assisted device:",
     ["Rotor", "Suction", "Wing", "Sail", "Kite"],
