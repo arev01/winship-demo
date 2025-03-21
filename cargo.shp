@@ -1,0 +1,9 @@
+# 5000 DWT General Cargo
+L       = 100.0 # : length (m)
+B       = 14.6 # : beam (m)
+T       = 6.0 # : draft (m)
+H       = 16.9 # : height (m)
+V       = 11.0 # : speed (kn)
+D       = 6402.0 # : displacement (m3)
+CB      = .731 # : block coefficient (-)
+CM      = .990 # : midship coefficient (-)
