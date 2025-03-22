@@ -8,6 +8,10 @@ class Ship:
 
     def __init__(self, length: float, draught: float, beam: float, speed: float,
                  slenderness_coefficient: float, prismatic_coefficient: float) -> None:
+
+    def __init__(self, **kw) -> None:
+        self.__keys = {}
+        self.__keys.update(kw)
         """
         Assign values for the main dimension of a ship.
 
@@ -20,14 +24,17 @@ class Ship:
         :param prismatic_coefficient: Prismatic coefficient dimensionless :math:`∇/(L\cdot A_m)` where L is length of ship,
             ∇ is displacement Am is midsection area of the ship
         """
-        self.length = length
-        self.draught = draught
-        self.beam = beam
-        self.speed = speed
-        self.slenderness_coefficient = slenderness_coefficient
-        self.prismatic_coefficient = prismatic_coefficient
-        self.displacement = (self.length / self.slenderness_coefficient) ** 3
-        self.surface_area = 1.025 * (1.7 * self.length * self.draught + self.displacement / self.draught)
+        if "D" not in self.__keys and "CB" in self.__keys:
+            self.D = self.CB * self.L* self.T * self.B
+            
+        if "SL" not in self.__keys and "D" in self.__keys:
+            self.SL = self.L / self.D ** (1/3)
+
+        if "CP" not in self.__keys and "CB" in self.__keys and "CM" in self.__keys:
+            self.CP = self.CB / self.CM
+            
+        if "S" not in self._keys:
+            self.S = 1.025 * (1.7 * self.L * self.T + self.D / self.T)
 
     @property
     def resistance(self) -> float:
@@ -36,11 +43,11 @@ class Ship:
 
         :return: newton the resistance of the ship
         """
-        total_resistance_coef = frictional_resistance_coef(self.length, self.speed) + \
-                                residual_resistance_coef(self.slenderness_coefficient,
-                                                         self.prismatic_coefficient,
-                                                         froude_number(self.speed, self.length))
-        return 1 / 2 * total_resistance_coef * 1025 * self.surface_area * self.speed ** 2
+        total_resistance_coef = frictional_resistance_coef(self.L, self.V) + \
+                                residual_resistance_coef(self.SL,
+                                                         self.CP,
+                                                         froude_number(self.V, self.L))
+        return 1 / 2 * total_resistance_coef * 1025 * self.S * self.V ** 2
 
     def maximum_deck_area(self, water_plane_coef: float = 0.88) -> float:
         """
@@ -49,7 +56,7 @@ class Ship:
         :param water_plane_coef: optional water plane coefficient
         :return: Area of the deck
         """
-        return self.beam * self.length * water_plane_coef
+        return self.B * self.L * water_plane_coef
 
     @property
     def reynold_number(self) -> float:
@@ -58,7 +65,7 @@ class Ship:
 
         :return: Reynold number of the ship
         """
-        return reynolds_number(self.length, self.speed)
+        return reynolds_number(self.L, self.S)
 
     def propulsion_power(self, propulsion_eff: float = 0.7, sea_margin: float = 0.2) -> float:
         """
@@ -68,4 +75,4 @@ class Ship:
         :param sea_margin: Sea margin take account of interaction between ship and the sea, e.g. wave
         :return: Watts shaft propulsion power of the ship
         """
-        return (1 + sea_margin) * self.resistance * self.speed / propulsion_eff
+        return (1 + sea_margin) * self.resistance * self.V / propulsion_eff
