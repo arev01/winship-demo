@@ -28,8 +28,7 @@ class Ship:
         if "slenderness_coef" not in self.__keys and "displacement" in self.__keys:
             self.slenderness_coef = self.length / self.displacement ** (1/3)
 
-        if "prismatic_coef" not in self.__keys and "block_coef" in self.__keys 
-        and "midship_coef" in self.__keys:
+        if "prismatic_coef" not in self.__keys and "block_coef" in self.__keys and "midship_coef" in self.__keys:
             self.prismatic_coef = self.block_coef / self.midship_coef
             
         if "wetted_surface" not in self._keys:
