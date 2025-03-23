@@ -11,3 +11,12 @@ out = mycomponent(my_input_value=50)
 st.write("You selected: ", out.capitalize())
 
 greet(out)
+
+from pyresis import read_ship, ship
+
+file_name = out + ".shp"
+
+out = read_ship.open(file_name)
+ship = ship.Ship(**out.values())
+
+st.write
