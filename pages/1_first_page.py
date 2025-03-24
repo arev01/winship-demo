@@ -8,7 +8,7 @@ menu(counter=1)
 my_output_value = mycomponent(my_input_value=50)
     
 # Display the output in Streamlit
-st.markdown("You selected: ", my_output_value.capitalize(), 
+st.markdown("You selected: " + my_output_value.capitalize(), 
          help="""A multi-purpose ship designed to transport 
          a wide variety of goods and commodities.""")
 
