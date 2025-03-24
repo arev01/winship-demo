@@ -8,40 +8,9 @@ menu(counter=1)
 my_output_value = mycomponent(my_input_value=50)
     
 # Display the output in Streamlit
-st.write("You selected: ", my_output_value.capitalize())
-
-st.write("<a href='#' id='my-link'>Click me</a>", unsafe_allow_html=True)
-
-if st.button("Click me", type="primary"):
-    st.write("Clicked")
-
-st.button("Another button!")
-
-st.markdown(
-    """
-    <style>
-    button[kind="primary"] {
-        background: none!important;
-        border: none;
-        padding: 0!important;
-        color: black !important;
-        text-decoration: none;
-        cursor: pointer;
-        border: none !important;
-    }
-    button[kind="primary"]:hover {
-        text-decoration: none;
-        color: black !important;
-    }
-    button[kind="primary"]:focus {
-        outline: none !important;
-        box-shadow: none !important;
-        color: black !important;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+st.write("You selected: ", my_output_value.capitalize(), 
+         help="""A multi-purpose ship designed to transport 
+         a wide variety of goods and commodities.""")
 
 greet(my_output_value)
 
