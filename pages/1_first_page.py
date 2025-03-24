@@ -12,14 +12,12 @@ st.markdown("You selected: " + my_output_value.capitalize(),
          help="""A multi-purpose ship designed to transport 
          a wide variety of goods and commodities.""")
 
-greet(my_output_value)
-
 from pyresis import read_ship, ship
 
 file_name = my_output_value + ".shp"
 
 out = read_ship.open(file_name)
-ship = ship.Ship(**out.values())
+ship = ship.Ship(**out)
 
 length = st.number_input("meters length", value=ship.length)
 beam = st.number_input("meters beam", value=ship.beam)
