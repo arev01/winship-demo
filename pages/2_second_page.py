@@ -10,7 +10,9 @@ option = st.selectbox("Wind assisted device:",
 )
 
 # HTML to add an image to a button
-st.button("![Streamlit logo](./img/kite.svg)")
+from st_image_button import st_image_button
+
+st_image_button("Title", "./img/rotor.jpg", "20px", "outlined", onClick)
 
 col1, col2 = st.columns(2)
 with col1:
