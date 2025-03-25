@@ -19,10 +19,17 @@ file_name = my_output_value + ".shp"
 out = read_ship.open(file_name)
 ship = ship.Ship(**out)
 
-length = st.number_input("meters length", value=ship.length)
-beam = st.number_input("meters beam", value=ship.beam)
-draft = st.number_input("meters draft", value=ship.draft)
-speed = st.number_input("knots speed", value=ship.speed)
+control = st.segmented_control("Specify ship size:",
+                     ["Cargo", "Size"]
+                    )
+
+if control == "Cargo":
+    cargo = st.number_input("gross tonnage", value=ship.deadweight)
+elif control == "Size":
+    length = st.number_input("meters length", value=ship.length)
+    beam = st.number_input("meters beam", value=ship.beam)
+    draft = st.number_input("meters draft", value=ship.draft)
+    speed = st.number_input("knots speed", value=ship.speed)
 
 import numpy as np
 
