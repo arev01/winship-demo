@@ -10,8 +10,6 @@ img = image_select("Label", [
     "./img/rotor.jpg", 
     "./img/suction.jpg", 
     "./img/wing.jpg", 
-    "./img/sail.jpg", 
-    "./img/kite.jpg", 
 ])
 st.write(dir(img))
 st.write(type(img))
