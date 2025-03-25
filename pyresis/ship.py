@@ -35,6 +35,46 @@ class Ship:
             self.wetted_surface = 1.025 * (1.7 * self.length * self.draft + self.displacement / self.draft)
 
     @property
+    def length(self):
+        return self.__keys["length"]
+
+    @length.setter
+    def length(self, value):
+        self.__keys["length"] = value
+
+    @property
+    def beam(self):
+        return self.__keys["beam"]
+
+    @beam.setter
+    def beam(self, value):
+        self.__keys["beam"] = value
+
+    @property
+    def draft(self):
+        return self.__keys["draft"]
+
+    @draft.setter
+    def draft(self, value):
+        self.__keys["draft"] = value
+
+    @property
+    def height(self):
+        return self.__keys["height"]
+
+    @height.setter
+    def height(self, value):
+        self.__keys["height"] = value
+
+    @property
+    def block_coef(self):
+        return self.__keys["block_coef"]
+
+    @block_coef.setter
+    def block_coef(self, value):
+        self.__keys["block_coef"] = value
+
+    @property
     def resistance(self, speed: float) -> float:
         """
         Return resistance of the vehicle.
