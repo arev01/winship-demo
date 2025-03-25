@@ -5,12 +5,12 @@ from navigation import menu
 
 menu(counter=2)
 
-option = st.segmented_control("Wind assisted device:",
+option = st.selectbox("Wind assisted device:",
     ["Rotor", "Suction", "Wing", "Sail", "Kite"],
 )
 
 col1, col2 = st.columns(2)
 with col1:
-    st.image("./img/" + option.lower() + ".jpg", use_column_width=True)
+    st.image("./img/" + option.lower() + ".jpg", width=400)
 with col2:
     greet(option.lower())
