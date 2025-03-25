@@ -54,12 +54,12 @@ def menu(counter):
             page_file = "./streamlit_app.py"
             # Switch to the selected page
             st.switch_page(page_file)
-        if st.button("<"):
+        if st.button(":material/arrow_backward_ios:"):
             counter -= 1
             page_file = page_lst[counter-1]
             # Switch to the selected page
             st.switch_page(page_file)
-        if st.button("\>"):
+        if st.button(":material/arrow_forward_ios:"):
             counter += 1
             counter = counter % 3
             page_file = page_lst[counter-1]
