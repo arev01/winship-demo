@@ -11,6 +11,7 @@ img = image_select("Label", [
     "./img/suction.jpg", 
     "./img/wing.jpg", 
     "./img/sail.jpg", 
+    "./img/kite.jpg", 
 ])
 st.markdown("You selected: " + img[6:-4].capitalize(), 
             help="""
