@@ -56,7 +56,7 @@ def menu(counter):
             st.switch_page(page_file)
         if st.button(":material/support:"):
             counter = counter
-        if st.button(":material/arrow_backward_ios:"):
+        if st.button(":material/arrow_back_ios:"):
             counter -= 1
             page_file = page_lst[counter-1]
             # Switch to the selected page
