@@ -5,17 +5,16 @@ from navigation import menu
 
 menu(counter=2)
 
-option = st.selectbox("Wind assisted device:",
-    ["Rotor", "Suction", "Wing", "Sail", "Kite"],
-)
-
-# HTML to add an image to a button
 from streamlit_image_select import image_select
-img = image_select("Label", ["./img/rotor.jpg", "./img/suction.jpg", "./img/wing.jpg"])
-st.write(img)
-
-col1, col2 = st.columns(2)
-with col1:
-    st.image("./img/" + option.lower() + ".jpg", width=40)
-with col2:
-    greet(option.lower())
+img = image_select("Label", [
+    "./img/rotor.jpg", 
+    "./img/suction.jpg", 
+    "./img/wing.jpg", 
+    "./img/sail.jpg", 
+    "./img/kite.jpg", 
+])
+st.markdown("You selected: " + img[6:-4].capitalize(), 
+            help="""
+            A gigantic rig deployed above the ship to assist 
+            in pulling the ship through the water."""
+           )
