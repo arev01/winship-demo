@@ -10,14 +10,7 @@ option = st.selectbox("Wind assisted device:",
 )
 
 # HTML to add an image to a button
-button_html = """
-<a href='https://www.example.com' target='_blank'>
-  <img src='./img/kite.jpg' alt='Button Image' style='width:100px;height:50px;'>
-</a>
-"""
-
-# Display the button with an image
-st.markdown(button_html, unsafe_allow_html=True)
+st.button("![Balloons](./img/kite.jpg) Generate balloons")
 
 col1, col2 = st.columns(2)
 with col1:
