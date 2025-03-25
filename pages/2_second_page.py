@@ -11,6 +11,6 @@ option = st.selectbox("Wind assisted device:",
 
 col1, col2 = st.columns(2)
 with col1:
-    st.image("./img/" + option.lower() + ".jpg", width=400)
+    st.image("./img/" + option.lower() + ".jpg", width=40)
 with col2:
     greet(option.lower())
