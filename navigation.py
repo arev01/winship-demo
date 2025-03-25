@@ -49,11 +49,13 @@ def menu(counter):
         "./pages/3_third_page.py"
     ]
     with st_horizontal():
-        if st.button(":material/home:"):
+        if st.button(":material/anchor:"):
             counter = 0
             page_file = "./streamlit_app.py"
             # Switch to the selected page
             st.switch_page(page_file)
+        if st.button(":material/support:"):
+            counter = counter
         if st.button(":material/arrow_backward_ios:"):
             counter -= 1
             page_file = page_lst[counter-1]
