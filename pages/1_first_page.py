@@ -31,14 +31,3 @@ elif control == "Dimension":
     st.number_input("meters beam", value=ship.beam, disabled=True)
     st.number_input("meters draft", value=ship.draft, disabled=True)
     st.number_input("knots speed", value=ship.speed, disabled=True)
-
-import numpy as np
-
-data = np.array(
-    [
-        (speed, ship.resistance(speed) / 1000.0)
-        for speed in np.arange(0.1, 35.0, 0.5)
-    ],
-)
-
-st.write(data)
