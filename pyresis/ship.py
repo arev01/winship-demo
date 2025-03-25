@@ -31,7 +31,7 @@ class Ship:
         if "prismatic_coef" not in self.__keys and "block_coef" in self.__keys and "midship_coef" in self.__keys:
             self.prismatic_coef = self.block_coef / self.midship_coef
             
-        if "wetted_surface" not in self._keys:
+        if "wetted_surface" not in self.__keys:
             self.wetted_surface = 1.025 * (1.7 * self.length * self.draft + self.displacement / self.draft)
 
     @property
