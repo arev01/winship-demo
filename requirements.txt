@@ -4,4 +4,4 @@ pandas
 searoute
 scgraph
 scipy
-streamlit-image-button
+streamlit-image-select
