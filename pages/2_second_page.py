@@ -10,7 +10,7 @@ option = st.selectbox("Wind assisted device:",
 )
 
 # HTML to add an image to a button
-st.button("![Balloons](./img/kite.jpg) Generate balloons")
+st.button("![Streamlit logo](./img/rotor.jpg)")
 
 col1, col2 = st.columns(2)
 with col1:
