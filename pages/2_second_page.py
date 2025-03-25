@@ -10,9 +10,8 @@ img = image_select("Label", [
     "./img/rotor.jpg", 
     "./img/suction.jpg", 
     "./img/wing.jpg", 
+    "./img/sail.jpg", 
 ])
-st.write(dir(img))
-st.write(type(img))
 st.markdown("You selected: " + img[6:-4].capitalize(), 
             help="""
             A gigantic rig deployed above the ship to assist 
