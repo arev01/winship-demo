@@ -20,16 +20,17 @@ out = read_ship.open(file_name)
 ship = ship.Ship(**out)
 
 control = st.segmented_control("Specify ship size:",
-                     ["Capacity", "Dimension"]
+                     ["Capacity", "Dimension"],
+                    default="Capacity",
                     )
 
 if control == "Capacity":
-    st.number_input("tons deadweight", value=ship.deadweight)
+    st.number_input("tons deadweight", value=ship.deadweight, disabled=True)
 elif control == "Dimension":
-    st.number_input("meters length", value=ship.length)
-    st.number_input("meters beam", value=ship.beam)
-    st.number_input("meters draft", value=ship.draft)
-    st.number_input("knots speed", value=ship.speed)
+    st.number_input("meters length", value=ship.length, disabled=True)
+    st.number_input("meters beam", value=ship.beam, disabled=True)
+    st.number_input("meters draft", value=ship.draft, disabled=True)
+    st.number_input("knots speed", value=ship.speed, disabled=True)
 
 import numpy as np
 
