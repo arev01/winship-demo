@@ -67,12 +67,36 @@ class Ship:
         self.__keys["height"] = value
 
     @property
+    def speed(self):
+        return self.__keys["speed"]
+
+    @speed.setter
+    def speed(self, value):
+        self.__keys["speed"] = value
+
+    @property
+    def deadweight(self):
+        return self.__keys["deadweight"]
+
+    @deadweight.setter
+    def deadweight(self, value):
+        self.__keys["deadweight"] = value
+
+    @property
     def block_coef(self):
         return self.__keys["block_coef"]
 
     @block_coef.setter
     def block_coef(self, value):
         self.__keys["block_coef"] = value
+
+    @property
+    def midship_coef(self):
+        return self.__keys["midship_coef"]
+
+    @midship_coef.setter
+    def midship_coef(self, value):
+        self.__keys["midship_coef"] = value
 
     @property
     def resistance(self, speed: float) -> float:
