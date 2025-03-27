@@ -5,3 +5,4 @@ searoute
 scgraph
 scipy
 streamlit-image-select
+streamlit-extras
