@@ -39,9 +39,9 @@ def st_horizontal():
         st.markdown('<span class="hide-element horizontal-marker"></span>', unsafe_allow_html=True)
         yield
 
-@st.dialog("Congratulations")
-def vote(varA):
-    st.write(f"You saved {varA} tons of CO2")
+@st.dialog("You saved")
+def vote(varA, varB):
+    st.metric("My metrix", varA, varB)
 
 # Button to switch page
 def menu(counter):
@@ -54,7 +54,7 @@ def menu(counter):
     ]
     with st_horizontal():
         if st.button("⭐️"):
-            vote("42.0")
+            vote(42, 12)
         if st.button(":material/home:"):
             counter = 0
             page_file = "./streamlit_app.py"
