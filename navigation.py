@@ -41,6 +41,8 @@ def st_horizontal():
 
 @st.dialog("Cast your vote")
 def vote(item):
+    import streamlit as st
+    st.markdown("<h1 style='text-align: center;'>🏆</h1>", unsafe_allow_html=True)
     st.write(f"Why is {item} your favorite?")
     reason = st.text_input("Because...")
     if st.button("Submit"):
@@ -75,3 +77,4 @@ def menu(counter):
             page_file = page_lst[counter-1]
             # Switch to the selected page
             st.switch_page(page_file)
+        st.write("---")
