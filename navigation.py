@@ -39,6 +39,14 @@ def st_horizontal():
         st.markdown('<span class="hide-element horizontal-marker"></span>', unsafe_allow_html=True)
         yield
 
+@st.dialog("Cast your vote")
+def vote(item):
+    st.write(f"Why is {item} your favorite?")
+    reason = st.text_input("Because...")
+    if st.button("Submit"):
+        st.session_state.vote = {"item": item, "reason": reason}
+        st.rerun()
+
 # Button to switch page
 def menu(counter):
     if counter == None:
@@ -49,13 +57,13 @@ def menu(counter):
         "./pages/3_third_page.py"
     ]
     with st_horizontal():
-        if st.button(":material/anchor:"):
+        if st.button("Evaluate"):
+            vote("A")
+        if st.button(":material/home:"):
             counter = 0
             page_file = "./streamlit_app.py"
             # Switch to the selected page
             st.switch_page(page_file)
-        if st.button(":material/support:"):
-            counter = counter
         if st.button(":material/arrow_back_ios:"):
             counter -= 1
             page_file = page_lst[counter-1]
