@@ -40,7 +40,7 @@ def st_horizontal():
         yield
 
 @st.dialog("Congratulations")
-def vote(varA, varB):
+def vote(varA):
     st.write(f"You saved {varA} tons of CO2")
 
 # Button to switch page
@@ -54,7 +54,7 @@ def menu(counter):
     ]
     with st_horizontal():
         if st.button("Evaluate"):
-            vote("1500.0, 12.6")
+            vote("42.0")
         if st.button(":material/home:"):
             counter = 0
             page_file = "./streamlit_app.py"
