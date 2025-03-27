@@ -56,7 +56,7 @@ def menu(counter):
         "./pages/3_third_page.py"
     ]
     with st_horizontal():
-        if st.button("⭐️"):
+        if st.button("Eval", style="background-color: #FF0000; color:#FFFFFF;"):
             vote(42, 12)
         if st.button(":material/home:"):
             counter = 0
