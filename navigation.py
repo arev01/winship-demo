@@ -53,7 +53,7 @@ def menu(counter):
         "./pages/3_third_page.py"
     ]
     with st_horizontal():
-        if st.button("Evaluate"):
+        if st.button("⭐️"):
             vote("42.0")
         if st.button(":material/home:"):
             counter = 0
