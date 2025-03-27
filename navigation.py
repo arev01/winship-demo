@@ -40,14 +40,9 @@ def st_horizontal():
         yield
 
 @st.dialog("Cast your vote")
-def vote(item):
-    import streamlit as st
-    st.markdown("<h1 style='text-align: center;'>🏆</h1>", unsafe_allow_html=True)
-    st.write(f"Why is {item} your favorite?")
-    reason = st.text_input("Because...")
-    if st.button("Submit"):
-        st.session_state.vote = {"item": item, "reason": reason}
-        st.rerun()
+def vote(varA, varB)
+    st.title("Congratulations")
+    st.write(f"You saved {varA} tons of CO2")
 
 # Button to switch page
 def menu(counter):
@@ -60,7 +55,7 @@ def menu(counter):
     ]
     with st_horizontal():
         if st.button("Evaluate"):
-            vote("A")
+            vote("1500.0, 12.6")
         if st.button(":material/home:"):
             counter = 0
             page_file = "./streamlit_app.py"
@@ -77,4 +72,4 @@ def menu(counter):
             page_file = page_lst[counter-1]
             # Switch to the selected page
             st.switch_page(page_file)
-        st.write("---")
+    st.write("---")
