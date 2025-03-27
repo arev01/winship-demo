@@ -39,9 +39,8 @@ def st_horizontal():
         st.markdown('<span class="hide-element horizontal-marker"></span>', unsafe_allow_html=True)
         yield
 
-@st.dialog("Cast your vote")
-def vote(varA, varB)
-    st.title("Congratulations")
+@st.dialog("Congratulations")
+def vote(varA, varB):
     st.write(f"You saved {varA} tons of CO2")
 
 # Button to switch page
