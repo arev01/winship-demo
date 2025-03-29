@@ -1,6 +1,6 @@
 import streamlit as st
 
-def greet(person):
+def prompt(person):
     match person:
         case "container":
             st.write("""A ship specifically designed 
