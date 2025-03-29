@@ -39,28 +39,28 @@ import xarray as xr
 data = xr.open_dataset('ERA5.nc')
 
 # Define latitude and longitude coordinates
-lat = data.latitude
-lon = data.longitude
+x = data.longitude
+y = data.latitude
 
 # Define the u-, v- wind speeds
 wind_u = data.u
 wind_v = data.v
 
+import pandas as pd
 import numpy as np
 
 # Get the magnitude of wind speed
 WS = np.sqrt(wind_u **2 + wind_v **2)
 
-st.write(lat.shape)
-st.write(lon.shape)
-st.write(wind_u.shape)
-st.write(wind_v.shape)
+DATA_SOURCE = pd.DataFrame(WS, index=x, columns=y)
 
-df = data.to_dataframe()
-st.write(df)
-
-import pandas as pd
-import numpy as np
+st.write(DATA_SOURCE.shape)
+df1 = DATA_SOURCE.unstack()
+st.write(df1.shape)
+st.write(df1)
+df2 = df1.sample(frac=0.5)
+st.write(df2.shape)
+st.write(df2)
 
 df = pd.DataFrame(
     #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
