@@ -46,8 +46,6 @@ def vote(varA, varB):
     col2.metric("Fuel", "9 L", "-8%")
     col3.metric("CO2", "86 T", "4%")
 
-from streamlit_extras.stylable_container import stylable_container
-
 # Button to switch page
 def menu(counter):
     if counter == None:
@@ -58,16 +56,7 @@ def menu(counter):
         "./pages/3_third_page.py"
     ]
     with st_horizontal():
-        with stylable_container(
-            "red",
-            css_styles="""
-            button {
-                background-color: #FF0000;
-                color: #FFFFFF;
-            }""",
-        ):
-            button1 = st.button("Button 1", key="button1")
-        if button1:
+        if st.button("Button 1"):
             vote(42, 12)
         if st.button(":material/home:"):
             counter = 0
