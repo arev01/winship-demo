@@ -13,8 +13,7 @@ img = image_select("Label", [
     "./img/sail.jpg", 
     "./img/kite.jpg", 
 ])
-st.markdown("You selected: " + img[6:-4].capitalize(), 
-            help="""
-            A gigantic rig deployed above the ship to assist 
-            in pulling the ship through the water."""
-           )
+st.markdown("You selected: " + img[6:-4].capitalize())
+
+with st.expander("Description"):
+    prompt(img[6:-4])
