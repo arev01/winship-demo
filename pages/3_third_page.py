@@ -46,6 +46,8 @@ lon = data.longitude
 wind_u = data.u
 wind_v = data.v
 
+import numpy as np
+
 # Get the magnitude of wind speed
 WS = np.sqrt(wind_u **2 + wind_v **2)
 
