@@ -1,10 +1,10 @@
 streamlit
 numpy
 pandas
-searoute
 scgraph
 scipy
 streamlit-image-select
 xarray
 netCDF4
 h5netcdf
+pydeck
