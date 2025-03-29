@@ -23,6 +23,7 @@ ship = ship.Ship(**out)
 control = st.segmented_control("Specify ship size:",
                      ["Capacity", "Dimension"],
                     default="Capacity",
+                    help="Currently unavailable",
                     )
 
 if control == "Capacity":
