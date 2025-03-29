@@ -54,15 +54,16 @@ WS = np.sqrt(wind_u **2 + wind_v **2)
 
 DATA_SOURCE = pd.DataFrame(WS[0,0,:,:], index=x, columns=y)
 
-# Random sample
-DATA_SOURCE = DATA_SOURCE.sample(frac=0.1)
-
 # Unstack
 DATA_SOURCE = DATA_SOURCE.unstack()
+
+# Random sample
+#DATA_SOURCE = DATA_SOURCE.sample(frac=0.1)
 
 # Rename columns
 DATA_SOURCE = DATA_SOURCE.reset_index().rename(columns={'level_0':'lon','level_1':'lat',0:'WS'})
 
+'''
 import pydeck as pdk
 
 COLOR_BREWER_BLUE_SCALE = [
@@ -93,6 +94,7 @@ r = pdk.Deck(layers=[layer], map_style=None)#initial_view_state=INITIAL_VIEW_STA
 
 # Display the pydeck object
 st.pydeck_chart(r)
+'''
 
 df = pd.DataFrame(
     #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
@@ -100,3 +102,5 @@ df = pd.DataFrame(
     columns = col,
 )
 st.map(df, height=300)
+
+st.toggle("Show wind", disabled=True, help="Currently unavailable")
