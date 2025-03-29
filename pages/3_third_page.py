@@ -52,7 +52,7 @@ import numpy as np
 # Get the magnitude of wind speed
 WS = np.sqrt(wind_u **2 + wind_v **2)
 
-DATA_SOURCE = pd.DataFrame(WS[1,:,:,:], index=x, columns=y)
+DATA_SOURCE = pd.DataFrame(WS[0,0,:,:], index=x, columns=y)
 
 st.write(DATA_SOURCE.shape)
 df1 = DATA_SOURCE.unstack()
