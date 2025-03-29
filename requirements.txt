@@ -5,7 +5,6 @@ searoute
 scgraph
 scipy
 streamlit-image-select
-streamlit-extras
 xarray
 netCDF4
 h5netcdf
