@@ -63,7 +63,24 @@ DATA_SOURCE = DATA_SOURCE.sample(frac=0.1)
 # Rename columns
 DATA_SOURCE = DATA_SOURCE.reset_index().rename(columns={'level_0':'lon','level_1':'lat',0:'WS'})
 
-st.write(DATA_SOURCE)
+import pydeck as pdk
+
+# Crate a base layer
+layer = pdk.Layer(
+    "HeatmapLayer",
+    DATA_SOURCE,
+    opacity=0.9,
+    get_position='[long, lat]',
+    get_weight='WS',
+)
+
+INITIAL_VIEW_STATE = pdk.ViewState(latitude=49.254, longitude=-123.13, zoom=10.5, max_zoom=16, pitch=45, bearing=0)
+
+# Embed the layer into pydeck object
+r = pdk.Deck(layers=[layer], map_style=None)#initial_view_state=INITIAL_VIEW_STATE)
+
+# Display the pydeck object
+st.pydeck_chart(r)
 
 df = pd.DataFrame(
     #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
