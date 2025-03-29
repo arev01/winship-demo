@@ -1,6 +1,6 @@
 import streamlit as st
 from mycomponent import mycomponent
-from functions import greet
+from functions import prompt
 from navigation import menu
 
 menu(counter=1)
@@ -8,9 +8,10 @@ menu(counter=1)
 my_output_value = mycomponent(my_input_value=50)
     
 # Display the output in Streamlit
-st.markdown("You selected: " + my_output_value.capitalize(), 
-         help="""A multi-purpose ship designed to transport 
-         a wide variety of goods and commodities.""")
+st.write("You selected: " + my_output_value.capitalize())
+
+with st.expander("Description"):
+    prompt(my_output_value)
 
 from pyresis import read_ship, ship
 
