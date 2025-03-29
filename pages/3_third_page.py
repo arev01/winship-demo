@@ -83,7 +83,6 @@ layer = pdk.Layer(
     get_position='[long, lat]',
     aggregation=pdk.types.String("MEAN"),
     color_range=COLOR_BREWER_BLUE_SCALE,
-    intensity=1,
     get_weight='WS',
 )
 
