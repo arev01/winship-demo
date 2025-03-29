@@ -6,3 +6,4 @@ scgraph
 scipy
 streamlit-image-select
 streamlit-extras
+xarray
