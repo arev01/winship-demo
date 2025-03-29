@@ -54,23 +54,36 @@ WS = np.sqrt(wind_u **2 + wind_v **2)
 
 DATA_SOURCE = pd.DataFrame(WS[0,0,:,:], index=x, columns=y)
 
-# Unstack
-DATA_SOURCE = DATA_SOURCE.unstack()
-
 # Random sample
 DATA_SOURCE = DATA_SOURCE.sample(frac=0.1)
+
+# Unstack
+DATA_SOURCE = DATA_SOURCE.unstack()
 
 # Rename columns
 DATA_SOURCE = DATA_SOURCE.reset_index().rename(columns={'level_0':'lon','level_1':'lat',0:'WS'})
 
 import pydeck as pdk
 
+COLOR_BREWER_BLUE_SCALE = [
+    [240, 249, 232],
+    [204, 235, 197],
+    [168, 221, 181],
+    [123, 204, 196],
+    [67, 162, 202],
+    [8, 104, 172],
+]
+
 # Crate a base layer
 layer = pdk.Layer(
     "HeatmapLayer",
-    DATA_SOURCE,
-    opacity=0.9,
+    data=DATA_SOURCE,
+    opacity=0.3,
+    intensity=1,
     get_position='[long, lat]',
+    aggregation=pdk.types.String("MEAN"),
+    color_range=COLOR_BREWER_BLUE_SCALE,
+    intensity=1,
     get_weight='WS',
 )
 
