@@ -39,8 +39,9 @@ def st_horizontal():
         st.markdown('<span class="hide-element horizontal-marker"></span>', unsafe_allow_html=True)
         yield
 
-@st.dialog("You saved")
-def vote(varA, varB):
+@st.dialog("🏆 Congratulations")
+def predict(varA, varB):
+    st.write("You saved:")
     col1, col2, col3 = st.columns(3)
     col1.metric("Power", "70 kW", "1.2%")
     col2.metric("Fuel", "9 L", "-8%")
@@ -57,7 +58,7 @@ def menu(counter):
     ]
     with st_horizontal():
         if st.button("Button 1"):
-            vote(42, 12)
+            predict(42, 12)
         if st.button(":material/home:"):
             counter = 0
             page_file = "./streamlit_app.py"
