@@ -42,10 +42,20 @@ data = xr.open_dataset('ERA5.nc')
 lat = data.latitude
 lon = data.longitude
 
+# Define the u-, v- wind speeds
+wind_u = data.u
+wind_v = data.v
+
+# Get the magnitude of wind speed
+WS = np.sqrt(wind_u **2 + wind_v **2)
+
 st.write(lat.shape)
 st.write(lon.shape)
-st.write(dir(data))
-st.write(data)
+st.write(wind_u.shape)
+st.write(wind_v.shape)
+
+df = data.to_dataframe()
+st.write(df)
 
 import pandas as pd
 import numpy as np
