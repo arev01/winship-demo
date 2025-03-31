@@ -51,17 +51,21 @@ wind_u = np.asarray(data.u[0,0,::3,::3], dtype=float)
 wind_v = np.asarray(data.v[0,0,::3,::3], dtype=float)
 
 xx, yy = np.meshgrid(x, y)
-DATA_SOURCE = np.c_[xx.ravel(), yy.ravel(), wind_u.ravel(), wind_v.ravel()]
+coords = np.c_[xx.ravel(), yy.ravel(), wind_u.ravel(), wind_v.ravel()]
 
-from scipy import interpolate
+def find_nearest(array, value):
+    idx = np.searchsorted(array, value, side="left")
+    if idx > 0 and (idx == len(array) or np.abs(value - array[idx-1]) < np.abs(value - array[idx])):
+        return array[idx-1]
+    else:
+        return array[idx]
 
-coords = DATA_SOURCE.T[:2].T
-values = DATA_SOURCE.T[3:].T
+toto = find_nearest(coords[:,0], 89.99)
+st.write(toto)
 
-for i in range(len(marnet_output['coordinate_path'])-1):
-    first_node = marnet_output['coordinate_path'][i]
-    second_node = marnet_output['coordinate_path'][i+1]
-    interpolate.LinearNDInterpolator
+#for i in range(len(marnet_output['coordinate_path'])-1):
+#    first_node = marnet_output['coordinate_path'][i]
+#    second_node = marnet_output['coordinate_path'][i+1]
 
 # Get the magnitude of wind speed
 #WS = np.sqrt(wind_u **2 + wind_v **2)
