@@ -52,7 +52,10 @@ import numpy as np
 
 xx, yy = np.meshgrid(x, y)
 coords = np.c_[xx.ravel(), yy.ravel()]
-st.write(coords)
+
+
+d1 = np.r_[coords, wind_u.unstack()]
+st.write(d1)
 
 # Get the magnitude of wind speed
 WS = np.sqrt(wind_u **2 + wind_v **2)
