@@ -40,12 +40,12 @@ import xarray as xr
 data = xr.open_dataset('ERA5.nc')
 
 # Define latitude and longitude coordinates
-x = data.latitude
-y = data.longitude
+x = data.latitude[::3]
+y = data.longitude[::3]
 
 # Define the u-, v- wind speeds
-wind_u = data.u
-wind_v = data.v
+wind_u = data.u[0,0,::3,::3]
+wind_v = data.v[0,0,::3,::3]
 
 import pandas as pd
 import numpy as np
