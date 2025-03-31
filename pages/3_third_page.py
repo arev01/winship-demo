@@ -60,7 +60,7 @@ coords = np.c_[xx.ravel(), yy.ravel(), wind_u.ravel(), wind_v.ravel()]
 from scipy import interpolate
 
 itp = interpolate.RegularGridInterpolator( (x, y), wind_u, method='nearest') 
-res = itp( (89.99, 0.31) )
+res = itp([89.99, 0.31])
 st.write(res)
 
 #for i in range(len(marnet_output['coordinate_path'])-1):
