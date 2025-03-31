@@ -55,7 +55,7 @@ coords = np.c_[xx.ravel(), yy.ravel()]
 
 st.write(coords.shape)
 st.write(wind_u.shape)
-st.write(wind_u.unstack().shape)
+st.write(wind_u.ravel().shape)
 
 #d1 = np.r_[coords, wind_u.unstack()]
 #st.write(d1)
