@@ -32,7 +32,7 @@ marnet_output = marnet_geograph.get_shortest_path(
     destination_node = {col[i]: nodes[destination][i] for i, _ in enumerate(col)},
     output_units = "km"
 )
-st.write("Distance: " + str(marnet_output['length']) + "km")
+st.write("Distance: " + str(marnet_output['length']) + " km")
 
 import xarray as xr
 
@@ -43,18 +43,16 @@ data = xr.open_dataset('ERA5.nc')
 x = data.latitude
 y = data.longitude
 
-xx, yy = np.meshgrid(x, y)
-
-coords = np.c_[xx.ravel(), yy.ravel()]
-
-st.write(coords)
-
 # Define the u-, v- wind speeds
 wind_u = data.u
 wind_v = data.v
 
 import pandas as pd
 import numpy as np
+
+xx, yy = np.meshgrid(x, y)
+coords = np.c_[xx.ravel(), yy.ravel()]
+st.write(coords)
 
 # Get the magnitude of wind speed
 WS = np.sqrt(wind_u **2 + wind_v **2)
