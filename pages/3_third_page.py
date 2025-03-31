@@ -27,11 +27,12 @@ from scgraph.geographs.marnet import marnet_geograph
 col = ["latitude", "longitude"]
 
 # Get the shortest path between 
-output = marnet_geograph.get_shortest_path(
+marnet_output = marnet_geograph.get_shortest_path(
     origin_node = {col[i]: nodes[origin][i] for i, _ in enumerate(col)},
-    destination_node = {col[i]: nodes[destination][i] for i, _ in enumerate(col)}
+    destination_node = {col[i]: nodes[destination][i] for i, _ in enumerate(col)},
+    output_units = "km"
 )
-st.write("Distance: ",output['length'])
+st.write("Distance: " + str(marnet_output['length']) + "km")
 
 import xarray as xr
 
@@ -63,42 +64,9 @@ DATA_SOURCE = DATA_SOURCE.unstack()
 # Rename columns
 DATA_SOURCE = DATA_SOURCE.reset_index().rename(columns={'level_0':'lon','level_1':'lat',0:'WS'})
 
-'''
-import pydeck as pdk
-
-COLOR_BREWER_BLUE_SCALE = [
-    [240, 249, 232],
-    [204, 235, 197],
-    [168, 221, 181],
-    [123, 204, 196],
-    [67, 162, 202],
-    [8, 104, 172],
-]
-
-# Crate a base layer
-layer = pdk.Layer(
-    "HeatmapLayer",
-    data=DATA_SOURCE,
-    opacity=0.3,
-    intensity=1,
-    get_position='[long, lat]',
-    aggregation=pdk.types.String("MEAN"),
-    color_range=COLOR_BREWER_BLUE_SCALE,
-    get_weight='WS',
-)
-
-INITIAL_VIEW_STATE = pdk.ViewState(latitude=49.254, longitude=-123.13, zoom=10.5, max_zoom=16, pitch=45, bearing=0)
-
-# Embed the layer into pydeck object
-r = pdk.Deck(layers=[layer], map_style=None)#initial_view_state=INITIAL_VIEW_STATE)
-
-# Display the pydeck object
-st.pydeck_chart(r)
-'''
-
 df = pd.DataFrame(
     #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-    output['coordinate_path'],
+    marnet_output['coordinate_path'],
     columns = col,
 )
 st.map(df, height=300)
