@@ -43,6 +43,12 @@ data = xr.open_dataset('ERA5.nc')
 x = data.latitude
 y = data.longitude
 
+xx, yy = np.meshgrid(x, y)
+
+coords = np.c_[xx.ravel(), yy.ravel()]
+
+st.write(coords)
+
 # Define the u-, v- wind speeds
 wind_u = data.u
 wind_v = data.v
@@ -63,6 +69,8 @@ DATA_SOURCE = DATA_SOURCE.unstack()
 
 # Rename columns
 DATA_SOURCE = DATA_SOURCE.reset_index().rename(columns={'level_0':'lon','level_1':'lat',0:'WS'})
+
+st.write(DATA_SOURCE)
 
 df = pd.DataFrame(
     #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
