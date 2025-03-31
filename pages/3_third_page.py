@@ -57,7 +57,7 @@ st.write(coords.shape)
 st.write(wind_u.shape)
 st.write(wind_u.ravel().shape)
 
-d1 = np.r_[coords, wind_u.ravel()]
+d1 = np.c_[coords, wind_u.ravel()]
 st.write(d1)
 
 # Get the magnitude of wind speed
