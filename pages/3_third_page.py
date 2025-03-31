@@ -57,23 +57,11 @@ coords = np.c_[xx.ravel(), yy.ravel(), wind_u.ravel(), wind_v.ravel()]
 
 #DATA_SOURCE = DATA_SOURCE.unstack()
 
-def find_index(lat, lon):
-    xi = np.searchsorted(x,lat)
-    yi = np.searchsorted(y,lon)
-    return xi, yi
+from scipy import interpolate
 
-thisLat, thisLon = find_index(89.99, 0.31)
-st.write(thisLat, thisLon)
-
-def find_nearest(array, value):
-    idx = np.searchsorted(array, value, side="left")
-    if idx > 0 and (idx == len(array) or np.abs(value - array[idx-1]) < np.abs(value - array[idx])):
-        return array[idx-1]
-    else:
-        return array[idx]
-
-toto = find_nearest(coords[:,0], 89.99)
-st.write(toto)
+itp = interpolate.RegularGridInterpolator( (x, y), wind_u, method='nearest') 
+res = itp(89.99, 0.31)
+st.write(res)
 
 #for i in range(len(marnet_output['coordinate_path'])-1):
 #    first_node = marnet_output['coordinate_path'][i]
