@@ -47,34 +47,24 @@ import pandas as pd
 import numpy as np
 
 # Define the u-, v- wind speeds
-wind_u = np.asarray(data.u[0,0,::3,::3])
-wind_v = np.asarray(data.v[0,0,::3,::3])
+wind_u = np.asarray(data.u[0,0,::3,::3], dtype=float)
+wind_v = np.asarray(data.v[0,0,::3,::3], dtype=float)
 
 xx, yy = np.meshgrid(x, y)
-coords = np.c_[xx.ravel(), yy.ravel()]
+DATA_SOURCE = np.c_[xx.ravel(), yy.ravel(), wind_u.ravel(), wind_v.ravel()]
 
-st.write(coords.shape)
-st.write(wind_u.shape)
-st.write(wind_u.ravel().shape)
+from scipy import interpolate
 
-d1 = np.c_[coords, wind_u.ravel(), wind_v.ravel()]
-st.write(d1)
+coords = DATA_SOURCE.T[:2].T
+values = DATA_SOURCE.T[3:].T
+
+for i in range(len(marnet_output['coordinate_path'])-1):
+    first_node = marnet_output['coordinate_path'][i]
+    second_node = marnet_output['coordinate_path'][i+1]
+    interpolate.LinearNDInterpolator
 
 # Get the magnitude of wind speed
-WS = np.sqrt(wind_u **2 + wind_v **2)
-
-DATA_SOURCE = pd.DataFrame(WS[0,0,:,:], index=x, columns=y)
-
-# Unstack
-DATA_SOURCE = DATA_SOURCE.unstack()
-
-# Random sample
-#DATA_SOURCE = DATA_SOURCE.sample(frac=0.1)
-
-# Rename columns
-DATA_SOURCE = DATA_SOURCE.reset_index().rename(columns={'level_0':'lon','level_1':'lat',0:'WS'})
-
-st.write(DATA_SOURCE)
+#WS = np.sqrt(wind_u **2 + wind_v **2)
 
 df = pd.DataFrame(
     #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
