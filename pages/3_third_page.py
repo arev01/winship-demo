@@ -57,8 +57,8 @@ st.write(coords.shape)
 st.write(wind_u.shape)
 st.write(wind_u.ravel().shape)
 
-#d1 = np.r_[coords, wind_u.unstack()]
-#st.write(d1)
+d1 = np.r_[coords, wind_u.ravel()]
+st.write(d1)
 
 # Get the magnitude of wind speed
 WS = np.sqrt(wind_u **2 + wind_v **2)
