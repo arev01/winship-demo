@@ -43,12 +43,12 @@ data = xr.open_dataset('ERA5.nc')
 x = data.latitude[::3]
 y = data.longitude[::3]
 
+import pandas as pd
+import numpy as np
+
 # Define the u-, v- wind speeds
 wind_u = np.asarray(data.u[0,0,::3,::3])
 wind_v = np.asarray(data.v[0,0,::3,::3])
-
-import pandas as pd
-import numpy as np
 
 xx, yy = np.meshgrid(x, y)
 coords = np.c_[xx.ravel(), yy.ravel()]
