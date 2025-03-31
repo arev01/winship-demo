@@ -53,6 +53,18 @@ wind_v = np.asarray(data.v[0,0,::3,::3], dtype=float)
 xx, yy = np.meshgrid(x, y)
 coords = np.c_[xx.ravel(), yy.ravel(), wind_u.ravel(), wind_v.ravel()]
 
+#DATA_SOURCE = pd.DataFrame(wind_u, wind_v, index=lat, columns=lon)
+
+#DATA_SOURCE = DATA_SOURCE.unstack()
+
+def find_index(lat, lon):
+    xi = np.searchsorted(x,lat)
+    yi = np.searchsorted(y,lon)
+    return xi, yi
+
+thisLat, thisLon = find_index(89.99, 0.31)
+st.write(thisLat, thisLon)
+
 def find_nearest(array, value):
     idx = np.searchsorted(array, value, side="left")
     if idx > 0 and (idx == len(array) or np.abs(value - array[idx-1]) < np.abs(value - array[idx])):
