@@ -42,9 +42,9 @@ elif ship.gross_tonnage >= 50000 and ship.gross_tonnage < 100000:
 else:
     units, size = 4, sizes_list[2]
 
-choice = st.segmented_control(["Quantity", "Dimension"], help=…)
+choice = st.segmented_control(["Quantity", "Dimension"], help="Currently unavailable")
 
 if choice == "Quantity":
     st.number_input("Units (-):", [1, 2, 4], default=units, disabled=True)
 else:
-    st.dropdown_select("Size (m2):", sizes_list, default=size, disabled=True)
+    st.selectbox("Size (m2):", sizes_list, default=size, disabled=True)
