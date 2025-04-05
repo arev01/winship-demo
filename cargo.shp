@@ -1,9 +1,10 @@
 # 5000 DWT General Cargo
-length       = 80.0 # : meters length of the vehicle
-beam         = 17.7 # : meters beam of the vehicle
-draft        = 7.1 # : meters draft of the vehicle
-height       = 16.9 # : meters height of the vehicle
-speed        = 11.0 # : knots speed of the vehicle
-deadweight   = 5000.0 # : tons deadweight of the vehicle
-block_coef   = .693 # : block coefficient dimensionless
-midship_coef = .990 # : midship coefficient dimensionless
+length        = 80.0 # : meters length of the vehicle
+beam          = 17.7 # : meters beam of the vehicle
+draft         = 7.1 # : meters draft of the vehicle
+height        = 16.9 # : meters height of the vehicle
+speed         = 11.0 # : knots speed of the vehicle
+deadweight    = 5000.0 # : tons deadweight of the vehicle
+gross_tonnage = 3000.0 # : tons gross tonnage of the vehicle
+block_coef    = .693 # : block coefficient dimensionless
+midship_coef  = .990 # : midship coefficient dimensionless
