@@ -83,6 +83,14 @@ class Ship:
         self.__keys["deadweight"] = value
 
     @property
+    def gross_tonnage(self):
+        return self.__keys["gross_tonnage"]
+
+    @gross_tonnage.setter
+    def gross_tonnage(self, value):
+        self.__keys["gros_tonnage"] = value
+
+    @property
     def block_coef(self):
         return self.__keys["block_coef"]
 
