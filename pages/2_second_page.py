@@ -53,7 +53,10 @@ and st.session_state['ship'].gross_tonnage < 100000:
 else:
     units, size = 4, sizes_list[2]
 
-choice = st.segmented_control(["Quantity", "Dimension"], help="Currently unavailable")
+choice = st.segmented_control("Specify device size:", 
+                              ["Quantity", "Dimension"], 
+                              default="Quantity",
+                              help="Currently unavailable")
 
 if choice == "Quantity":
     st.number_input("Units (-):", [1, 2, 4], default=units, disabled=True)
