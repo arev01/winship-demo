@@ -6,7 +6,16 @@ from navigation import menu
 menu(counter=2)
 
 from streamlit_image_select import image_select
+"""
 img = image_select("Label", [
+    "./img/rotor.jpg", 
+    "./img/suction.jpg", 
+    "./img/wing.jpg", 
+    "./img/sail.jpg", 
+    "./img/kite.jpg", 
+])
+"""
+img = st.selectbox("Label", [
     "./img/rotor.jpg", 
     "./img/suction.jpg", 
     "./img/wing.jpg", 
