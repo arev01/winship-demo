@@ -2,6 +2,7 @@ import streamlit as st
 from mycomponent import mycomponent
 from functions import prompt
 from navigation import menu
+from pyaero import wind
 
 menu(counter=2)
 
@@ -29,8 +30,11 @@ with st.expander("Description"):
 
 import numpy as np
 
+# Create Wind() class object
+wind = wind.Wind()
+
 # Get lift and drag coefficients
-lift_coef, drag_coef = np.loadtxt(img[6:-4] + ".dat", comments="#", usecols=(1, 2), unpack=True)
+wind.lift_coef, wind.drag_coef = np.loadtxt(img[6:-4] + ".dat", comments="#", usecols=(1, 2), unpack=True)
 
 # Choose units, size 
 if img[6:-4] == "kite":
@@ -63,3 +67,7 @@ if choice == "Quantity":
     st.number_input("Units (-):", value=units, disabled=True)
 else:
     st.selectbox("Size (m2):", sizes_list, index=size, disabled=True)
+
+# Correct attributes
+wind.units = units
+wind.size = np.prod([float(i) for i in sizes_list[size].split("x")])
