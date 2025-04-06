@@ -30,9 +30,9 @@ control = st.segmented_control("Specify ship size:",
                     )
 
 if control == "Capacity":
-    st.number_input("tons deadweight", value=ship.deadweight, disabled=True)
+    st.number_input("Gross tonnage (tons):", value=ship.gross_tonnage, disabled=True)
 elif control == "Dimension":
-    st.number_input("meters length", value=ship.length, disabled=True)
-    st.number_input("meters beam", value=ship.beam, disabled=True)
-    st.number_input("meters draft", value=ship.draft, disabled=True)
-    st.number_input("knots speed", value=ship.speed, disabled=True)
+    st.number_input("Length (m):", value=ship.length, disabled=True)
+    st.number_input("Beam (m):", value=ship.beam, disabled=True)
+    st.number_input("Draft (m):", value=ship.draft, disabled=True)
+    st.number_input("Speed (kt):", value=ship.speed, disabled=True)
