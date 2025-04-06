@@ -21,7 +21,7 @@ with st.expander("Description"):
 import numpy as np
 
 # Get lift and drag coefficients
-lift_coef, drag_coef = np.loadtxt(img[6:-4] + ".dat", comments="#", usecols=(1, 2))
+lift_coef, drag_coef = np.loadtxt(img[6:-4] + ".dat", comments="#", usecols=(1, 2), unpack=True)
 
 # Choose units, size 
 if img[6:-4] == "kite":
