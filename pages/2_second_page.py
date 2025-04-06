@@ -71,3 +71,6 @@ else:
 # Correct attributes
 wind.units = units
 wind.size = np.prod([float(i) for i in sizes_list[size].split("x")])
+
+if 'wind' not in st.session_state:
+    st.session_state['wind'] = wind
