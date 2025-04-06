@@ -24,9 +24,25 @@ class Wind():
     def size(self):
         return self.__keys['size']
 
-    @sizer.setter
+    @size.setter
     def size(self, value):
         self.__keys['size'] = value
+
+    @property
+    def lift_coef(self):
+        return self.__keys['lift_coef']
+
+    @lift_coef.setter
+    def lift_coef(self, value):
+        self.__keys['lift_coef'] = value
+
+    @property
+    def drag_coef(self):
+        return self.__keys['drag_coef']
+
+    @drag_coef.setter
+    def drag_coef(self, value):
+        self.__keys['drag_coef'] = value
 
     def aero_force(self, speed: float, angle: float) -> float:
         """
