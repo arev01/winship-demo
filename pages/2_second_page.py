@@ -56,9 +56,10 @@ else:
 choice = st.segmented_control("Specify device size:", 
                               ["Quantity", "Dimension"], 
                               default="Quantity",
-                              help="Currently unavailable")
+                              help="Currently unavailable",
+                             )
 
 if choice == "Quantity":
-    st.number_input("Units (-):", [1, 2, 4], default=units, disabled=True)
+    st.number_input("Units (-):", [1, 2, 4], value=units, disabled=True)
 else:
-    st.selectbox("Size (m2):", sizes_list, default=size, disabled=True)
+    st.selectbox("Size (m2):", sizes_list, value=size, disabled=True)
