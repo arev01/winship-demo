@@ -29,7 +29,7 @@ def main():
     st.title("👋 Welcome to winship!")
     st.write(
         """
-        A tool that estimates the performance of a SHIP equipped with WINd powered devices in 3 simple steps: select ship type & size, choose device configuration and select a course.
+        A tool that evaluates the potential of a WINd-assisted SHIP in 3 simple steps: select ship type & size, choose device configuration and select a course.
 
         Accurate results plus a graphical output will be available in just a few seconds.
         """
