@@ -62,7 +62,7 @@ def find_index(x, y):
     yi = np.searchsorted(lon, y)
     return xi, yi
 
-from navigation import *
+from pyaero import navigation
 
 wind_data = pd.DataFrame(columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
 
