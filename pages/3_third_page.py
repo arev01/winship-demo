@@ -86,3 +86,6 @@ for i in range(len(marnet_output['coordinate_path'])-1):
     distance = navigation.distance(p1, p2)
 
     wind_data.loc[-1] = [distance] + list(navigation.velocity(v0, v1))
+
+if 'wind_data' not in st.session_state:
+    st.session_state['wind_data'] = wind_data
