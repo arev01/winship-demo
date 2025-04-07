@@ -44,7 +44,7 @@ import numpy as np
 @st.dialog("🏆 Congratulations")
 def predict(varA, varB):
     sea_margin = 0.2
-    resistance = st.session_state['ship'].resistance()
+    resistance = st.session_state['ship'].resistance
     ref_power = st.session_state['ship'].propulsion_power(sea_margin) * np.sum(list(st.session_state['wind_data']['DIST'])) / st.session_state['ship'].speed
 
     new_power = 0
