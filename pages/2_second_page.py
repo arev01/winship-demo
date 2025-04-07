@@ -1,8 +1,6 @@
 import streamlit as st
-from mycomponent import mycomponent
-from functions import prompt
-from navigation import menu
-from pyaero import wind
+from functions import menu, prompt
+from pyaero import wind, navigation
 
 menu(counter=2)
 
