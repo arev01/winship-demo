@@ -56,7 +56,7 @@ else:
     units, size = 4, 2
 
 choice = st.segmented_control("Specify device size:", 
-                              ["Quantity", "Dimension"], 
+                              ["Quantity","Windage"], 
                               default="Quantity",
                               help="Currently unavailable",
                              )
