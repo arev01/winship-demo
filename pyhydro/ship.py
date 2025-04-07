@@ -22,17 +22,17 @@ class Ship:
         self.__keys = {}
         self.__keys.update(kw)
         
-        if "displacement" not in self.__keys and "block_coef" in self.__keys:
-            self.displacement = self.block_coef * self.length * self.beam * self.draft
+        #if "displacement" not in self.__keys and "block_coef" in self.__keys:
+        self.displacement = self.block_coef * self.length * self.beam * self.draft
             
-        if "slenderness_coef" not in self.__keys and "displacement" in self.__keys:
-            self.slenderness_coef = self.length / self.displacement ** (1/3)
+        #if "slenderness_coef" not in self.__keys and "displacement" in self.__keys:
+        self.slenderness_coef = self.length / self.displacement ** (1/3)
 
-        if "prismatic_coef" not in self.__keys and "block_coef" in self.__keys and "midship_coef" in self.__keys:
-            self.prismatic_coef = self.block_coef / self.midship_coef
+        #if "prismatic_coef" not in self.__keys and "block_coef" in self.__keys and "midship_coef" in self.__keys:
+        self.prismatic_coef = self.block_coef / self.midship_coef
             
-        if "wetted_surface" not in self.__keys:
-            self.wetted_surface = 1.025 * (1.7 * self.length * self.draft + self.displacement / self.draft)
+        #if "wetted_surface" not in self.__keys:
+        self.wetted_surface = 1.025 * (1.7 * self.length * self.draft + self.displacement / self.draft)
 
     @property
     def length(self):
