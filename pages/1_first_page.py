@@ -12,7 +12,7 @@ st.write("You selected: " + my_output_value.capitalize())
 with st.expander("Description"):
     prompt(my_output_value)
 
-from pyresis import read_ship, ship
+from pyhydro import read_ship, ship
 
 file_name = my_output_value + ".shp"
 
