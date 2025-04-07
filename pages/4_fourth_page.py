@@ -1,13 +1,34 @@
 import streamlit as st
 
-st.title("📚 Background")
+st.title("📚 Methodology")
 
 st.markdown(
         """
         The tool works by balancing the aerodynamic and hydrodynamic forces of the ship. It takes into account the most important eﬀects of the wind powered devices to predict the ship speeds at various wind conditions.
 
-        By determining the elapsed time around the course, a direct measure of the fuel and emission savings can be assessed.
+        A methodology to estimate the fuel and emission savings for a defined route (origin and destination port), ship design and speed is provided in [1].
 
+        Due to the complexity of the problem, some approximations are made using basic ship theory:
+
+        - For simplicity, the tool only solves one equation (movement along the longitudinal axis), assuming that the ship will naturally be balanced for all other motions.
+
+        - Calm water resistance and hull/propeller interaction coefficients are given by Harvald [2] semi empirical method.
+
+        - Propulsion efficiency is estimated using naval architecture’s rules of thumbs.
+
+        - Added resistance due to wind and waves is accounted for by applying a sea margin of 10-25% based on the ship route.
+
+        - Wind powered device operation typically can be calculated through lift and drag coefficients found in literature.
+
+         - Wind data is derived from the ERA-5 [3] database (annual average).
+
+        - Generic models. Typical dimensions.
+
+        - No interaction
+
+        [1] www.emsa.europe.eu
+        [2] Harvald
+        [3] Copernicus
         """
 )
 
