@@ -39,8 +39,24 @@ def st_horizontal():
         st.markdown('<span class="hide-element horizontal-marker"></span>', unsafe_allow_html=True)
         yield
 
+import numpy as np
+
 @st.dialog("🏆 Congratulations")
 def predict(varA, varB):
+    sea_margin = 0.2
+    resistance = st.session_state['ship'].resistance()
+    ref_power = st.session_state['ship'].propulsion_power(sea_margin) * np.sum(list(st.session_state['wind_data']['distance'])) / st.session_state['ship'].speed
+
+    new_power = 0
+    for i in range(len(st.session_state['win_data'])):
+        distance, _, _, wind_speed, wind_angle = st.session_state['wind_data'].loc[i]
+
+        wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
+        new_power += st.session_state['ship'].propulsion_power(sea_margin, wind_load) * distance / st.session_state['ship'].speed
+    
+    total_power = np.sum(new_power)
+    st.write(total_power)
+
     st.write("You saved:")
     col1, col2, col3 = st.columns(3)
     col1.metric("Power", "70 kW", "1.2%")
