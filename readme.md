@@ -1,5 +1,5 @@
 # winship-demo
-A tool that estimates the performance of a SHIP equipped with WINd powered devices.
+A tool that evaluates the potential of a WINd-assisted SHIP.
 
 ## Getting started
 The tool uses the open-source Python framework [Streamlit](https://docs.streamlit.io/#).
