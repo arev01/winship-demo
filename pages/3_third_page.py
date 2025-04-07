@@ -1,7 +1,5 @@
 import streamlit as st
-from mycomponent import mycomponent
-from functions import prompt
-from navigation import menu
+from functions import menu, prompt
 
 menu(counter=3)
 
