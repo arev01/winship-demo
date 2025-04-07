@@ -32,6 +32,8 @@ marnet_output = marnet_geograph.get_shortest_path(
 )
 st.write("Distance: " + str(marnet_output['length']) + " km")
 
+import pandas as pd
+
 df = pd.DataFrame(
     #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
     marnet_output['coordinate_path'],
@@ -43,7 +45,6 @@ st.toggle("Show wind", disabled=True, help="Currently unavailable")
 
 import xarray as xr
 import numpy as np
-import pandas as pd
 
 # Open the ERA-5 data
 data = xr.open_dataset('ERA5.nc')
