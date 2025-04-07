@@ -58,6 +58,7 @@ wind_u = data.u[0,0,::3,::3]
 wind_v = data.v[0,0,::3,::3]
 
 def find_index(x, y):
+    global lat, lon
     xi = np.searchsorted(lat, x)
     yi = np.searchsorted(lon, y)
     return xi, yi
