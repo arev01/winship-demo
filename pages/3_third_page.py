@@ -32,42 +32,6 @@ marnet_output = marnet_geograph.get_shortest_path(
 )
 st.write("Distance: " + str(marnet_output['length']) + " km")
 
-import xarray as xr
-
-# Open the ERA-5 data
-data = xr.open_dataset('ERA5.nc')
-
-# Define latitude and longitude coordinates
-x = data.latitude[::3]
-y = data.longitude[::3]
-
-import pandas as pd
-import numpy as np
-
-# Define the u-, v- wind speeds
-wind_u = np.asarray(data.u[0,0,::3,::3], dtype=float)
-wind_v = np.asarray(data.v[0,0,::3,::3], dtype=float)
-
-xx, yy = np.meshgrid(x, y)
-coords = np.c_[xx.ravel(), yy.ravel(), wind_u.ravel(), wind_v.ravel()]
-
-#DATA_SOURCE = pd.DataFrame(wind_u, wind_v, index=lat, columns=lon)
-
-#DATA_SOURCE = DATA_SOURCE.unstack()
-
-from scipy import interpolate
-
-itp = interpolate.RegularGridInterpolator( (x, y), wind_u, method='nearest') 
-res = itp([89.99, 0.31])
-st.write(res)
-
-#for i in range(len(marnet_output['coordinate_path'])-1):
-#    first_node = marnet_output['coordinate_path'][i]
-#    second_node = marnet_output['coordinate_path'][i+1]
-
-# Get the magnitude of wind speed
-#WS = np.sqrt(wind_u **2 + wind_v **2)
-
 df = pd.DataFrame(
     #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
     marnet_output['coordinate_path'],
@@ -76,3 +40,48 @@ df = pd.DataFrame(
 st.map(df, height=300)
 
 st.toggle("Show wind", disabled=True, help="Currently unavailable")
+
+import xarray as xr
+import numpy as np
+import pandas as pd
+
+# Open the ERA-5 data
+data = xr.open_dataset('ERA5.nc')
+
+# Define latitude and longitude coordinates
+x = data.latitude[::3]
+y = data.longitude[::3]
+
+# Define the u-, v- wind speeds
+wind_u = data.u[0,0,::3,::3]
+wind_v = data.v[0,0,::3,::3]
+
+def find_index(x, y):
+    xi = np.searchsorted(lat, x)
+    yi = np.searchsorted(lon, y)
+    return xi, yi
+
+from navigation import *
+
+wind_data = pd.DataFrame(columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
+
+for i in range(len(marnet_output[‘coordinate_path’])-1):
+    p1 = marnet_output[‘coordinate_path’][i]
+    p2 = marnet_output[‘coordinate_path’][i+1]
+
+    if p1[0] == p2[0]:
+        boat_u, boat_v = ship.speed, 0
+    else:
+        X = ( p1[1] - p2[1] ) / ( p1[0] - p2[0] )
+        boat_u = ship.speed / np.sqrt(1 + X**2) * X
+        boat_v = ship.speed / np.sqrt(1 + X**2)
+
+    xi, yi = find_index(*p1)
+
+    # Construct speed vectors
+    v0 = np.asarray([boat_u, boat_v], dtype=float) * ship.speed
+    v1 = np.asarray([wind_u[xi, yi], wind_v[xi, yi], dtype=float) * ship.speed
+
+    distance = navigation.distance(p1, p2)
+
+    wind_data.loc[-1] = [distance] + list(navigation.velocity(v0, v1))
