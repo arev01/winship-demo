@@ -65,22 +65,23 @@ from navigation import *
 
 wind_data = pd.DataFrame(columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
 
-for i in range(len(marnet_output[‘coordinate_path’])-1):
-    p1 = marnet_output[‘coordinate_path’][i]
-    p2 = marnet_output[‘coordinate_path’][i+1]
+for i in range(len(marnet_output['coordinate_path'])-1):
+    p1 = marnet_output['coordinate_path'][i]
+    p2 = marnet_output['coordinate_path'][i+1]
 
     if p1[0] == p2[0]:
-        boat_u, boat_v = ship.speed, 0
+        boat_u = st.session_state['ship'].speed
+        boat_v = 0
     else:
         X = ( p1[1] - p2[1] ) / ( p1[0] - p2[0] )
-        boat_u = ship.speed / np.sqrt(1 + X**2) * X
-        boat_v = ship.speed / np.sqrt(1 + X**2)
+        boat_u = st.session_state['ship'].speed / np.sqrt(1 + X**2) * X
+        boat_v = st.session_state['ship'].speed / np.sqrt(1 + X**2)
 
     xi, yi = find_index(*p1)
 
     # Construct speed vectors
-    v0 = np.asarray([boat_u, boat_v], dtype=float) * ship.speed
-    v1 = np.asarray([wind_u[xi, yi], wind_v[xi, yi], dtype=float) * ship.speed
+    v0 = np.asarray([boat_u, boat_v], dtype=float)
+    v1 = np.asarray([wind_u[xi, yi], wind_v[xi, yi], dtype=float)
 
     distance = navigation.distance(p1, p2)
 
