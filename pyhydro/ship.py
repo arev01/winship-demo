@@ -106,17 +106,17 @@ class Ship:
     def midship_coef(self, value):
         self.__keys["midship_coef"] = value
 
-    def resistance(self, speed: float) -> float:
+    def resistance(self) -> float:
         """
         Return resistance of the vehicle.
 
         :return: newton the resistance of the ship
         """
-        total_resistance_coef = frictional_resistance_coef(self.length, speed) + \
+        total_resistance_coef = frictional_resistance_coef(self.length, self.speed) + \
                                 residual_resistance_coef(self.slenderness_coef,
                                                          self.prismatic_coef,
-                                                         froude_number(speed, self.length))
-        return 1 / 2 * total_resistance_coef * 1025 * self.wetted_surface * speed ** 2
+                                                         froude_number(self.speed, self.length))
+        return 1 / 2 * total_resistance_coef * 1025 * self.wetted_surface * self.speed ** 2
 
     def maximum_deck_area(self, water_plane_coef: float = 0.88) -> float:
         """
@@ -135,7 +135,7 @@ class Ship:
         """
         return reynolds_number(self.length, self.wetted_surface)
 
-    def propulsion_power(self, speed: float, propulsion_eff: float = 0.7, sea_margin: float = 0.2, external_force: float = 0.0) -> float:
+    def propulsion_power(self, propulsion_eff: float = 0.7, sea_margin: float = 0.2, external_force: float = 0.0) -> float:
         """
         Total propulsion power of the ship.
 
@@ -144,4 +144,4 @@ class Ship:
         :param external_force: External force acting on the ship
         :return: Watts shaft propulsion power of the ship
         """
-        return ((1 + sea_margin) * self.resistance + external_force) * speed / propulsion_eff
+        return ((1 + sea_margin) * self.resistance + external_force) * self.speed / propulsion_eff
