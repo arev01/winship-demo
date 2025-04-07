@@ -106,6 +106,7 @@ class Ship:
     def midship_coef(self, value):
         self.__keys["midship_coef"] = value
 
+    @property
     def resistance(self) -> float:
         """
         Return resistance of the vehicle.
@@ -135,6 +136,7 @@ class Ship:
         """
         return reynolds_number(self.length, self.wetted_surface)
 
+    @property
     def propulsion_power(self, propulsion_eff: float = 0.7, sea_margin: float = 0.2, external_force: float = 0.0) -> float:
         """
         Total propulsion power of the ship.
