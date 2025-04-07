@@ -50,8 +50,8 @@ import numpy as np
 data = xr.open_dataset('ERA5.nc')
 
 # Define latitude and longitude coordinates
-x = data.latitude[::3]
-y = data.longitude[::3]
+lat = data.latitude[::3]
+lon = data.longitude[::3]
 
 # Define the u-, v- wind speeds
 wind_u = data.u[0,0,::3,::3]
