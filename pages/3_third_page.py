@@ -85,7 +85,7 @@ for i in range(len(marnet_output['coordinate_path'])-1):
     v0 = np.asarray([boat_u, boat_v], dtype=float)
     v1 = np.asarray([wind_u[yi, xi], wind_v[yi, xi]], dtype=float)
 
-    distance = navigation.distance(p1, p2)
+    distance = navigation.distance(*p1, *p2)
 
     wind_data.loc[-1] = [distance] + list(navigation.velocity(v0, v1))
 
