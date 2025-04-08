@@ -48,8 +48,8 @@ def predict(varA, varB):
     ref_power = st.session_state['ship'].propulsion_power(sea_margin) * np.sum(list(st.session_state['wind_data']['DIST'])) / st.session_state['ship'].speed
 
     new_power = 0
-    for i in range(len(st.session_state['wind_data'])):
-        distance, _, _, wind_speed, wind_angle = st.session_state['wind_data'].loc[i]
+    for idx, row in st.session_state['wind_data'].iterrows():
+        distance, _, _, wind_speed, wind_angle = row.values.tolist()
         
         wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
         new_power += st.session_state['ship'].propulsion_power(sea_margin, wind_load) * distance / st.session_state['ship'].speed
