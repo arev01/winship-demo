@@ -44,18 +44,20 @@ import numpy as np
 @st.dialog("🏆 Congratulations")
 def predict(varA, varB):
     sea_margin = 0.2
-    resistance = st.session_state['ship'].resistance
-    ref_power = st.session_state['ship'].propulsion_power(sea_margin) * st.session_state['wind_data']['DIST'].sum() / st.session_state['ship'].speed
-
+    resistance = st.session_state['ship'].resistance / 1000
+    st.write("Resistance: " + str(resistance) + " kN")
+    ref_power = st.session_state['ship'].propulsion_power(sea_margin=sea_margin) * st.session_state['wind_data']['DIST'].sum() / (st.session_state['ship'].speed * 1.852)
+    st.write("Energy wo/: " + str(ref_power) + " kWh")
+    
     new_power = 0
     for idx, row in st.session_state['wind_data'].iterrows():
         distance, _, _, wind_speed, wind_angle = row.values.tolist()
         
         wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
-        new_power += st.session_state['ship'].propulsion_power(sea_margin, wind_load) * distance / st.session_state['ship'].speed
+        new_power += st.session_state['ship'].propulsion_power(sea_margin=sea_margin, external_force=wind_load) * distance / (st.session_state['ship'].speed * 1.852)
     
     total_power = np.sum(new_power)
-    st.write(total_power)
+    st.write("Energy w/: " + str(total_power) + " kWh")
 
     st.write("You saved:")
     col1, col2, col3 = st.columns(3)
