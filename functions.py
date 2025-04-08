@@ -46,6 +46,9 @@ def predict(varA, varB):
     sea_margin = 0.2
     resistance = st.session_state['ship'].resistance / 1000
     st.write("Resistance: " + str(resistance) + " kN")
+    st.write("Power: " + str(st.session_state['ship'].propulsion_power(sea_margin=sea_margin) / 1000) + " kW")
+    st.write("Distance: " + str(st.session_state['wind_data']['DIST'].sum()) + " km")
+    st.write("Speed: " + str(st.session_state['ship'].speed * 1.852) + " km/h")
     ref_power = st.session_state['ship'].propulsion_power(sea_margin=sea_margin) * st.session_state['wind_data']['DIST'].sum() / (st.session_state['ship'].speed * 1.852)
     st.write("Energy wo/: " + str(ref_power) + " kWh")
     
