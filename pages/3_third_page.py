@@ -72,12 +72,12 @@ for i in range(len(marnet_output['coordinate_path'])-1):
     p2 = marnet_output['coordinate_path'][i+1]
 
     if p1[0] == p2[0]:
-        boat_u = st.session_state['ship'].speed
+        boat_u = st.session_state['ship'].speed1
         boat_v = 0
     else:
         X = ( p1[1] - p2[1] ) / ( p1[0] - p2[0] )
-        boat_u = st.session_state['ship'].speed / np.sqrt(1 + X**2) * X
-        boat_v = st.session_state['ship'].speed / np.sqrt(1 + X**2)
+        boat_u = st.session_state['ship'].speed1 / np.sqrt(1 + X**2) * X
+        boat_v = st.session_state['ship'].speed1 / np.sqrt(1 + X**2)
 
     xi, yi = find_index(*p1)
 
