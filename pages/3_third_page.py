@@ -65,7 +65,7 @@ def find_index(x, y):
 
 from pyaero import navigation
 
-lst = []
+lst = [[]]
 for i in range(len(marnet_output['coordinate_path'])-1):
     p1 = marnet_output['coordinate_path'][i]
     p2 = marnet_output['coordinate_path'][i+1]
