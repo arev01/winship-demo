@@ -21,6 +21,9 @@ class Ship:
         """
         self.__keys = {}
         self.__keys.update(kw)
+
+        #if "speed" in self.__keys:
+        self.speed1 = self.speed / 1.852
         
         #if "displacement" not in self.__keys and "block_coef" in self.__keys:
         self.displacement = self.block_coef * self.length * self.beam * self.draft
@@ -113,11 +116,11 @@ class Ship:
 
         :return: newton the resistance of the ship
         """
-        total_resistance_coef = frictional_resistance_coef(self.length, self.speed) + \
+        total_resistance_coef = frictional_resistance_coef(self.length, self.speed1) + \
                                 residual_resistance_coef(self.slenderness_coef,
                                                          self.prismatic_coef,
-                                                         froude_number(self.speed, self.length))
-        return 1 / 2 * total_resistance_coef * 1025 * self.wetted_surface * self.speed ** 2
+                                                         froude_number(self.speed1, self.length))
+        return 1 / 2 * total_resistance_coef * 1025 * self.wetted_surface * self.speed1 ** 2
 
     def maximum_deck_area(self, water_plane_coef: float = 0.88) -> float:
         """
@@ -146,4 +149,4 @@ class Ship:
         :param external_force: External force acting on the ship
         :return: Watts shaft propulsion power of the ship
         """
-        return ((1 + sea_margin) * self.resistance + external_force) * self.speed / propulsion_eff
+        return ((1 + sea_margin) * self.resistance + external_force) * self.speed1 / propulsion_eff
