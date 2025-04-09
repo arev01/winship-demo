@@ -65,8 +65,7 @@ def find_index(x, y):
 
 from pyaero import navigation
 
-wind_data = pd.DataFrame(columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
-
+lst = []
 for i in range(len(marnet_output['coordinate_path'])-1):
     p1 = marnet_output['coordinate_path'][i]
     p2 = marnet_output['coordinate_path'][i+1]
@@ -84,10 +83,11 @@ for i in range(len(marnet_output['coordinate_path'])-1):
     # Construct speed vectors
     v0 = np.asarray([boat_u, boat_v], dtype=float)
     v1 = np.asarray([wind_u[yi, xi], wind_v[yi, xi]], dtype=float)
+    
+    lst.append(navigation.distance(*p1, *p2), *navigation.velocity(v0, v1))
 
-    distance = navigation.distance(*p1, *p2)
-
-    wind_data.loc[-1] = [distance] + list(navigation.velocity(v0, v1))
+wind_data = pd.DataFrame(lst, columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
+st.dataframe(wind_data)
 
 if 'wind_data' not in st.session_state:
     st.session_state['wind_data'] = wind_data
