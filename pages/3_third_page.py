@@ -84,8 +84,8 @@ for i in range(len(marnet_output['coordinate_path'])-1):
     v0 = np.asarray([boat_u, boat_v], dtype=float)
     v1 = np.asarray([wind_u[yi, xi], wind_v[yi, xi]], dtype=float)
     
-    lst.append(navigation.distance(*p1, *p2), *navigation.velocity(v0, v1))
-
+    lst.append([navigation.distance(*p1, *p2), *navigation.velocity(v0, v1)])
+    
 wind_data = pd.DataFrame(lst, columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
 st.dataframe(wind_data)
 
