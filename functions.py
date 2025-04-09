@@ -48,10 +48,10 @@ def predict(varA, varB):
     st.write("Resistance: " + str(resistance) + " kN")
     st.write("Power: " + str(st.session_state['ship'].propulsion_power(sea_margin=sea_margin) / 1000) + " kW")
     st.write("Distance: " + str(st.session_state['wind_data']['DIST'].sum()) + " km")
-    st.write("Speed: " + str(st.session_state['ship'].speed * 1.852) + " km/h")
-    ref_power = st.session_state['ship'].propulsion_power(sea_margin=sea_margin) * st.session_state['wind_data']['DIST'].sum() / (st.session_state['ship'].speed * 1.852)
+    st.write("Speed: " + st.session_state['ship'].speed1 + " m/s")
+    ref_power = st.session_state['ship'].propulsion_power(sea_margin=sea_margin) * st.session_state['wind_data']['DIST'].sum() / st.session_state['ship'].speed1
     #st.write("Energy wo/: " + str(ref_power) + " kWh")
-    st.dataframe(st.session_state['wind_data'])
+    #st.dataframe(st.session_state['wind_data'])
     
     new_power = 0
     for idx, row in st.session_state['wind_data'].iterrows():
