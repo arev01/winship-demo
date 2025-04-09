@@ -8,15 +8,30 @@ from nodes import nodes
 #Define origin and destination ports
 tab1, tab2 = st.tabs(["Origin", "Destination"])
 
+from persist import persist, load_widget_state
+load_widget_state()
+
+    # Initialize session state
+    if "selectbox1" not in st.session_state:
+        st.session_state.update({
+            "selectbox1": "Abidjan",
+        })
+    if "selectbox2" not in st.session_state:
+        st.session_state.update({
+            "selectbox2": "Abidjan",
+        })
+
 with tab1:
-    origin = st.selectbox(
+    st.selectbox(
         "Select port of origin:",
-        nodes.keys()
+        nodes.keys(),
+        key=persist("selectbox1")
     )
 with tab2:
-    destination = st.selectbox(
+    st.selectbox(
         "Select port of destination:",
-        nodes.keys()
+        nodes.keys(),
+        key=persist("selectbox2")
     )
 
 # Use a maritime network geograph
@@ -26,8 +41,8 @@ col = ["latitude", "longitude"]
 
 # Get the shortest path between 
 marnet_output = marnet_geograph.get_shortest_path(
-    origin_node = {col[i]: nodes[origin][i] for i, _ in enumerate(col)},
-    destination_node = {col[i]: nodes[destination][i] for i, _ in enumerate(col)},
+    origin_node = {col[i]: nodes[st.session_state['selectbox1']][i] for i, _ in enumerate(col)},
+    destination_node = {col[i]: nodes[st.session_state['selectbox2']][i] for i, _ in enumerate(col)},
     output_units = "km"
 )
 st.write("Distance: " + str(marnet_output['length']) + " km")
