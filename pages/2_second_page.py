@@ -5,7 +5,7 @@ from pyaero import wind, navigation
 menu(counter=2)
 
 from streamlit_image_select import image_select
-"""
+
 img = image_select("Label", [
     "./img/rotor.jpg", 
     "./img/suction.jpg", 
@@ -13,14 +13,7 @@ img = image_select("Label", [
     "./img/sail.jpg", 
     "./img/kite.jpg", 
 ])
-"""
-img = st.selectbox("Label", [
-    "./img/rotor.jpg", 
-    "./img/suction.jpg", 
-    "./img/wing.jpg", 
-    "./img/sail.jpg", 
-    "./img/kite.jpg", 
-])
+
 st.markdown("You selected: " + img[6:-4].capitalize())
 
 with st.expander("Description"):
@@ -32,7 +25,7 @@ import numpy as np
 wind = wind.Wind()
 
 # Get lift and drag coefficients
-wind.lift_coef, wind.drag_coef = np.loadtxt(img[6:-4] + ".dat", comments="#", usecols=(1, 2), unpack=True)
+wind.lift_coef, wind.drag_coef = np.loadtxt("wing.dat", comments="#", usecols=(1, 2), unpack=True)
 
 # Choose units, size 
 if img[6:-4] == "kite":
