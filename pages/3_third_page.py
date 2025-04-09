@@ -89,5 +89,5 @@ for i in range(len(marnet_output['coordinate_path'])-1):
 wind_data = pd.DataFrame(lst, columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
 st.dataframe(wind_data)
 
-if 'data' not in st.session_state:
-    st.session_state['data'] = wind_data
+if 'updated_data' not in st.session_state:
+    st.session_state['updated_data'] = wind_data
