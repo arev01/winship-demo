@@ -138,7 +138,7 @@ class Ship:
 
         :return: Reynold number of the ship
         """
-        return reynolds_number(self.length, self.wetted_surface)
+        return reynolds_number(self.length, self.speed1)
 
     def propulsion_power(self, propulsion_eff: float = 0.7, sea_margin: float = 0.2, external_force: float = 0.0) -> float:
         """
