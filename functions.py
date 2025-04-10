@@ -80,7 +80,8 @@ def help():
         """
         Use the buttons :material/arrow_back_ios: :material/arrow_forward_ios:
         to navigate the different menus or use :material/home: to go back.
-        Press X to evaluate your favorite design.
+        
+        Press :material/bolt: to evaluate your favorite design.
         """
     )
 
