@@ -23,6 +23,8 @@ def help():
         Press :material/bolt: to run a prediction.
         """
     )
+    
+    tmp_checkbox = st.checkbox("I understand")
 
     
 # ---- MAIN FUNCTION ----
@@ -38,9 +40,12 @@ def main():
     # Button to switch page
     next_page = st.button("Start now", on_click=help)
     if next_page:
-        # Switch to the selected page
-        page_file = "./pages/1_first_page.py"
-        st.switch_page(page_file)
+        if tmp_checkbox:
+            # Switch to the selected page
+            page_file = "./pages/1_first_page.py"
+            st.switch_page(page_file)
+        else:
+            st.stop()
     previous_page = st.button("Methodology")
     if previous_page:
         page_file = "./pages/4_fourth_page.py"
