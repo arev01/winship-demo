@@ -45,28 +45,28 @@ import numpy as np
 def predict(varA, varB):
     sea_margin = 0.2
     resistance = st.session_state['ship'].resistance / 1000
+    ref_power = st.session_state['ship'].propulsion_power(sea_margin=sea_margin) / 1000
+    distance = st.session_state['updated_data']['DIST'].sum()
+    speed = st.session_state['ship'].speed * 1.944
+    ref_energy = ref_power * distance / speed
     st.write("Resistance: " + str(resistance) + " kN")
-    st.write("Power: " + str(st.session_state['ship'].propulsion_power(sea_margin=sea_margin) / 1000) + " kW")
-    st.write("Distance: " + str(st.session_state['updated_data']['DIST'].sum()) + " km")
-    st.write("Speed: " + str(st.session_state['ship'].speed1) + " m/s")
-    ref_power = st.session_state['ship'].propulsion_power(sea_margin=sea_margin) * st.session_state['updated_data']['DIST'].sum() / st.session_state['ship'].speed1
-    #st.write("Energy wo/: " + str(ref_power) + " kWh")
-    st.dataframe(st.session_state['updated_data'])
-    st.dataframe(st.session_state['updated_data']['DIST'])
+    st.write("Power: " + str(ref_power) + " kW")
+    st.write("Distance: " + str(distance) + " km")
+    st.write("Speed: " + str(speed) + " km/h")
+    st.write("Energy wo/: " + str(ref_energy) + " kWh")
     
     new_power = 0
     for idx, row in st.session_state['updated_data'].iterrows():
         distance, _, _, wind_speed, wind_angle = row.values.tolist()
-        st.write("Distance: " + str(distance) + " km")
-        st.write("Wind speed: " + str(wind_speed) + " m/s")
-        st.write("Wind angle: " + str(wind_angle) + " rad")
+        #st.write("Distance: " + str(distance) + " km")
+        #st.write("Wind speed: " + str(wind_speed) + " m/s")
+        #st.write("Wind angle: " + str(wind_angle) + " rad")
         st.write("Wind load: " + str(st.session_state['wind'].aero_force(wind_speed, wind_angle) / 1000) + " kN")
         
         wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
-        new_power += st.session_state['ship'].propulsion_power(sea_margin=sea_margin, external_force=wind_load) * distance / (st.session_state['ship'].speed * 1.852)
-    
-    total_power = np.sum(new_power)
-    #st.write("Energy w/: " + str(total_power) + " kWh")
+        new_energy += st.session_state['ship'].propulsion_power(sea_margin=sea_margin, external_force=wind_load) / 1000 * distance / (st.session_state['ship'].speed * 1.944)
+        
+st.write("Energy w/: " + str(new_energy) + " kWh")
 
     st.write("You saved:")
     col1, col2, col3 = st.columns(3)
