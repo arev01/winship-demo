@@ -66,7 +66,7 @@ def predict(varA, varB):
         wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
         new_energy += st.session_state['ship'].propulsion_power(sea_margin=sea_margin, external_force=wind_load) / 1000 * distance / (st.session_state['ship'].speed * 1.944)
         
-st.write("Energy w/: " + str(new_energy) + " kWh")
+    st.write("Energy w/: " + str(new_energy) + " kWh")
 
     st.write("You saved:")
     col1, col2, col3 = st.columns(3)
