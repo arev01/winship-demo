@@ -5,8 +5,8 @@ st.set_page_config(initial_sidebar_state="collapsed")
 st.markdown(
     """
 <style>
-    [data-testid="collapsedControl"] {
-        display: none
+    [data-testid="stSidebar"] {
+        visibility: hidden;
     }
 </style>
 """,
