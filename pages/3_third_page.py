@@ -88,7 +88,6 @@ for i in range(len(marnet_output['coordinate_path'])-1):
     lst.append([navigation.distance(*p1, *p2), *navigation.velocity(v0, v1)])
     
 wind_data = pd.DataFrame(lst, columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
-st.dataframe(wind_data)
 
 if 'updated_data' not in st.session_state:
     st.session_state['updated_data'] = wind_data
