@@ -74,17 +74,6 @@ def predict(varA, varB):
     col2.metric("Fuel", "9 L", "-8%")
     col3.metric("CO2", "86 T", "4%")
 
-@st.dialog("❓ Help")
-def help():
-    st.markdown(
-        """
-        Use the buttons :material/arrow_back_ios: :material/arrow_forward_ios:
-        to navigate the different menus or use :material/home: to go back.
-        
-        Press :material/bolt: to evaluate your favorite design.
-        """
-    )
-
 # Button to switch page
 def menu(counter):
     if counter == None:
@@ -97,13 +86,11 @@ def menu(counter):
     with st_horizontal():
         if st.button(":material/bolt:"):
             predict(42, 12)
-        if st.button(":material/question_mark:"):
-            help()
-        if st.button(":material/home:"):
-            counter = 0
-            page_file = "./streamlit_app.py"
-            # Switch to the selected page
-            st.switch_page(page_file)
+        #if st.button(":material/home:"):
+        #    counter = 0
+        #    page_file = "./streamlit_app.py"
+        #    # Switch to the selected page
+        #    st.switch_page(page_file)
         if st.button(":material/arrow_back_ios:"):
             counter -= 1
             page_file = page_lst[counter-1]
