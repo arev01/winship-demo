@@ -13,6 +13,17 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+@st.dialog("❓ Help")
+def help():
+    st.markdown(
+        """
+        Use the buttons :material/arrow_back_ios::material/arrow_forward_ios:
+        to navigate the different menus and choose your favorite design.
+        
+        Press :material/bolt: to run a prediction.
+        """
+    )
+
     
 # ---- MAIN FUNCTION ----
 def main():
@@ -25,12 +36,12 @@ def main():
         """
     )
     # Button to switch page
-    next_page = st.button("Start now")
+    next_page = st.button("Start now", on_click=help)
     if next_page:
         # Switch to the selected page
         page_file = "./pages/1_first_page.py"
         st.switch_page(page_file)
-    previous_page = st.button("Background")
+    previous_page = st.button("Methodology")
     if previous_page:
         page_file = "./pages/4_fourth_page.py"
         st.switch_page(page_file)
