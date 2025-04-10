@@ -41,7 +41,7 @@ def st_horizontal():
 
 import numpy as np
 
-@st.dialog("🏆 Congratulations")
+@st.dialog("⚡️ Congratulations")
 def predict(varA, varB):
     sea_margin = 0.2
     resistance = st.session_state['ship'].resistance / 1000
@@ -74,6 +74,16 @@ def predict(varA, varB):
     col2.metric("Fuel", "9 L", "-8%")
     col3.metric("CO2", "86 T", "4%")
 
+@st.dialog("❓ Help")
+def help():
+    st.markdown(
+        """
+        Use the buttons :material/arrow_back_ios: :material/arrow_forward_ios:
+        to navigate the different menus or use :material/home: to go back.
+        Press X to evaluate your favorite design.
+        """
+    )
+
 # Button to switch page
 def menu(counter):
     if counter == None:
@@ -84,8 +94,10 @@ def menu(counter):
         "./pages/3_third_page.py"
     ]
     with st_horizontal():
-        if st.button("Button 1"):
+        if st.button(":material/bolt:"):
             predict(42, 12)
+        if st.button(":material/question_mark:"):
+            help()
         if st.button(":material/home:"):
             counter = 0
             page_file = "./streamlit_app.py"
