@@ -10,12 +10,12 @@ tab1, tab2 = st.tabs(["Origin", "Destination"])
 values = ['<select>', *nodes.keys()]
 
 with tab1:
-    st.selectbox(
+    origin = st.selectbox(
         "Select port of origin:",
         values
     )
 with tab2:
-    st.selectbox(
+    destination = st.selectbox(
         "Select port of destination:",
         values
     )
@@ -27,8 +27,8 @@ col = ["latitude", "longitude"]
 
 # Get the shortest path between 
 marnet_output = marnet_geograph.get_shortest_path(
-    origin_node = {col[i]: nodes[st.session_state['selectbox1']][i] for i, _ in enumerate(col)},
-    destination_node = {col[i]: nodes[st.session_state['selectbox2']][i] for i, _ in enumerate(col)},
+    origin_node = {col[i]: nodes[origin][i] for i, _ in enumerate(col)},
+    destination_node = {col[i]: nodes[destination][i] for i, _ in enumerate(col)},
     output_units = "km"
 )
 st.write("Distance: " + str(marnet_output['length']) + " km")
