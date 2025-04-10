@@ -7,31 +7,17 @@ from nodes import nodes
 
 #Define origin and destination ports
 tab1, tab2 = st.tabs(["Origin", "Destination"])
-
-from persist import persist, load_widget_state
-load_widget_state()
-
-# Initialize session state
-if "selectbox1" not in st.session_state:
-    st.session_state.update({
-        "selectbox1": "Abidjan",
-    })
-if "selectbox2" not in st.session_state:
-    st.session_state.update({
-        "selectbox2": "Abidjan",
-    })
+values = ['<select>', *nodes.keys()]
 
 with tab1:
     st.selectbox(
         "Select port of origin:",
-        nodes.keys(),
-        key=persist("selectbox1")
+        values
     )
 with tab2:
     st.selectbox(
         "Select port of destination:",
-        nodes.keys(),
-        key=persist("selectbox2")
+        values
     )
 
 # Use a maritime network geograph
