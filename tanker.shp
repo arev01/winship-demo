@@ -1,0 +1,10 @@
+# KRISO Very Large Crude Carrier 2 (KVLCC2)
+length        = 320.0 # : meters length of the vehicle
+beam          = 58.0 # : meters beam of the vehicle
+draft         = 20.8 # : meters draft of the vehicle
+height        = 30.0 # : meters height of the vehicle
+speed         = 15.5 # : knots speed of the vehicle
+deadweight    = 300000.0 # : tons deadweight of the vehicle
+gross_tonnage = 180000.0 # : tons gross tonnage of the vehicle
+block_coef    = .810 # : block coefficient dimensionless
+midship_coef  = .998 # : midship coefficient dimensionless
