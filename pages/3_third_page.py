@@ -91,5 +91,5 @@ if origin != '<select>' and destination != '<select>':
     
     wind_data = pd.DataFrame(lst, columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
 
-if 'updated_data' not in st.session_state:
-    st.session_state['updated_data'] = wind_data
+    if 'wind_data' not in st.session_state:
+        st.session_state['wind_data'] = wind_data
