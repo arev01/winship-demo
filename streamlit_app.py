@@ -5,8 +5,8 @@ st.set_page_config(initial_sidebar_state="collapsed")
 st.markdown(
     """
 <style>
-    [data-testid="stSidebar"] {
-        visibility: hidden;
+    section[data-testid="stSidebar"][aria-expanded="true"]{
+        display: none;
     }
 </style>
 """,
