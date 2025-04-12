@@ -1,0 +1,10 @@
+# MOERI Japan Bulk Carrier (JBC)
+length        = 280.0 # : meters length of the vehicle
+beam          = 45.0 # : meters beam of the vehicle
+draft         = 16.5 # : meters draft of the vehicle
+height        = 25.0 # : meters height of the vehicle
+speed         = 14.5 # : knots speed of the vehicle
+deadweight    = 150000.0 # : tons deadweight of the vehicle
+gross_tonnage = 90000.0 # : tons gross tonnage of the vehicle
+block_coef    = .858 # : block coefficient dimensionless
+midship_coef  = .998 # : midship coefficient dimensionless
