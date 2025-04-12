@@ -4,7 +4,7 @@ from pyaero import wind, navigation
 
 menu(counter=2)
 
-st.markdown("# (2/3) Select a device")
+st.markdown("### (2/3) Select a device")
 
 from streamlit_image_select import image_select
 
@@ -50,15 +50,8 @@ and st.session_state['ship'].gross_tonnage < 100000:
 else:
     units, size = 4, 2
 
-choice = st.segmented_control("Specify device size:", 
-                              ["Features"],
-                              default="Features",
-                              help="Currently unavailable",
-                             )
-
-if choice == "Features":
-    st.number_input("Units (-):", value=units, disabled=True)
-    st.selectbox("Size (m2):", sizes_list, index=size, disabled=True)
+st.number_input("Units (-):", value=units, disabled=True)
+st.selectbox("Size (m2):", sizes_list, index=size, disabled=True)
 
 # Correct attributes
 wind.units = units
