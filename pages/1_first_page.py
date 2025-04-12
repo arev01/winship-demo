@@ -8,16 +8,17 @@ menu(counter=1)
 def help():
     st.markdown(
         """
-        Use the buttons :material/arrow_back_ios::material/arrow_forward_ios:
-        to navigate the different menus and choose your favorite design.
-        
-        Press :material/bolt: to run a prediction.
+        Use the buttons :material/arrow_back_ios: :material/arrow_forward_ios:
+        to navigate the different menus and press :material/bolt: to evaluate your favorite design.
         """
     )
 
 help()
 
 my_output_value = mycomponent(my_input_value=50)
+
+if my_output_value == None:
+    my_output_value = "container"
     
 # Display the output in Streamlit
 st.write("You selected: " + my_output_value.capitalize())
