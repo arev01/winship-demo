@@ -1,0 +1,9 @@
+# Mega Luxury Cruise Ship
+length        = 300.0 # : meters length of the vehicle
+beam          = 38.6 # : meters beam of the vehicle
+draft         = 8.5 # : meters draft of the vehicle
+height        = 62.0 # : meters height of the vehicle
+speed         = 22.0 # : knots speed of the vehicle
+gross_tonnage = 150000.0 # : tons gross tonnage of the vehicle
+block_coef    = .738 # : block coefficient dimensionless
+midship_coef  = .991 # : midship coefficient dimensionless
