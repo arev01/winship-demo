@@ -49,14 +49,13 @@ else:
     units, size = 4, 2
 
 choice = st.segmented_control("Specify device size:", 
-                              ["Quantity","Windage"], 
-                              default="Quantity",
+                              ["Features"],
+                              default="Features",
                               help="Currently unavailable",
                              )
 
-if choice == "Quantity":
+if choice == "Features":
     st.number_input("Units (-):", value=units, disabled=True)
-else:
     st.selectbox("Size (m2):", sizes_list, index=size, disabled=True)
 
 # Correct attributes
