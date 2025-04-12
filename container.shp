@@ -1,0 +1,10 @@
+# KRISO Container Ship (KCS)
+length        = 230.0 # : meters length of the vehicle
+beam          = 32.2 # : meters beam of the vehicle
+draft         = 10.8 # : meters draft of the vehicle
+height        = 30.0 # : meters height of the vehicle
+speed         = 24.0 # : knots speed of the vehicle
+gross_tonnage = 30000.0 # : tons gross tonnage of the vehicle
+twenty_feet   = 3600.0 # : twenty-feet equivalent unit dimensionless
+block_coef    = .651 # : block coefficient dimensionless
+midship_coef  = .985 # : midship coefficient dimensionless
