@@ -50,6 +50,8 @@ and st.session_state['ship'].gross_tonnage < 100000:
 else:
     units, size = 4, 2
 
+st.markdown("###### Specify device size:", help="Currently unavailable")
+
 st.number_input("Units (-):", value=units, disabled=True)
 st.selectbox("Size (m2):", sizes_list, index=size, disabled=True)
 
