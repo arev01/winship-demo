@@ -102,7 +102,7 @@ def menu(counter):
             page_file = page_lst[counter-1]
             # Switch to the selected page
             st.switch_page(page_file)
-    st.write("---")
+    st.empty()
 
 def prompt(person):
     match person:
