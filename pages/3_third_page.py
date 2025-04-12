@@ -48,7 +48,7 @@ from scgraph.geographs.marnet import marnet_geograph
 
 col = ["latitude", "longitude"]
 
-if origin =! '<select>' and destination =! '<select>':
+if origin != '<select>' and destination != '<select>':
     # Get the shortest path between 
     marnet_output = marnet_geograph.get_shortest_path(
         origin_node = {col[i]: nodes[origin][i] for i, _ in enumerate(col)},
