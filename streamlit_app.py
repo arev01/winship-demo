@@ -25,7 +25,7 @@ def main():
         """
     )
     # Button to switch page
-    next_page = st.button("Start now", on_click=help)
+    next_page = st.button("Start now")
     if next_page:
         # Switch to the selected page
         page_file = "./pages/1_first_page.py"
