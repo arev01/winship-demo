@@ -4,6 +4,8 @@ from pyaero import wind, navigation
 
 menu(counter=2)
 
+st.markdown("# (2/3) Select a device")
+
 from streamlit_image_select import image_select
 
 img = image_select("Label", [
