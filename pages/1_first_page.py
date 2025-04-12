@@ -4,6 +4,19 @@ from functions import menu, prompt
 
 menu(counter=1)
 
+@st.dialog("❓ Help")
+def help():
+    st.markdown(
+        """
+        Use the buttons :material/arrow_back_ios::material/arrow_forward_ios:
+        to navigate the different menus and choose your favorite design.
+        
+        Press :material/bolt: to run a prediction.
+        """
+    )
+
+help()
+
 my_output_value = mycomponent(my_input_value=50)
     
 # Display the output in Streamlit
