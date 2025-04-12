@@ -1,0 +1,9 @@
+# David Taylor Model Basin (DTMB) 5415
+length        = 140.0 # : meters length of the vehicle
+beam          = 17.9 # : meters beam of the vehicle
+draft         = 6.1 # : meters draft of the vehicle
+height        = 41.0 # : meters height of the vehicle
+speed         = 30.0 # : knots speed of the vehicle
+gross_tonnage = 6000.0 # : tons gross tonnage of the vehicle
+block_coef    = .491 # : block coefficient dimensionless
+midship_coef  = .766 # : midship coefficient dimensionless
