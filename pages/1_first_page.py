@@ -4,6 +4,8 @@ from functions import menu, prompt
 
 menu(counter=1)
 
+st.markdown("### (1/3) Select a ship")
+
 @st.dialog("❓ Help")
 def help():
     st.markdown(
