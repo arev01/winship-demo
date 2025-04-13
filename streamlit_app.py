@@ -25,15 +25,18 @@ def main():
         """
     )
     # Button to switch page
-    next_page = st.button("Start now")
-    if next_page:
-        # Switch to the selected page
-        page_file = "./pages/1_first_page.py"
-        st.switch_page(page_file)
-    previous_page = st.button("Methodology")
-    if previous_page:
-        page_file = "./pages/4_fourth_page.py"
-        st.switch_page(page_file)
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        pass
+    with col2:
+        pass
+    with col3 :
+        next_page = st.button("En avant toute !")
+        if next_page:
+            # Switch to the selected page
+            page_file = "./pages/1_first_page.py"
+            st.switch_page(page_file)
 
 if __name__=='__main__':
     main()
