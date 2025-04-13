@@ -6,17 +6,6 @@ menu(counter=1)
 
 st.markdown("### (1/3) Select a ship")
 
-@st.dialog("❓ Help")
-def help():
-    st.markdown(
-        """
-        Use the buttons :material/arrow_back_ios: :material/arrow_forward_ios:
-        to navigate the different menus and press :material/bolt: to evaluate your favorite design.
-        """
-    )
-
-help()
-
 my_output_value = mycomponent(my_input_value=50)
 
 if my_output_value == None:
