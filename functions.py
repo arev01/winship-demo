@@ -41,6 +41,16 @@ def st_horizontal():
 
 import numpy as np
 
+@st.dialog("❓ Help")
+def help():
+    st.markdown(
+        """
+        Use the buttons :material/arrow_back_ios: :material/arrow_forward_ios:
+        to navigate the different menus and press :material/bolt: to evaluate your favorite design.
+        """
+    )
+    st.page_link("./pages/4_fourth_page.py", label="Read more", icon=None)
+
 @st.dialog("⚡️ Congratulations")
 def predict(varA, varB):
     sea_margin = 0.2
@@ -49,11 +59,13 @@ def predict(varA, varB):
     distance = st.session_state['wind_data']['DIST'].sum()
     speed = st.session_state['ship'].speed * 1.944
     ref_energy = ref_power * distance / speed
+    ref_fuel = ref_energy * 155. / 900.
     st.write("Resistance: " + str(resistance) + " kN")
     st.write("Power: " + str(ref_power) + " kW")
     st.write("Distance: " + str(distance) + " km")
     st.write("Speed: " + str(speed) + " km/h")
     st.write("Energy wo/: " + str(ref_energy) + " kWh")
+    st.write("Fuel cons. wo/: " + str(ref_fuel) + " L")
     
     new_energy = 0
     for idx, row in st.session_state['wind_data'].iterrows():
@@ -66,12 +78,18 @@ def predict(varA, varB):
         wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
         new_energy += st.session_state['ship'].propulsion_power(sea_margin=sea_margin, external_force=wind_load) / 1000 * distance / speed
         
+    diff_energy = ref_energy - new_energy
+    pc_energy = diff_energy / ref_energy * 100.
+    new_fuel = new_energy * 155. / 900.
+    diff_fuel = ref_fuel - new_fuel
+    pc_fuel = diff_fuel / ref_fuel * 100.
     st.write("Energy w/: " + str(new_energy) + " kWh")
+    st.write("Fuel cons. w/: " + str(new_fuel) + " L")
 
     st.write("You saved:")
     col1, col2, col3 = st.columns(3)
-    col1.metric("Power", "70 kW", "1.2%")
-    col2.metric("Fuel", "9 L", "-8%")
+    col1.metric("Energy", '{0:.0f} kWh'.format(diff_energy), '{0:.1f} %'.format(pc_energy))
+    col2.metric("Fuel", '{0:.0f} L'.format(diff_fuel), '{0:.1f} %'.format(pc_fuel))
     col3.metric("CO2", "86 T", "4%")
 
 # Button to switch page
@@ -84,6 +102,8 @@ def menu(counter):
         "./pages/3_third_page.py"
     ]
     with st_horizontal():
+        if st.button(":material/question_mark:"):
+            help()
         if st.button(":material/bolt:"):
             predict(42, 12)
         #if st.button(":material/home:"):
