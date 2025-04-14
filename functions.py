@@ -60,6 +60,7 @@ def predict(varA, varB):
     speed = st.session_state['ship'].speed * 1.944
     ref_energy = ref_power * distance / speed
     ref_fuel = ref_energy * 155. / 900.
+    ref_emissions = ref_fuel * 900. * 3.206 / 1000000
     st.write("Resistance: " + str(resistance) + " kN")
     st.write("Power: " + str(ref_power) + " kW")
     st.write("Distance: " + str(distance) + " km")
@@ -67,7 +68,7 @@ def predict(varA, varB):
     st.write("Energy wo/: " + str(ref_energy) + " kWh")
     st.write("Fuel cons. wo/: " + str(ref_fuel) + " L")
     
-    new_energy = 0
+   new_energy = 0
     for idx, row in st.session_state['wind_data'].iterrows():
         distance, _, _, wind_speed, wind_angle = row.values.tolist()
         #st.write("Distance: " + str(distance) + " km")
@@ -83,14 +84,18 @@ def predict(varA, varB):
     new_fuel = new_energy * 155. / 900.
     diff_fuel = ref_fuel - new_fuel
     pc_fuel = diff_fuel / ref_fuel * 100.
+    new_emissions = new_fuel * 900. * 3.206 / 1000000
+    diff_emissions = ref_emissions - new_emissions
+    pc_emissions = diff_emissions / ref_emissions * 100.
     st.write("Energy w/: " + str(new_energy) + " kWh")
     st.write("Fuel cons. w/: " + str(new_fuel) + " L")
+    st.write("Emissions w/: " + str(new_emissions) + " TCO2")
 
     st.write("You saved:")
     col1, col2, col3 = st.columns(3)
     col1.metric("Power", '{0:.0f} kWh'.format(diff_energy), '{0:.1f} %'.format(pc_energy))
     col2.metric("Fuel", '{0:.0f} L'.format(diff_fuel), '{0:.1f} %'.format(pc_fuel))
-    col3.metric("Emissions", "86 TCO2", "4%")
+    col3.metric("Emissions", '{0:.0f} TCO2'.format(diff_emissions), '{0:.1f} %'.format(pc_emissions))
 
 # Button to switch page
 def menu(counter):
