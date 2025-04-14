@@ -71,8 +71,8 @@ def predict(varA, varB):
     for idx, row in st.session_state['wind_data'].iterrows():
         distance, _, _, wind_speed, wind_angle = row.values.tolist()
         #st.write("Distance: " + str(distance) + " km")
-        #st.write("Wind speed: " + str(wind_speed) + " m/s")
-        #st.write("Wind angle: " + str(wind_angle) + " rad")
+        st.write("Wind speed: " + str(wind_speed) + " m/s")
+        st.write("Wind angle: " + str(wind_angle) + " rad")
         st.write("Wind load: " + str(st.session_state['wind'].aero_force(wind_speed, wind_angle) / 1000) + " kN")
         
         wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
@@ -88,9 +88,9 @@ def predict(varA, varB):
 
     st.write("You saved:")
     col1, col2, col3 = st.columns(3)
-    col1.metric("Energy", '{0:.0f} kWh'.format(diff_energy), '{0:.1f} %'.format(pc_energy))
+    col1.metric("Power", '{0:.0f} kWh'.format(diff_energy), '{0:.1f} %'.format(pc_energy))
     col2.metric("Fuel", '{0:.0f} L'.format(diff_fuel), '{0:.1f} %'.format(pc_fuel))
-    col3.metric("CO2", "86 T", "4%")
+    col3.metric("Emissions", "86 TCO2", "4%")
 
 # Button to switch page
 def menu(counter):
