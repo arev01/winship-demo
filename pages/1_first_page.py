@@ -8,8 +8,8 @@ st.markdown("### (1/3) Select a ship")
 
 my_output_value = mycomponent(my_input_value=50)
 
-if my_output_value == None:
-    my_output_value = "container"
+#if my_output_value == None:
+#    my_output_value = "container"
     
 # Display the output in Streamlit
 st.write("You selected: " + my_output_value.capitalize())
