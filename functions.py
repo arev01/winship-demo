@@ -68,7 +68,7 @@ def predict(varA, varB):
     st.write("Energy wo/: " + str(ref_energy) + " kWh")
     st.write("Fuel cons. wo/: " + str(ref_fuel) + " L")
     
-   new_energy = 0
+    new_energy = 0
     for idx, row in st.session_state['wind_data'].iterrows():
         distance, _, _, wind_speed, wind_angle = row.values.tolist()
         #st.write("Distance: " + str(distance) + " km")
