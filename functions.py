@@ -69,16 +69,36 @@ def predict(varA, varB):
     st.write("Fuel cons. wo/: " + str(ref_fuel) + " L")
     
     new_energy = 0
+    lst_speed, lst_angle, lst_frequency = ([] * range(3))
     for idx, row in st.session_state['wind_data'].iterrows():
         distance, _, _, wind_speed, wind_angle = row.values.tolist()
+
+        frequency = distance / st.session_state['wind_data']['DIST'].sum()
+
+        lst_speed.append(wind_speed)
+        lst_angle.append(wind_angle)
+        lst_frequency.append(frequency)
+        
         #st.write("Distance: " + str(distance) + " km")
-        st.write("Wind speed: " + str(wind_speed) + " m/s")
-        st.write("Wind angle: " + str(wind_angle) + " rad")
-        st.write("Wind load: " + str(st.session_state['wind'].aero_force(wind_speed, wind_angle) / 1000) + " kN")
+        #st.write("Wind speed: " + str(wind_speed) + " m/s")
+        #st.write("Wind angle: " + str(wind_angle) + " rad")
+        #st.write("Wind load: " + str(st.session_state['wind'].aero_force(wind_speed, wind_angle) / 1000) + " kN")
         
         wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
         new_energy += st.session_state['ship'].propulsion_power(sea_margin=sea_margin, external_force=-wind_load) / 1000 * distance / speed
         
+    import pandas as pd
+    import plotly.express as px
+    
+    d3 = {'direction': lst_angle, 'speed': lst_speed, 'frequency': lst_frequency}
+    df3 = pd.DataFrame(data=d3)
+    fig3 = px.bar_polar(df3, r="frequency",
+        theta="direction", color="speed",
+        template="plotly_dark",
+        color_discrete_sequence= px.colors.sequential.Plasma_r)
+
+    st.plotly_chart(fig3)
+    
     diff_energy = ref_energy - new_energy
     pc_energy = diff_energy / ref_energy * 100.
     new_fuel = new_energy * 155. / 900.
