@@ -27,7 +27,7 @@ import numpy as np
 wind = wind.Wind()
 
 # Get lift and drag coefficients
-wind.lift_coef, wind.drag_coef = np.loadtxt("wing.dat", comments="#", usecols=(1, 2), unpack=True)
+wind.lift_coef, wind.drag_coef = np.loadtxt(img[6:-4] + ".dat", comments="#", usecols=(1, 2), unpack=True)
 
 # Choose units, size 
 if img[6:-4] == "kite":
