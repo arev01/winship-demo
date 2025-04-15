@@ -90,10 +90,11 @@ def predict(varA, varB):
     import pandas as pd
     import plotly.express as px
     
-    d = {'speed': lst_speed, 'direction': lst_angle * 180. / np.pi}
+    d = {'speed': lst_speed, 'dir': lst_angle}
     df = pd.DataFrame(data=d)
 
     # populate values in new columns
+    df['dirDeg'] = df['dir'] * 180. / np.pi
     df['speedKt'] = df['speed'] * 1.944
     bins = [-1, 10, 20, 30, np.inf]
     names = ['0-10 kt', '10-20 kt', '20-30 kt', '30 kt']
@@ -102,14 +103,14 @@ def predict(varA, varB):
     bins = np.linspace(0, 360, 17) + 11.25
     bins = np.insert(bins, 0, 0)
     names = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW', 'N2']
-    df['directionRange'] = pd.cut(df['direction'], bins, labels=names)
-    df['directionRange'] = df['directionRange'].replace('N2', 'N')
+    df['dirDegRange'] = pd.cut(df['dirDeg'], bins, labels=names)
+    df['dirDegRange'] = df['dirDegRange'].replace('N2', 'N')
 
-    grp = df.groupby(["directionRange","speedKtRange"]).size()\
+    grp = df.groupby(["dirDegRange","speedKtRange"]).size()\
                 .reset_index(name="frequency")
 
     fig = px.bar_polar(grp, r="frequency",
-        theta="directionRange", color="speedKtRange",
+        theta="dirDegRange", color="speedKtRange",
         template="plotly_dark",
         color_discrete_sequence= px.colors.sequential.Plasma_r)
 
