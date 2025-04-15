@@ -73,11 +73,11 @@ def predict(varA, varB):
     for idx, row in st.session_state['wind_data'].iterrows():
         distance, _, _, wind_speed, wind_angle = row.values.tolist()
 
-        frequency = distance / st.session_state['wind_data']['DIST'].sum()
+        #frequency = distance / st.session_state['wind_data']['DIST'].sum()
 
         lst_speed.append(wind_speed)
         lst_angle.append(wind_angle)
-        lst_frequency.append(frequency)
+        #lst_frequency.append(frequency)
         
         #st.write("Distance: " + str(distance) + " km")
         #st.write("Wind speed: " + str(wind_speed) + " m/s")
@@ -90,14 +90,31 @@ def predict(varA, varB):
     import pandas as pd
     import plotly.express as px
     
-    d3 = {'direction': lst_angle, 'speed': lst_speed, 'frequency': lst_frequency}
-    df3 = pd.DataFrame(data=d3)
-    fig3 = px.bar_polar(df3, r="frequency",
-        theta="direction", color="speed",
+    d = {'speed': lst_speed, 'direction': lst_angle * 180. / np.pi}
+    df = pd.DataFrame(data=d)
+
+    # populate values in new columns
+    df['speedKt'] = df['speed'] * 1.944
+    bins = [-1, 10, 20, 30, np.inf]
+    names = ['0-10 kt', '10-20 kt', '20-30 kt', '30 kt']
+    df['speedKtRange'] = pd.cut(df['speedKt'], bins, labels=names)
+
+    bins = np.linspace(0, 360, 17) + 11.25
+    bins = np.insert(bins, 0, 0)
+    names = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW', 'N2']
+    df['directionRange'] = pd.cut(df['direction'], bins, labels=names)
+    df['directionRange'] = df['directionRange'].replace('N2', 'N')
+
+    grp = df.groupby(["directionRange","speedKtRange"]).size()\
+                .reset_index(name="frequency")
+
+    fig = px.bar_polar(grp, r="frequency",
+        theta="directionRange", color="speedKtRange",
         template="plotly_dark",
         color_discrete_sequence= px.colors.sequential.Plasma_r)
 
-    st.plotly_chart(fig3)
+    st.plotly_chart(fig)
+
     
     diff_energy = ref_energy - new_energy
     pc_energy = diff_energy / ref_energy * 100.
