@@ -87,9 +87,9 @@ if origin != '<select>' and destination != '<select>':
 
         xi, yi = find_index(*p1)
 
-        #st.write(*p1)
+        st.write(*p1)
         #st.write(xi, yi)
-        #st.write(lat[xi], lon[yi])
+        st.write(lat.item(xi), lon.item(yi))
         #st.write(wind_u.shape)
         #st.write(wind_u[xi, yi])
 
