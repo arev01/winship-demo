@@ -65,7 +65,7 @@ if origin != '<select>' and destination != '<select>':
     )
     st.map(df, height=300)
 
-    st.toggle("Show wind", disabled=True, help="Currently unavailable")
+    st.checkbox("Show wind", disabled=True, help="Currently unavailable")
 
     from pyaero import navigation
 
@@ -87,9 +87,9 @@ if origin != '<select>' and destination != '<select>':
 
         xi, yi = find_index(*p1)
 
-        st.write(*p1)
+        #st.write(*p1)
         #st.write(xi, yi)
-        st.write(lat.item(xi), lon.item(yi))
+        #st.write(lat.item(xi), lon.item(yi))
         #st.write(wind_u.shape)
         #st.write(wind_u[xi, yi])
 
