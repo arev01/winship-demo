@@ -27,7 +27,7 @@ st.markdown(
         - No interaction
 
         [1] www.emsa.europe.eu
-        [2] Harvald
+        [2] Harvald S. A. (1983), Resistance and Propulsion of Ships, Wiley 1983, ISBN 0-89464-754-7
         [3] Copernicus
         """
 )
