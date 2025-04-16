@@ -91,8 +91,9 @@ if origin != '<select>' and destination != '<select>':
 
         st.write(*p1)
         st.write(xi, yi)
-        st.write(wind_u.shape)
-        st.write(wind_u[xi, yi])
+        st.write(lat[xi], lon[yi])
+        #st.write(wind_u.shape)
+        #st.write(wind_u[xi, yi])
 
         # Construct speed vectors
         v0 = np.asarray([boat_u, boat_v], dtype=float)
