@@ -197,6 +197,9 @@ def prompt(person):
         case "rotor":
             st.write("""A rotating cylinder that generates lift 
             at right angles to the wind to drive the ship forward.""")
+        case "suction":
+            st.write("""A thick profile wing with internal fans 
+            to reduce flow separation and thus generate higher lift.""")
         case "wing":
             st.write("""A rigid aerofoil shape mounted vertically 
             on the ship to provide a propulsive force.""")
