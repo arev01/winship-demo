@@ -19,6 +19,9 @@ lon = data.longitude[::3]
 # Define the u-, v- wind speeds
 wind_u = data.u[0,0,::3,::3]
 wind_v = data.v[0,0,::3,::3]
+st.write(wind_u.shape)
+wind_u = data.u[:,0,::3,::3].mean(axis=0)
+st.write(wind_u.shape)
 
 def find_index(x, y):
     global lat, lon
