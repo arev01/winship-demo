@@ -16,6 +16,9 @@ data = xr.open_dataset('ERA5.nc')
 lat = data.latitude[::3]
 lon = data.longitude[::3]
 
+st.write(lat)
+st.write(lon)
+
 # Define the u-, v- wind speeds
 wind_u = data.u[:,0,::3,::3].mean(axis=0)
 wind_v = data.v[:,0,::3,::3].mean(axis=0)
@@ -86,6 +89,7 @@ if origin != '<select>' and destination != '<select>':
 
         xi, yi = find_index(*p1)
 
+        st.write(*p1)
         st.write(xi, yi)
         st.write(wind_u.shape)
         st.write(wind_u[xi, yi])
