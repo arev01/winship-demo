@@ -116,8 +116,8 @@ def predict(varA, varB):
         template=None,
         color_discrete_sequence=px.colors.sequential.Reds)
 
-    fig.update_layout(polar_radialaxis_ticksuffix='%',
-                      polar_angularaxis_ticks=np.linspace(0, 360, num=16, endpoint=False))
+    fig.update_layout(polar_radialaxis_ticksuffix='%')
+                      #polar_angularaxis_ticks=np.linspace(0, 360, num=16, endpoint=False))
 
     st.plotly_chart(fig)
 
