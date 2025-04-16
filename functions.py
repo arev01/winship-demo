@@ -71,7 +71,7 @@ def predict(varA, varB):
     new_energy = 0
     lst_speed, lst_angle, lst_frequency = ([] for i in range(3))
     for idx, row in st.session_state['wind_data'].iterrows():
-        distance, _, _, wind_speed, wind_angle = row.values.tolist()
+        distance, wind_speed, wind_angle, _, _ = row.values.tolist()
 
         #frequency = distance / st.session_state['wind_data']['DIST'].sum()
 
