@@ -13,7 +13,8 @@ import pandas as pd
 data = xr.open_dataset('ERA5.nc')
 
 # Define latitude and longitude coordinates
-lat = data.latitude[::3].sort()
+lat = data.latitude[::3]
+lat = lat.sortby(lat)
 lon = data.longitude[::3] - 180.
 
 st.write(lat)
