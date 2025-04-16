@@ -95,7 +95,7 @@ if origin != '<select>' and destination != '<select>':
 
         # Construct speed vectors
         v0 = np.asarray([boat_u, boat_v], dtype=float)
-        v1 = np.asarray([wind_u[yi, xi], wind_v[yi, xi]], dtype=float)
+        v1 = np.asarray([wind_u[xi, yi], wind_v[xi, yi]], dtype=float)
     
         lst.append([navigation.distance(*p1, *p2), *navigation.velocity(v0, v1)])
     
