@@ -20,15 +20,15 @@ st.markdown(
 
         - Wind powered device operation typically can be calculated through lift and drag coefficients found in literature.
 
-         - Wind data is derived from the ERA-5 [3] database (annual average).
+         - Wind data is derived from the ERA-5 dataset [3] (annually averaged).
 
         - Generic models. Typical dimensions.
 
         - No interaction
 
-        [1] European Maritime Safety Agency (2023), Potential of Wind-Assisted Propulsion for Shipping, EMSA, Lisbon
-        [2] Harvald S. A. (1983), Resistance and Propulsion of Ships, Wiley 1983, ISBN 0-89464-754-7
-        [3] Copernicus
+        [1] European Maritime Safety Agency (2023), Potential of Wind-Assisted Propulsion for Shipping, EMSA, Lisbon.
+        [2] Harvald S. A. (1983), Resistance and Propulsion of Ships, Wiley 1983, ISBN 0-89464-754-7.
+        [3] Copernicus Climate Change Service (2017), ERA-5: Fifth generation of ECMWF atmospheric reanalyses of the global climate, Accessed March 2025.
         """
 )
 
