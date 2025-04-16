@@ -23,8 +23,8 @@ wind_v = data.v[:,0,::3,::3].mean(axis=0)
 
 def find_index(x, y):
     global lat, lon
-    xi = np.searchsorted(lat, x)
-    yi = np.searchsorted(lon, y)
+    xi = np.searchsorted(lat, x)-1
+    yi = np.searchsorted(lon, y)-1
     return xi, yi
 
 from nodes import nodes
@@ -65,7 +65,7 @@ if origin != '<select>' and destination != '<select>':
     )
     st.map(df, height=300)
 
-    st.checkbox("Show wind", disabled=True, help="Currently unavailable")
+    st.toggle("Show wind", disabled=True, help="Currently unavailable")
 
     from pyaero import navigation
 
