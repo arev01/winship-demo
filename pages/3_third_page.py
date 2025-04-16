@@ -93,6 +93,4 @@ if origin != '<select>' and destination != '<select>':
         lst.append([navigation.distance(*p1, *p2), *navigation.velocity(v0, v1)])
     
     wind_data = pd.DataFrame(lst, columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
-
-    if 'wind_data' not in st.session_state:
-        st.session_state['wind_data'] = wind_data
+    st.session_state['wind_data'] = wind_data
