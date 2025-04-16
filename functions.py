@@ -109,10 +109,14 @@ def predict(varA, varB):
     grp = df.groupby(["dirDegRange","speedKtRange"]).size()\
                 .reset_index(name="frequency")
 
-    fig = px.bar_polar(grp, r="frequency",
+    grp['percentage'] = grp['frequency']/grp['frequency'].sum()*100
+
+    fig = px.bar_polar(grp, r="percentage",
         theta="dirDegRange", color="speedKtRange",
         template="plotly_dark",
         color_discrete_sequence= px.colors.sequential.Plasma_r)
+
+    fig.update_layout(polar_radialaxis_ticksuffix='%')
 
     st.plotly_chart(fig)
 
