@@ -26,7 +26,7 @@ st.markdown(
 
         - No interaction
 
-        [1] www.emsa.europe.eu
+        [1] European Maritime Safety Agency (2023), Potential of Wind-Assisted Propulsion for Shipping, EMSA, Lisbon
         [2] Harvald S. A. (1983), Resistance and Propulsion of Ships, Wiley 1983, ISBN 0-89464-754-7
         [3] Copernicus
         """
