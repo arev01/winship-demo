@@ -24,8 +24,7 @@ file_name = my_output_value + ".shp"
 out = read_ship.open(file_name)
 ship = ship.Ship(**out)
 
-if 'ship' not in st.session_state:
-    st.session_state['ship'] = ship
+st.session_state['ship'] = ship
 
 control = st.segmented_control("Specify ship size:",
                      ["Capacity", "Dimension"],
