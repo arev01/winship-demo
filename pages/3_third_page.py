@@ -73,13 +73,16 @@ if origin != '<select>' and destination != '<select>':
         p1 = marnet_output['coordinate_path'][i]
         p2 = marnet_output['coordinate_path'][i+1]
 
-        if p1[0] == p2[0]:
+        if p2[1] == p1[1] and p2[0] > p1[0]:
+            boat_u = -1. * st.session_state['ship'].speed1
+            boat_v = 0
+        elif p2[1] == p1[1] and p2[0] < p1[0]:
             boat_u = st.session_state['ship'].speed1
             boat_v = 0
         else:
-            X = ( p1[1] - p2[1] ) / ( p1[0] - p2[0] )
+            X = ( p2[0] - p1[0] ) / ( p2[1] - p1[1] )
             boat_u = st.session_state['ship'].speed1 / np.sqrt(1 + X**2) * X
-            boat_v = st.session_state['ship'].speed1 / np.sqrt(1 + X**2)
+            boat_v = -1. * st.session_state['ship'].speed1 / np.sqrt(1 + X**2)
 
         xi, yi = find_index(*p1)
 
@@ -87,7 +90,7 @@ if origin != '<select>' and destination != '<select>':
         v0 = np.asarray([boat_u, boat_v], dtype=float)
         v1 = np.asarray([wind_u[yi, xi], wind_v[yi, xi]], dtype=float)
     
-        lst.append([navigation.distance(*p1, *p2), *navigation.velocity(-v0, v1)])
+        lst.append([navigation.distance(*p1, *p2), *navigation.velocity(v0, v1)])
     
     wind_data = pd.DataFrame(lst, columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
 
