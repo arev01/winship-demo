@@ -49,7 +49,7 @@ def help():
         to navigate the different menus and press :material/bolt: to evaluate your favorite design.
         """
     )
-    st.page_link("./pages/4_fourth_page.py", label="Read more", icon=None)
+    st.page_link("./pages/4_fourth_page.py", label="Methodology", icon="📚")
 
 @st.dialog("⚡️ Congratulations")
 def predict(varA, varB):
