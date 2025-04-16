@@ -113,10 +113,11 @@ def predict(varA, varB):
 
     fig = px.bar_polar(grp, r="percentage",
         theta="dirDegRange", color="speedKtRange",
-        template="plotly_dark",
-        color_discrete_sequence= px.colors.sequential.Plasma_r)
+        template=None,
+        color_discrete_sequence=px.colors.sequential.Reds)
 
-    fig.update_layout(polar_radialaxis_ticksuffix='%')
+    fig.update_layout(polar_radialaxis_ticksuffix='%',
+                      polar_angularaxis_ticks=np.linspace(0, 360, num=16, endPoint=False))
 
     st.plotly_chart(fig)
 
