@@ -18,9 +18,9 @@ st.markdown(
 
         - Wind powered device operation typically can be calculated through lift and drag coefficients found in literature.
 
-         - Wind data is derived from the ERA-5 dataset [3] (annually averaged).
+        - Wind data is derived from the ERA-5 dataset [3] (annually averaged).
 
-        - Generic models. Typical dimensions.
+        - WINSHIP uses generic ship models and wind devices with typical dimensions used in the maritime industry.
 
         - No interaction
 
