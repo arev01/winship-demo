@@ -14,7 +14,7 @@ st.markdown(
 
         - Propulsion efficiency is estimated using naval architecture’s rules of thumbs.
 
-        - Added resistance due to wind and waves is accounted for by applying a sea margin of 10-25% based on the ship route.
+        - Added resistance due to wind and waves is accounted for by applying a sea margin of 20% regardless of the ship route.
 
         - Wind powered device operation typically can be calculated through lift and drag coefficients found in literature.
 
