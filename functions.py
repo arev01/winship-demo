@@ -70,7 +70,7 @@ def predict(varA, varB):
     new_energy = 0
     lst_speed, lst_angle, lst_frequency = ([] for i in range(3))
     for idx, row in st.session_state['wind_data'].iterrows():
-        distance, wind_speed, wind_angle, _, _ = row.values.tolist()
+        distance, _, _, wind_speed, wind_angle = row.values.tolist()
 
         #frequency = distance / st.session_state['wind_data']['DIST'].sum()
 
@@ -79,9 +79,9 @@ def predict(varA, varB):
         #lst_frequency.append(frequency)
         
         #st.write("Distance: " + str(distance) + " km")
-        st.write("Wind speed: " + str(wind_speed * 3.6) + " km/h")
-        st.write("Wind angle: " + str(wind_angle * 180. / np.pi) + " deg")
-        st.write("Wind load: " + str(st.session_state['wind'].aero_force(wind_speed, wind_angle) / 1000) + " kN")
+        #st.write("Wind speed: " + str(wind_speed * 3.6) + " km/h")
+        #st.write("Wind angle: " + str(wind_angle * 180. / np.pi) + " deg")
+        #st.write("Wind load: " + str(st.session_state['wind'].aero_force(wind_speed, wind_angle) / 1000) + " kN")
         
         wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
         new_energy += st.session_state['ship'].propulsion_power(external_force=-wind_load) / 1000 * distance / speed
@@ -93,7 +93,7 @@ def predict(varA, varB):
     df = pd.DataFrame(data=d)
 
     # populate values in new columns
-    df['dirDeg'] = df['dir'] * 180. / np.pi
+    df['dirDeg'] = df['dir'] * 180. / np.pi + 180.
     df['speedKt'] = df['speed'] * 1.944
     bins = [-1, 10, 20, 30, np.inf]
     names = ['0-10 kt', '10-20 kt', '20-30 kt', '30 kt']
