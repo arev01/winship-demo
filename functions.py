@@ -53,9 +53,8 @@ def help():
 
 @st.dialog("⚡️ Congratulations")
 def predict(varA, varB):
-    sea_margin = 0.2
     resistance = st.session_state['ship'].resistance / 1000
-    ref_power = st.session_state['ship'].propulsion_power(sea_margin=sea_margin) / 1000
+    ref_power = st.session_state['ship'].propulsion_power() / 1000
     distance = st.session_state['wind_data']['DIST'].sum()
     speed = st.session_state['ship'].speed * 1.944
     ref_energy = ref_power * distance / speed
@@ -85,7 +84,7 @@ def predict(varA, varB):
         st.write("Wind load: " + str(st.session_state['wind'].aero_force(wind_speed, wind_angle) / 1000) + " kN")
         
         wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
-        new_energy += st.session_state['ship'].propulsion_power(sea_margin=sea_margin, external_force=-wind_load) / 1000 * distance / speed
+        new_energy += st.session_state['ship'].propulsion_power(external_force=-wind_load) / 1000 * distance / speed
         
     import pandas as pd
     import plotly.express as px
