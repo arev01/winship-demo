@@ -82,8 +82,8 @@ if origin != '<select>' and destination != '<select>':
             boat_v = 0
         else:
             X = ( p2[0] - p1[0] ) / ( p2[1] - p1[1] )
-            boat_u = st.session_state['ship'].speed1 / np.sqrt(1 + X**2) * X
-            boat_v = -1. * st.session_state['ship'].speed1 / np.sqrt(1 + X**2)
+            boat_u = -1. * st.session_state['ship'].speed1 / np.sqrt(1 + X**2) * X
+            boat_v = st.session_state['ship'].speed1 / np.sqrt(1 + X**2)
 
         xi, yi = find_index(*p1)
 
@@ -100,8 +100,8 @@ if origin != '<select>' and destination != '<select>':
         st.write("v0: ", *v0)
         st.write("v1: ", *v1)
         tws, twa, aws, awa = navigation.velocity(v0, v1)
-        st.write("tws: ", tws)
-        st.write("twa: ", twa * 180. / np.pi)
+        st.write("aws: ", aws)
+        st.write("awa: ", awa * 180. / np.pi)
         st.write()
     
         lst.append([navigation.distance(*p1, *p2), *navigation.velocity(v0, v1)])
