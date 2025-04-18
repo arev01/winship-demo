@@ -97,8 +97,11 @@ if origin != '<select>' and destination != '<select>':
         v0 = np.asarray([boat_u, boat_v], dtype=float)
         v1 = np.asarray([wind_u[xi, yi], wind_v[xi, yi]], dtype=float)
 
-        st.write(*v0, *v1)
-        st.write(*navigation.velocity(v0, v1))
+        st.write("v0: ", *v0)
+        st.write("v1: ", *v1)
+        tws, twa, aws, awa = navigation.velocity(v0, v1)
+        st.write("tws: ", tws)
+        st.write("twa: ", twa * 180. / np.pi)
         st.write()
     
         lst.append([navigation.distance(*p1, *p2), *navigation.velocity(v0, v1)])
