@@ -75,10 +75,10 @@ if origin != '<select>' and destination != '<select>':
         p2 = marnet_output['coordinate_path'][i+1]
 
         if p2[1] == p1[1] and p2[0] > p1[0]:
-            boat_u = -1. * st.session_state['ship'].speed1
+            boat_u = st.session_state['ship'].speed1
             boat_v = 0
         elif p2[1] == p1[1] and p2[0] < p1[0]:
-            boat_u = st.session_state['ship'].speed1
+            boat_u = -1. * st.session_state['ship'].speed1
             boat_v = 0
         else:
             X = ( p2[0] - p1[0] ) / ( p2[1] - p1[1] )
