@@ -112,7 +112,7 @@ def predict(varA, varB):
 
     fig = px.bar_polar(grp, r="percentage",
         theta="dirDegRange", color="speedKtRange",
-        template=None,
+        template="plotly_dark",
         color_discrete_sequence=px.colors.sequential.Reds)
 
     fig.update_layout(polar_radialaxis_ticksuffix='%')
