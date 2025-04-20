@@ -82,8 +82,8 @@ if origin != '<select>' and destination != '<select>':
             boat_v = -1. * st.session_state['ship'].speed1
         else:
             X = ( p2[0] - p1[0] ) / ( p2[1] - p1[1] )
-            boat_u = st.session_state['ship'].speed1 / np.sqrt(1 + X**2)
-            boat_v = st.session_state['ship'].speed1 / np.sqrt(1 + X**2) * X
+            boat_u = -1. * st.session_state['ship'].speed1 / np.sqrt(1 + X**2) * X
+            boat_v = st.session_state['ship'].speed1 / np.sqrt(1 + X**2)
 
         xi, yi = find_index(*p1)
 
