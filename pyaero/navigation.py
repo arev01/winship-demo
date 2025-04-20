@@ -27,12 +27,12 @@ def velocity(v0, v1):
     AWS = np.sqrt(TWS **2 + BS **2 + 2 * TWS * BS * np.cos(TWA))
 
     # Get apparent wind angle
-    phi = np.acos( (TWS * np.cos(TWA) + BS) / AWS)
+    AWA = np.acos( (TWS * np.cos(TWA) + BS) / AWS)
     
-    v2 = np.cross([*v0, 0.], [*v1, 0.])
-    if v2[2] > 0:
-        AWA = phi
-    else:
-        AWA = 2 * np.pi - phi
+    #v2 = np.cross([*v0, 0.], [*v1, 0.])
+    #if v2[2] > 0:
+    #    AWA = phi
+    #else:
+    #    AWA = 2 * np.pi - phi
 
     return TWS, TWA, AWS, AWA
