@@ -23,7 +23,7 @@ def velocity(v0, v1):
     # Get true wind angle
     # : Angle of wind direction in radians. A value of 0 is a movement of wind
     # from north to south.
-    TWA = np.atan2(np.linalg.det([v0,v1]), np.dot(v0,v1))
+    TWA = np.atan2(np.linalg.det([v0,v1]), np.dot(v0,v1)) + np.pi
 
     # Get apparent wind speed
     AWS = np.sqrt(TWS **2 + BS **2 + 2 * TWS * BS * np.cos(TWA))
