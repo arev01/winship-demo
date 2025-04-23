@@ -25,8 +25,8 @@ HORIZONTAL_STYLE = """
     }
     /* Just an example of how you would style buttons, if desired */
     div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) button {
-        height: 200px;
-        width: 200px;
+        height: 20px;
+        width: 20px;
     }
 </style>
 """
