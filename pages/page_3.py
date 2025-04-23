@@ -1,5 +1,5 @@
 import streamlit as st
-from lib.functions import menu, prompt
+from utils.functions import menu, prompt
 
 menu(counter=3)
 
@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 
 # Open the ERA-5 data
-data = xr.open_dataset('resources/db/ERA5.nc')
+data = xr.open_dataset('resources/ERA5.nc')
 
 # Define latitude and longitude coordinates
 lat = data.latitude[::3]
@@ -27,7 +27,7 @@ def find_index(x, y):
     yi = np.searchsorted(lon, y)-1
     return xi, yi
 
-from nodes import nodes
+from utils.nodes import nodes
 
 #Define origin and destination ports
 tab1, tab2 = st.tabs(["Origin", "Destination"])
@@ -67,7 +67,7 @@ if origin != '<select>' and destination != '<select>':
 
     st.toggle("Show wind", disabled=True, help="Currently unavailable")
 
-    from pyaero import navigation
+    from lib.pyaero import navigation
 
     lst = []
     for i in range(len(marnet_output['coordinate_path'])-1):
