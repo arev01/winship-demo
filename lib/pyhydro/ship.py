@@ -1,4 +1,4 @@
-from pyhydro.physics import residual_resistance_coef, froude_number, reynolds_number, frictional_resistance_coef
+from lib.pyhydro.physics import residual_resistance_coef, froude_number, reynolds_number, frictional_resistance_coef
 
 
 class Ship:
