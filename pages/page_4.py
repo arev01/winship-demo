@@ -3,7 +3,7 @@ from lib.functions import menu, prompt
 
 menu(counter=4)
 
-st.title("🧭 FAQ/Guide")
+st.markdown("### FAQ/Guide")
 
 st.markdown(
     """
