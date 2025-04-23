@@ -1,5 +1,5 @@
 import streamlit as st
-from lib.functions import menu, prompt
+from utils.functions import menu, prompt
 
 menu(counter=4)
 
