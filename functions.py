@@ -24,13 +24,10 @@ HORIZONTAL_STYLE = """
         width: max-content !important;
     }
     /* Just an example of how you would style buttons, if desired */
-    /*
     div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) button {
-        border-color: red;
         height: 200px;
         width: 200px;
     }
-    */
 </style>
 """
 
