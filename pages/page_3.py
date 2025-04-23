@@ -1,5 +1,5 @@
 import streamlit as st
-from functions import menu, prompt
+from lib.functions import menu, prompt
 
 menu(counter=3)
 
@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 
 # Open the ERA-5 data
-data = xr.open_dataset('ERA5.nc')
+data = xr.open_dataset('resources/db/ERA5.nc')
 
 # Define latitude and longitude coordinates
 lat = data.latitude[::3]
