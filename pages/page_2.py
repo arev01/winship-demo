@@ -1,6 +1,6 @@
 import streamlit as st
-from lib.functions import menu, prompt
-from resources.pyaero import wind, navigation
+from utils.functions import menu, prompt
+from lib.pyaero import wind, navigation
 
 menu(counter=2)
 
