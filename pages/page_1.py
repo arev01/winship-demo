@@ -1,6 +1,6 @@
 import streamlit as st
 from mycomponent import mycomponent
-from lib.functions import menu, prompt
+from utils.functions import menu, prompt
 
 menu(counter=1)
 
@@ -17,7 +17,7 @@ st.write("You selected: " + my_output_value.capitalize())
 with st.expander("Description"):
     prompt(my_output_value)
 
-from resources.pyhydro import read_ship, ship
+from lib.pyhydro import read_ship, ship
 
 file_name = my_output_value + ".shp"
 
