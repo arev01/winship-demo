@@ -149,26 +149,32 @@ def menu(counter):
         "./pages/3_third_page.py"
     ]
     with st_horizontal():
-        if st.button(":material/question_mark:"):
-            help()
-        if st.button(":material/bolt:"):
+        if st.button(":material/sailing:"):
+            st.switch_page("./pages/1_first_page.py")
+        if st.button(":material/air:"):
+            st.switch_page("./pages/2_second_page.py")
+        if st.button(":material/route:"):
+            st.switch_page("./pages/3_third_page.py")
+        if st.button(":material/monitoring:"):
             predict(42, 12)
+        if st.button(":material/explore:"):
+            help()
         #if st.button(":material/home:"):
         #    counter = 0
         #    page_file = "./streamlit_app.py"
         #    # Switch to the selected page
         #    st.switch_page(page_file)
-        if st.button(":material/arrow_back_ios:"):
-            counter -= 1
-            page_file = page_lst[counter-1]
+        #if st.button(":material/arrow_back_ios:"):
+        #    counter -= 1
+        #    page_file = page_lst[counter-1]
             # Switch to the selected page
-            st.switch_page(page_file)
-        if st.button(":material/arrow_forward_ios:"):
-            counter += 1
-            counter = counter % 3
-            page_file = page_lst[counter-1]
-            # Switch to the selected page
-            st.switch_page(page_file)
+        #    st.switch_page(page_file)
+        #if st.button(":material/arrow_forward_ios:"):
+        #    counter += 1
+        #    counter = counter % 3
+        #    page_file = page_lst[counter-1]
+        #    # Switch to the selected page
+        #    st.switch_page(page_file)
     st.empty()
 
 def prompt(person):
