@@ -8,7 +8,7 @@ st.markdown("### (2/3) Select a device")
 
 from streamlit_image_select import image_select
 
-img = image_select("Label", [
+img = image_select("", [
     "./img/rotor.jpg", 
     "./img/suction.jpg", 
     "./img/wing.jpg", 
