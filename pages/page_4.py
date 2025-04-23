@@ -1,6 +1,18 @@
 import streamlit as st
+from lib.functions import menu, prompt
 
-st.title("📚 Methodology")
+menu(counter=4)
+
+st.title("🧭 FAQ/Guide")
+
+st.markdown(
+        """
+        Use the buttons :material/arrow_back_ios: :material/arrow_forward_ios:
+        to navigate the different menus and press :material/bolt: to evaluate your favorite design.
+        """
+)
+
+st.empty()
 
 st.markdown(
         """
