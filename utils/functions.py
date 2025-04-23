@@ -40,17 +40,7 @@ def st_horizontal():
 
 import numpy as np
 
-@st.dialog("❓ Help")
-def help():
-    st.markdown(
-        """
-        Use the buttons :material/arrow_back_ios: :material/arrow_forward_ios:
-        to navigate the different menus and press :material/bolt: to evaluate your favorite design.
-        """
-    )
-    st.page_link("./pages/4_fourth_page.py", label="Methodology", icon="📚")
-
-@st.dialog("⚡️ Congratulations")
+@st.dialog("📊 Results")
 def predict(varA, varB):
     resistance = st.session_state['ship'].resistance / 1000
     ref_power = st.session_state['ship'].propulsion_power() / 1000
@@ -149,15 +139,15 @@ def menu(counter):
     ]
     with st_horizontal():
         if st.button(":material/sailing:"):
-            st.switch_page("./pages/1_first_page.py")
+            st.switch_page("./pages/page_1.py")
         if st.button(":material/air:"):
-            st.switch_page("./pages/2_second_page.py")
+            st.switch_page("./pages/page_2.py")
         if st.button(":material/route:"):
-            st.switch_page("./pages/3_third_page.py")
+            st.switch_page("./pages/page_3.py")
         if st.button(":material/monitoring:"):
             predict(42, 12)
         if st.button(":material/explore:"):
-            help()
+            st.switch_page("./pages/page_4.py")
         #if st.button(":material/home:"):
         #    counter = 0
         #    page_file = "./streamlit_app.py"
@@ -174,7 +164,6 @@ def menu(counter):
         #    page_file = page_lst[counter-1]
         #    # Switch to the selected page
         #    st.switch_page(page_file)
-    st.empty()
 
 def prompt(person):
     match person:
