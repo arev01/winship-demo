@@ -3,14 +3,14 @@ from utils.functions import menu, prompt
 
 menu(counter=3)
 
-st.markdown("### (3/3) Select a route")
+st.markdown("### Select a route")
 
 import xarray as xr
 import numpy as np
 import pandas as pd
 
 # Open the ERA-5 data
-data = xr.open_dataset('resources/ERA5.nc')
+data = xr.open_dataset("resources/ERA5.nc")
 
 # Define latitude and longitude coordinates
 lat = data.latitude[::3]
