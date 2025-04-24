@@ -17,17 +17,19 @@ HORIZONTAL_STYLE = """
         flex-wrap: wrap;
         gap: 0.5rem;
         align-items: baseline;
-    /*    justify-content: flex-end; */
+        justify-content: flex-end;
     }
     /* Buttons and their parent container all have a width of 704px, which we need to override */
     div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) div {
         width: max-content !important;
     }
     /* Just an example of how you would style buttons, if desired */
+    /*
     div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) button {
         height: 20px;
         width: 20px;
     }
+    */
 </style>
 """
 
