@@ -4,7 +4,7 @@ from lib.pyaero import wind, navigation
 
 menu(counter=2)
 
-st.markdown("### (2/3) Select a device")
+st.markdown("### Select a device")
 
 from streamlit_image_select import image_select
 
@@ -27,7 +27,10 @@ import numpy as np
 wind = wind.Wind()
 
 # Get lift and drag coefficients
-wind.lift_coef, wind.drag_coef = np.loadtxt(img[6:-4] + ".dat", comments="#", usecols=(1, 2), unpack=True)
+file_name = img[6:-4] + ".dat"
+path_to_file = "resources/" + file_name
+
+wind.lift_coef, wind.drag_coef = np.loadtxt(path_to_file, comments="#", usecols=(1, 2), unpack=True)
 
 # Choose units, size 
 if img[6:-4] == "kite":
