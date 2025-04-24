@@ -4,7 +4,7 @@ from utils.functions import menu, prompt
 
 menu(counter=1)
 
-st.markdown("### (1/3) Select a ship")
+st.markdown("### Select a ship")
 
 my_output_value = mycomponent(my_input_value=50)
 
@@ -20,13 +20,14 @@ with st.expander("Description"):
 from lib.pyhydro import read_ship, ship
 
 file_name = my_output_value + ".shp"
+path_to_file = "resources/" + file_name
 
-out = read_ship.open(file_name)
+out = read_ship.open(path_to_file)
 ship = ship.Ship(**out)
 
 st.session_state['ship'] = ship
 
-control = st.segmented_control("Specify ship size:",
+control = st.segmented_control("Ship size:",
                      ["Capacity", "Dimension"],
                     default="Capacity",
                     help="Currently unavailable",
