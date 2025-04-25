@@ -3,7 +3,7 @@ from utils.functions import menu, prompt
 
 menu(counter=3)
 
-st.markdown("### Select a route")
+st.markdown("### Create shortest route")
 
 import xarray as xr
 import numpy as np
@@ -81,9 +81,10 @@ if origin != '<select>' and destination != '<select>':
             boat_u = 0.
             boat_v = -1. * st.session_state['ship'].speed1
         else:
-            X = ( p2[0] - p1[0] ) / ( p2[1] - p1[1] )
-            boat_u = -1. * st.session_state['ship'].speed1 / np.sqrt(1 + X**2) * X
-            boat_v = st.session_state['ship'].speed1 / np.sqrt(1 + X**2)
+            p0 = p2 - p1
+            phi = np.atan2(p0[0], p0[1])
+            boat_u = st.session_state['ship'].speed1 * np.cos(phi)
+            boat_v = st.session_state['ship'].speed1 * np.sin(phi)
 
         xi, yi = find_index(*p1)
 
