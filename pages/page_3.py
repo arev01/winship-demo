@@ -81,7 +81,7 @@ if origin != '<select>' and destination != '<select>':
             boat_u = 0.
             boat_v = -1. * st.session_state['ship'].speed1
         else:
-            p0 = p2 - p1
+            p0 = np.subtract(p2, p1)
             phi = np.atan2(p0[0], p0[1])
             boat_u = st.session_state['ship'].speed1 * np.cos(phi)
             boat_v = st.session_state['ship'].speed1 * np.sin(phi)
