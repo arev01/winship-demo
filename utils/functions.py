@@ -43,7 +43,7 @@ def st_horizontal():
 
 import numpy as np
 
-@st.dialog("📊 Results")
+@st.dialog("🔍 :material/troubleshoot:")
 def predict(varA, varB):
     resistance = st.session_state['ship'].resistance / 1000
     ref_power = st.session_state['ship'].propulsion_power() / 1000
@@ -131,14 +131,32 @@ def predict(varA, varB):
     col2.metric("Fuel", '{0:,.0f} L'.format(diff_fuel), '{0:.1f} %'.format(pc_fuel))
     col3.metric("Emissions", '{0:,.0f} TCO2e'.format(diff_emissions), '{0:.1f} %'.format(pc_emissions))
 
+@st.dialog("🧭 Navigation")
+def help():
+    st.markdown(
+        """
+        Use the buttons at the top to go through the different steps...
+        
+        :material/sailing: Choose ship type. Usr arrows or swipe left/right.
+        
+        :material/air: Choose wind device. Select image to show more information.
+        
+        :material/route: Create shortest route. Choose ports of origin and destination.
+        
+        ... and press :material/troubleshoot: to monitor the gain.
+        
+        Click :material/navigation: to show this page.
+        """
+    )
+
 # Button to switch page
 def menu(counter):
     if counter == None:
         counter = 0
     page_lst = [
-        "./pages/1_first_page.py",
-        "./pages/2_second_page.py",
-        "./pages/3_third_page.py"
+        "./pages/page_1.py",
+        "./pages/page_2.py",
+        "./pages/page_3.py"
     ]
     with st_horizontal():
         if st.button(":material/sailing:"):
@@ -147,10 +165,10 @@ def menu(counter):
             st.switch_page("./pages/page_2.py")
         if st.button(":material/route:"):
             st.switch_page("./pages/page_3.py")
-        if st.button(":material/monitoring:"):
+        if st.button(":material/troubleshoot:"):
             predict(42, 12)
         if st.button(":material/explore:"):
-            st.switch_page("./pages/page_4.py")
+            help()
         #if st.button(":material/home:"):
         #    counter = 0
         #    page_file = "./streamlit_app.py"
