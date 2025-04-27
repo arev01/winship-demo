@@ -42,7 +42,7 @@ def st_horizontal():
 
 import numpy as np
 
-@st.dialog("🔍 :material/troubleshoot:")
+@st.dialog("⚖️ Comparison")
 def predict(varA, varB):
     resistance = st.session_state['ship'].resistance / 1000
     ref_power = st.session_state['ship'].propulsion_power() / 1000
@@ -142,7 +142,7 @@ def help():
         
             :material/route: Create shortest route. Choose ports of origin and destination.
         
-        ... and press :material/troubleshoot: to monitor the performance.
+        ... and press :material/balance: to compare the gains.
         
         Click :material/explore: to show this page.
         """
@@ -164,7 +164,7 @@ def menu(counter):
             st.switch_page("./pages/page_2.py")
         if st.button(":material/route:"):
             st.switch_page("./pages/page_3.py")
-        if st.button(":material/troubleshoot:"):
+        if st.button(":material/balance:"):
             predict(42, 12)
         if st.button(":material/explore:"):
             help()
