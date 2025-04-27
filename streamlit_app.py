@@ -22,8 +22,13 @@ def main():
         A tool that evaluates the potential of a WINd-assisted SHIP in 3 simple steps: choose ship type, choose wind device and create shortest route.
 
         Accurate results plus a graphical output will be available in just a few seconds.
+
+        For more information, see:
         """
     )
+
+    st.page_link("./pages/page_4.py", label="Information", icon="📚")
+    
     # Button to switch page
     col1, col2, col3, col4, col5 = st.columns(5)
 
