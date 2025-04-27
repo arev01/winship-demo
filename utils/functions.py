@@ -18,7 +18,6 @@ HORIZONTAL_STYLE = """
         gap: 0.5rem;
         align-items: baseline;
         justify-content: flex-end;
-        background-color: orangered;
     }
     /* Buttons and their parent container all have a width of 704px, which we need to override */
     div[data-testid="stVerticalBlock"]:has(> .element-container .horizontal-marker) div {
@@ -137,15 +136,15 @@ def help():
         """
         Use the buttons at the top to go through the different steps...
         
-        :material/sailing: Choose ship type. Usr arrows or swipe left/right.
+            :material/sailing: Choose ship type. Use arrows or swipe left/right.
         
-        :material/air: Choose wind device. Select image to show more information.
+            :material/air: Choose wind device. Select image to show more information.
         
-        :material/route: Create shortest route. Choose ports of origin and destination.
+            :material/route: Create shortest route. Choose ports of origin and destination.
         
-        ... and press :material/troubleshoot: to monitor the gain.
+        ... and press :material/troubleshoot: to monitor the performance.
         
-        Click :material/navigation: to show this page.
+        Click :material/explore: to show this page.
         """
     )
 
