@@ -19,7 +19,7 @@ def main():
     st.title("👋 Welcome to winship!")
     st.write(
         """
-        A tool that evaluates the potential of a WINd-assisted SHIP in 3 simple steps: select ship type & size, choose device configuration and select a course.
+        A tool that evaluates the potential of a WINd-assisted SHIP in 3 simple steps: choose ship type, choose wind device and create shortest route.
 
         Accurate results plus a graphical output will be available in just a few seconds.
         """
@@ -41,6 +41,8 @@ def main():
             # Switch to the selected page
             page_file = "./pages/page_1.py"
             st.switch_page(page_file)
+
+    st.badge("Disclaimer: This tool is intended for educational purpose only.")
 
 if __name__=='__main__':
     main()
