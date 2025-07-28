@@ -25,8 +25,6 @@ def main():
         Ready to explore how auxiliary wind propulsion can clean up the shipping industry?
         """
     )
-
-    st.page_link("./pages/page_4.py", label="Resource", icon="📚")
     
     # Button to switch page
     col1, col2, col3, col4, col5 = st.columns(5)
