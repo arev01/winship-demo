@@ -42,107 +42,122 @@ def st_horizontal():
 
 import numpy as np
 
-@st.dialog("⚖️ Comparison")
+@st.dialog("⚡ Savings", width="large")
 def predict(varA, varB):
-    resistance = st.session_state['ship'].resistance / 1000
-    ref_power = st.session_state['ship'].propulsion_power() / 1000
-    distance = st.session_state['wind_data']['DIST'].sum()
-    speed = st.session_state['ship'].speed * 1.944
-    ref_energy = ref_power * distance / speed
-    ref_fuel = ref_energy * 155. / 900.
-    ref_emissions = ref_fuel * 900. * 3.206 / 1000000
-    st.write("Resistance: " + str(resistance) + " kN")
-    st.write("Power: " + str(ref_power) + " kW")
-    st.write("Distance: " + str(distance) + " km")
-    st.write("Speed: " + str(speed) + " km/h")
-    #st.write("Energy wo/: " + str(ref_energy) + " kWh")
-    #st.write("Fuel cons. wo/: " + str(ref_fuel) + " L")
-    
-    new_energy = 0
-    lst_speed, lst_angle, lst_frequency = ([] for i in range(3))
-    for idx, row in st.session_state['wind_data'].iterrows():
-        distance, _, _, wind_speed, wind_angle = row.values.tolist()
+    if 'ship' not in st.session_state:
+        st.error("No ship selected")
+    elif 'wind' not in st.session_state:
+        st.error("No device selected")
+    elif 'wind_data' not in st.session_state:
+        st.error("No route created")
+    else:
+        resistance = st.session_state['ship'].resistance / 1000
+        ref_power = st.session_state['ship'].propulsion_power() / 1000
+        distance = st.session_state['wind_data']['DIST'].sum()
+        speed = st.session_state['ship'].speed * 1.944
+        ref_energy = ref_power * distance / speed
+        ref_fuel = ref_energy * 155. / 900.
+        ref_emissions = ref_fuel * 900. * 3.206 / 1000000
+        #st.write("Resistance: " + "{:.1f}".format(resistance) + " kN")
+        #st.write("Power: " + "{:.1f}".format(ref_power) + " kW")
+        #st.write("Distance: " + "{:.1f}".format(distance) + " km")
+        #st.write("Speed: " + "{:.1f}".format(speed) + " km/h")
+        #st.write("Energy wo/: " + "{:.1f}".format(ref_energy) + " kWh")
+        #st.write("Fuel cons. wo/: " + "{:.f}".format(ref_fuel) + " L")
 
-        #frequency = distance / st.session_state['wind_data']['DIST'].sum()
-
-        lst_speed.append(wind_speed)
-        lst_angle.append(wind_angle)
-        #lst_frequency.append(frequency)
+        genre = st.radio(
+            "Choose type:",
+            ["True wind", "Apparent wind"]
+        )
         
-        #st.write("Distance: " + str(distance) + " km")
-        #st.write("Wind speed: " + str(wind_speed * 3.6) + " km/h")
-        #st.write("Wind angle: " + str(wind_angle * 180. / np.pi) + " deg")
-        #st.write("Wind load: " + str(st.session_state['wind'].aero_force(wind_speed, wind_angle) / 1000) + " kN")
+        new_energy = 0
+        lst_speed, lst_angle, lst_frequency = ([] for i in range(3))
+        for idx, row in st.session_state['wind_data'].iterrows():
+            if genre == "True wind":
+                distance, wind_speed, wind_angle, _, _ = row.values.tolist()
+            else:
+                distance, _, _, wind_speed, wind_angle, = row.values.tolist()
+
+            #frequency = distance / st.session_state['wind_data']['DIST'].sum()
+
+            lst_speed.append(wind_speed)
+            lst_angle.append(wind_angle)
+            #lst_frequency.append(frequency)
+            
+            #st.write("Distance: " + str(distance) + " km")
+            #st.write("Wind speed: " + str(wind_speed * 3.6) + " km/h")
+            #st.write("Wind angle: " + str(wind_angle * 180. / np.pi) + " deg")
+            #st.write("Wind load: " + str(st.session_state['wind'].aero_force(wind_speed, wind_angle) / 1000) + " kN")
+            
+            wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
+            new_energy += st.session_state['ship'].propulsion_power(external_force=-wind_load) / 1000 * distance / speed
+            
+        import pandas as pd
+        import plotly.express as px
         
-        wind_load = st.session_state['wind'].aero_force(wind_speed, wind_angle)
-        new_energy += st.session_state['ship'].propulsion_power(external_force=-wind_load) / 1000 * distance / speed
+        d = {'speed': lst_speed, 'dir': lst_angle}
+        df = pd.DataFrame(data=d)
+
+        # populate values in new columns
+        df['dirDeg'] = df['dir'] * 180. / np.pi #+ 180.
+        df['speedKt'] = df['speed'] * 1.944
+        bins = [-1, 5, 10, 15, 25, np.inf]
+        names = ['0-5 kt', '5-10 kt', '10-15 kt', '15-25 kt', '>25 kt']
+        df['speedKtRange'] = pd.cut(df['speedKt'], bins, labels=names)
+
+        bins = np.linspace(0, 360, 17) + 11.25
+        bins = np.insert(bins, 0, 0)
+        names = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW', 'N2']
+        df['dirDegRange'] = pd.cut(df['dirDeg'], bins, labels=names)
+        df['dirDegRange'] = df['dirDegRange'].replace('N2', 'N')
+
+        grp = df.groupby(["dirDegRange","speedKtRange"]).size()\
+                    .reset_index(name="frequency")
+
+        grp['percentage'] = grp['frequency']/grp['frequency'].sum()*100
+
+        fig = px.bar_polar(grp, r="percentage",
+            theta="dirDegRange", color="speedKtRange",
+            template="plotly_dark",
+            color_discrete_sequence= ['#482878','#31688e','#1f9e89','#6ece58','#fde725'])
+
+        fig.update_layout(polar_radialaxis_ticksuffix='%')
+                        #polar_angularaxis_ticks=np.linspace(0, 360, num=16, endpoint=False))
+
+        st.plotly_chart(fig)
+
         
-    import pandas as pd
-    import plotly.express as px
-    
-    d = {'speed': lst_speed, 'dir': lst_angle}
-    df = pd.DataFrame(data=d)
+        diff_energy = ref_energy - new_energy
+        pc_energy = diff_energy / ref_energy * 100.
+        new_fuel = new_energy * 155. / 900.
+        diff_fuel = ref_fuel - new_fuel
+        pc_fuel = diff_fuel / ref_fuel * 100.
+        new_emissions = new_fuel * 900. * 3.206 / 1000000
+        diff_emissions = ref_emissions - new_emissions
+        pc_emissions = diff_emissions / ref_emissions * 100.
+        #st.write("Energy w/: " + str(new_energy) + " kWh")
+        #st.write("Fuel cons. w/: " + str(new_fuel) + " L")
+        #st.write("Emissions w/: " + str(new_emissions) + " TCO2")
 
-    # populate values in new columns
-    df['dirDeg'] = df['dir'] * 180. / np.pi + 180.
-    df['speedKt'] = df['speed'] * 1.944
-    bins = [-1, 10, 20, 30, np.inf]
-    names = ['0-10 kt', '10-20 kt', '20-30 kt', '30 kt']
-    df['speedKtRange'] = pd.cut(df['speedKt'], bins, labels=names)
+        if genre == "Apparent wind":
+            col1, col2, col3 = st.columns(3)
+            col1.metric("Power savings", '{0:,.0f} kWh'.format(diff_energy), '{0:.1f} %'.format(pc_energy))
+            col2.metric("Fuel savings", '{0:,.0f} L'.format(diff_fuel), '{0:.1f} %'.format(pc_fuel))
+            col3.metric("Emission savings", '{0:,.0f} TCO2e'.format(diff_emissions), '{0:.1f} %'.format(pc_emissions))
 
-    bins = np.linspace(0, 360, 17) + 11.25
-    bins = np.insert(bins, 0, 0)
-    names = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW', 'N2']
-    df['dirDegRange'] = pd.cut(df['dirDeg'], bins, labels=names)
-    df['dirDegRange'] = df['dirDegRange'].replace('N2', 'N')
-
-    grp = df.groupby(["dirDegRange","speedKtRange"]).size()\
-                .reset_index(name="frequency")
-
-    grp['percentage'] = grp['frequency']/grp['frequency'].sum()*100
-
-    fig = px.bar_polar(grp, r="percentage",
-        theta="dirDegRange", color="speedKtRange",
-        template="plotly_dark",
-        color_discrete_sequence=px.colors.sequential.Reds)
-
-    fig.update_layout(polar_radialaxis_ticksuffix='%')
-                      #polar_angularaxis_ticks=np.linspace(0, 360, num=16, endpoint=False))
-
-    st.plotly_chart(fig)
-
-    
-    diff_energy = ref_energy - new_energy
-    pc_energy = diff_energy / ref_energy * 100.
-    new_fuel = new_energy * 155. / 900.
-    diff_fuel = ref_fuel - new_fuel
-    pc_fuel = diff_fuel / ref_fuel * 100.
-    new_emissions = new_fuel * 900. * 3.206 / 1000000
-    diff_emissions = ref_emissions - new_emissions
-    pc_emissions = diff_emissions / ref_emissions * 100.
-    #st.write("Energy w/: " + str(new_energy) + " kWh")
-    #st.write("Fuel cons. w/: " + str(new_fuel) + " L")
-    #st.write("Emissions w/: " + str(new_emissions) + " TCO2")
-
-    st.write("You saved:")
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Power", '{0:,.0f} kWh'.format(diff_energy), '{0:.1f} %'.format(pc_energy))
-    col2.metric("Fuel", '{0:,.0f} L'.format(diff_fuel), '{0:.1f} %'.format(pc_fuel))
-    col3.metric("Emissions", '{0:,.0f} TCO2e'.format(diff_emissions), '{0:.1f} %'.format(pc_emissions))
-
-@st.dialog("🧭 Navigation")
+@st.dialog("🧭 Navigation", width="large")
 def help():
     st.markdown(
         """
         Use the buttons at the top to go through the different steps...
         
-            :material/sailing: Choose ship type. Use arrows or swipe left/right.
+        :material/sailing: Choose ship type. Use arrows or swipe left/right.
         
-            :material/air: Choose wind device. Select image to show more information.
+        :material/air: Choose wind device. Select image to show more information.
         
-            :material/route: Create shortest route. Choose ports of origin and destination.
+        :material/route: Create shortest route. Choose ports of origin and destination.
         
-        ... and press :material/balance: to compare the gains.
+        ... and press :material/bolt: to estimate the savings.
         
         Click :material/explore: to show this page.
         """
@@ -164,7 +179,7 @@ def menu(counter):
             st.switch_page("./pages/page_2.py")
         if st.button(":material/route:"):
             st.switch_page("./pages/page_3.py")
-        if st.button(":material/balance:"):
+        if st.button(":material/bolt:"):
             predict(42, 12)
         if st.button(":material/explore:"):
             help()

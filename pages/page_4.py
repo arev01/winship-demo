@@ -3,10 +3,12 @@ from utils.functions import menu, prompt
 
 menu(counter=4)
 
-st.markdown("### 📚 Information")
+st.markdown("### 📚 Resource")
 
 st.markdown(
     """
+    Winship is a tool that evaluates the potential of a WINd-assisted SHIP in 3 simple steps: choose ship type, choose wind device and create shortest route.
+
     The tool works by balancing the aerodynamic and hydrodynamic forces of the ship. It takes into account the most important eﬀects of the wind powered devices to estimate the fuel and emission savings for a defined route (origin and destination port), ship design and speed as per [1].
     
     Due to the complexity of the problem, some approximations are made using basic ship theory:
@@ -25,11 +27,11 @@ st.markdown(
     
     - WINSHIP uses generic ship models and wind devices with typical dimensions used in the maritime industry.
     
-    - No interaction
+    - The tool does not take into account interactions between wind devices.
     """
 )
 
-st.empty()
+st.divider()
 
 st.markdown(
     """

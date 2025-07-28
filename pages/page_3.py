@@ -5,107 +5,112 @@ menu(counter=3)
 
 st.markdown("### Create shortest route")
 
-import xarray as xr
-import numpy as np
-import pandas as pd
+if 'ship' not in st.session_state:
+    st.error("No ship selected")
+else:
 
-# Open the ERA-5 data
-data = xr.open_dataset("resources/ERA5.nc")
+    import xarray as xr
+    import numpy as np
+    import pandas as pd
 
-# Define latitude and longitude coordinates
-lat = data.latitude[::3]
-lat = lat.sortby(lat)
-lon = data.longitude[::3] - 180.
+    # Open the ERA-5 data
+    data = xr.open_dataset("resources/ERA5.nc")
 
-# Define the u-, v- wind speeds
-wind_u = data.u[:,0,::3,::3].mean(axis=0)
-wind_v = data.v[:,0,::3,::3].mean(axis=0)
+    # Define latitude and longitude coordinates
+    lat = data.latitude[::3]
+    lat = lat.sortby(lat)
+    lon = data.longitude[::3] - 180.
 
-def find_index(x, y):
-    global lat, lon
-    xi = np.searchsorted(lat, x)-1
-    yi = np.searchsorted(lon, y)-1
-    return xi, yi
+    # Define the u-, v- wind speeds
+    wind_u = data.u[:,0,::3,::3].mean(axis=0)
+    wind_v = data.v[:,0,::3,::3].mean(axis=0)
 
-from utils.nodes import nodes
+    def find_index(x, y):
+        global lat, lon
+        xi = np.searchsorted(lat, x)-1
+        yi = np.searchsorted(lon, y)-1
+        return xi, yi
 
-#Define origin and destination ports
-tab1, tab2 = st.tabs(["Origin", "Destination"])
-values = ['<select>', *nodes.keys()]
+    from utils.nodes import nodes
 
-with tab1:
-    origin = st.selectbox(
-        "Select port of origin:",
-        values
-    )
-with tab2:
-    destination = st.selectbox(
-        "Select port of destination:",
-        values
-    )
+    #Define origin and destination ports
+    tab1, tab2 = st.tabs(["Origin", "Destination"])
+    values = ['<select>', *nodes.keys()]
 
-# Use a maritime network geograph
-from scgraph.geographs.marnet import marnet_geograph
+    with tab1:
+        origin = st.selectbox(
+            "Select port of origin:",
+            values
+        )
+    with tab2:
+        destination = st.selectbox(
+            "Select port of destination:",
+            values
+        )
 
-col = ["latitude", "longitude"]
+    # Use a maritime network geograph
+    from scgraph.geographs.marnet import marnet_geograph
 
-if origin != '<select>' and destination != '<select>':
-    # Get the shortest path between 
-    marnet_output = marnet_geograph.get_shortest_path(
-        origin_node = {col[i]: nodes[origin][i] for i, _ in enumerate(col)},
-        destination_node = {col[i]: nodes[destination][i] for i, _ in enumerate(col)},
-        output_units = "km"
-    )
-    st.write("Distance: " + str(marnet_output['length']) + " km")
+    col = ["latitude", "longitude"]
 
-    df = pd.DataFrame(
-        #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
-        marnet_output['coordinate_path'],
-        columns = col,
-    )
-    st.map(df, height=300)
+    if origin != '<select>' and destination != '<select>':
+        # Get the shortest path between 
+        marnet_output = marnet_geograph.get_shortest_path(
+            origin_node = {col[i]: nodes[origin][i] for i, _ in enumerate(col)},
+            destination_node = {col[i]: nodes[destination][i] for i, _ in enumerate(col)},
+            output_units = "km"
+        )
+        st.write("Distance: " + "{:.1f}".format(marnet_output['length']) + " km")
 
-    st.toggle("Show wind", disabled=True, help="Currently unavailable")
+        df = pd.DataFrame(
+            #np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+            marnet_output['coordinate_path'],
+            columns = col,
+        )
+        st.map(df, height=300)
 
-    from lib.pyaero import navigation
+        st.toggle("Show wind", disabled=True, help="Currently unavailable")
 
-    lst = []
-    for i in range(len(marnet_output['coordinate_path'])-1):
-        p1 = marnet_output['coordinate_path'][i]
-        p2 = marnet_output['coordinate_path'][i+1]
+        from lib.pyaero import navigation
 
-        if p2[1] == p1[1] and p2[0] > p1[0]:
-            boat_u = 0.
-            boat_v = st.session_state['ship'].speed1
-        elif p2[1] == p1[1] and p2[0] < p1[0]:
-            boat_u = 0.
-            boat_v = -1. * st.session_state['ship'].speed1
-        else:
-            p0 = [y - x for x, y in zip(p1, p2)]
-            phi = np.atan2(p0[0], p0[1])
-            boat_u = st.session_state['ship'].speed1 * np.cos(phi)
-            boat_v = st.session_state['ship'].speed1 * np.sin(phi)
+        lst = []
+        for i in range(len(marnet_output['coordinate_path'])-1):
+            p1 = marnet_output['coordinate_path'][i]
+            p2 = marnet_output['coordinate_path'][i+1]
 
-        xi, yi = find_index(*p1)
+            if p2[1] == p1[1] and p2[0] > p1[0]:
+                boat_u = 0.
+                boat_v = st.session_state['ship'].speed1
+            elif p2[1] == p1[1] and p2[0] < p1[0]:
+                boat_u = 0.
+                boat_v = -1. * st.session_state['ship'].speed1
+            else:
+                p0 = [y - x for x, y in zip(p1, p2)]
+                phi = np.arctan2(p0[0], p0[1])
+                #phi = np.arctan2(*p0.T[::-1])
+                boat_u = st.session_state['ship'].speed1 * np.cos(phi)
+                boat_v = st.session_state['ship'].speed1 * np.sin(phi)
 
-        #st.write(*p1)
-        #st.write(xi, yi)
-        #st.write(lat.item(xi), lon.item(yi))
-        #st.write(wind_u.shape)
-        #st.write(wind_u[xi, yi])
+            xi, yi = find_index(*p1)
 
-        # Construct speed vectors
-        v0 = np.asarray([boat_u, boat_v], dtype=float)
-        v1 = np.asarray([wind_u[xi, yi], wind_v[xi, yi]], dtype=float)
+            #st.write(*p1)
+            #st.write(xi, yi)
+            #st.write(lat.item(xi), lon.item(yi))
+            #st.write(wind_u.shape)
+            #st.write(wind_u[xi, yi])
 
-        st.write("v0: ", *v0)
-        st.write("v1: ", *v1)
-        tws, twa, aws, awa = navigation.velocity(v0, v1)
-        st.write("aws: ", aws)
-        st.write("awa: ", awa * 180. / np.pi)
-        st.write()
-    
-        lst.append([navigation.distance(*p1, *p2), *navigation.velocity(v0, v1)])
-    
-    wind_data = pd.DataFrame(lst, columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
-    st.session_state['wind_data'] = wind_data
+            # Construct speed vectors
+            v0 = np.asarray([boat_u, boat_v], dtype=float)
+            v1 = np.asarray([wind_u[xi, yi], wind_v[xi, yi]], dtype=float)
+
+            #st.write("v0: ", *v0)
+            #st.write("v1: ", *v1)
+            #tws, twa, aws, awa = navigation.velocity(v0, v1)
+            #st.write("aws: ", aws)
+            #st.write("awa: ", awa * 180. / np.pi)
+            #st.write()
+        
+            lst.append([navigation.distance(*p1, *p2), *navigation.velocity(v0, v1)])
+        
+        wind_data = pd.DataFrame(lst, columns=['DIST', 'TWS', 'TWA', 'AWS', 'AWA'])
+        st.session_state['wind_data'] = wind_data

@@ -21,7 +21,8 @@ def velocity(v0, v1):
     TWS = np.sqrt(v1[0] **2 + v1[1] **2)
 
     # Get true wind angle
-    TWA = np.atan2(np.linalg.det([v1, v0]), np.dot(v1, v0)) + np.pi
+    #TWA = np.arctan2(np.linalg.det([v1, v0]), np.dot(v1, v0)) + np.pi
+    TWA = np.arctan2(*v1.T[::-1])
 
     # Get apparent wind speed
     AWS = np.sqrt(TWS **2 + BS **2 + 2 * TWS * BS * np.cos(TWA))
