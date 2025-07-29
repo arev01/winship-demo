@@ -20,7 +20,7 @@ with st.expander("Description"):
 from lib.pyhydro import read_ship, ship
 
 file_name = my_output_value + ".shp"
-path_to_file = "resources/" + file_name
+path_to_file = "./resources/prf/" + file_name
 
 out = read_ship.open(path_to_file)
 ship = ship.Ship(**out)
