@@ -52,7 +52,7 @@ def main():
         unsafe_allow_html=True
     )
     
-    st.badge("Disclaimer: This tool is intended for educational purpose only.")
+    st.badge("Disclaimer: Use this tool at your own risk.")
 
 if __name__=='__main__':
     main()
