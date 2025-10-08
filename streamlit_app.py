@@ -46,7 +46,7 @@ def main():
 
     st.markdown(
         f'''
-        For more information, check the <a href="{app_path}/{page}" target="_self">Resource</a> section.
+        For more information, check out the <a href="{app_path}/{page}" target="_self">Resources</a> section.
         ''',
         
         unsafe_allow_html=True
