@@ -118,7 +118,7 @@ def predict(varA, varB):
 
         fig = px.bar_polar(grp, r="percentage",
             theta="dirDegRange", color="speedKtRange",
-            border_color="black",
+            marker_line=dict(width=1, color="black"),
             template="plotly_dark",
             color_discrete_sequence= ['#482878','#31688e','#1f9e89','#6ece58','#fde725'])
 
