@@ -121,7 +121,7 @@ def predict(varA, varB):
             template="plotly_dark",
             color_discrete_sequence=['#482878','#31688e','#1f9e89','#6ece58','#fde725'])
 
-        fig.update_layout(polar_radialaxis_ticksuffix='%', marker_line_width=1)
+        fig.update_layout(polar_radialaxis_ticksuffix='%')
                         #polar_angularaxis_ticks=np.linspace(0, 360, num=16, endpoint=False))
 
         st.plotly_chart(fig)
