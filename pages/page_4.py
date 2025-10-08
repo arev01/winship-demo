@@ -3,7 +3,7 @@ from utils.functions import menu, prompt
 
 menu(counter=4)
 
-st.markdown("### 📚 Resource")
+st.markdown("### 📚 Resources")
 
 st.markdown(
     """
