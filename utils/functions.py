@@ -147,7 +147,7 @@ def predict(varA, varB):
 
     import pandas as pd
     
-    confusion_matrix = pd.DataFrame(
+    df = pd.DataFrame(
         {
             "Predicted Cat": [st.session_state['ship'].gross_tonnage,
                              st.session_state['ship'].length,
@@ -157,7 +157,12 @@ def predict(varA, varB):
         },
         index=["Gross Tonnage", "Length", "Beam", "Draft", "Speed"],
     )
-    st.table(confusion_matrix)
+
+    st.dataframe(
+        data=df,
+        width="stretch",
+        hide_index=True,
+    )
 
 @st.dialog("🧭 Navigation", width="large")
 def help():
