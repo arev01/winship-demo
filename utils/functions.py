@@ -153,7 +153,8 @@ def predict(varA, varB):
                      "Length (m): %s".format(st.session_state['ship'].length),
                      "Beam (m): %s".format(st.session_state['ship'].beam),
                      "Draft (m): %s".format(st.session_state['ship'].draft),
-                     "Speed (kt): %s".format(st.session_state['ship'].speed]),
+                     "Speed (kt): %s".format(st.session_state['ship'].speed)
+                    ],
         },
     )
 
