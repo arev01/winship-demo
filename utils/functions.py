@@ -145,6 +145,19 @@ def predict(varA, varB):
             col2.metric("Fuel savings", '{0:,.0f} L'.format(diff_fuel), '{0:.1f} %'.format(pc_fuel))
             col3.metric("Emission savings", '{0:,.0f} TCO2e'.format(diff_emissions), '{0:.1f} %'.format(pc_emissions))
 
+    import pandas as pd
+    
+    confusion_matrix = pd.DataFrame(
+        {
+            "Predicted Cat": [85, 3, 2, 1],
+            "Predicted Dog": [2, 78, 4, 0],
+            "Predicted Bird": [1, 5, 72, 3],
+            "Predicted Fish": [0, 2, 1, 89],
+        },
+        index=["Actual Cat", "Actual Dog", "Actual Bird", "Actual Fish"],
+    )
+    st.table(confusion_matrix)
+
 @st.dialog("🧭 Navigation", width="large")
 def help():
     st.markdown(
