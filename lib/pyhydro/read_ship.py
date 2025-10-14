@@ -19,8 +19,6 @@ def open(file=None):
             out[key] = float(value)
             #self.__keys.append(key)
     
-    out['type'] = file.split('/')[-1].split('.')[0]
-    
     return out
 
 def edit(file=None):
