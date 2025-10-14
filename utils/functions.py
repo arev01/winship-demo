@@ -145,6 +145,7 @@ def predict(varA, varB):
             col2.metric("Fuel savings", '{0:,.0f} L'.format(diff_fuel), '{0:.1f} %'.format(pc_fuel))
             col3.metric("Emission savings", '{0:,.0f} TCO2e'.format(diff_emissions), '{0:.1f} %'.format(pc_emissions))
 
+    st.write(st.session_state['ship'].loc['gross_tonnage', 'length'])
     st.write(st.session_state['ship'].gross_tonnage, st.session_state['ship'].length, st.session_state['ship'].beam, st.session_state['ship'].draft, st.session_state['ship'].speed)
     
     import pandas as pd
