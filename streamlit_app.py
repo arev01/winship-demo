@@ -27,26 +27,15 @@ def main():
     )
     
     # Button to switch page
-    col1, col2, col3, col4, col5 = st.columns(5)
-
-    with col1:
-        pass
-    with col2:
-        pass
-    with col4:
-        pass
-    with col5:
-        pass
-    with col3:
-        next_page = st.button("Set sail")
-        if next_page:
-            # Switch to the selected page
-            page_file = "./pages/page_1.py"
-            st.switch_page(page_file)
+    next_page = st.button("Set sail")
+    if next_page:
+        # Switch to the selected page
+        page_file = "./pages/page_1.py"
+        st.switch_page(page_file)
 
     st.markdown(
         f'''
-        For more information, check out the <a href="{app_path}/{page}" target="_self">Resources</a> section.
+        For more information, check out the <a href="./pages/page_4.py" target="_self">Resources</a> section.
         ''',
         
         unsafe_allow_html=True
