@@ -25,6 +25,7 @@ path_to_file = "./resources/prf/" + file_name
 out = read_ship.open(path_to_file)
 ship = ship.Ship(**out)
 
+ship.type = my_output_value
 st.session_state['ship'] = ship
 
 control = st.segmented_control("Specify ship size:",
