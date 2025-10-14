@@ -149,18 +149,17 @@ def predict(varA, varB):
     
     df = pd.DataFrame(
         {
-            "Predicted Cat": [st.session_state['ship'].gross_tonnage,
-                             st.session_state['ship'].length,
-                             st.session_state['ship'].beam,
-                             st.session_state['ship'].draft,
-                             st.session_state['ship'].speed],
+            "Ship": ["Gross tonnage (tons): %s".format(st.session_state['ship'].gross_tonnage),
+                     "Length (m): %s".format(st.session_state['ship'].length),
+                     "Beam (m): %s".format(st.session_state['ship'].beam),
+                     "Draft (m): %s".format(st.session_state['ship'].draft),
+                     "Speed (kt): %s".format(st.session_state['ship'].speed]),
         },
-        index=["Gross Tonnage", "Length", "Beam", "Draft", "Speed"],
     )
 
     st.dataframe(
         data=df,
-        width="stretch",
+        width="content",
         hide_index=True,
     )
 
