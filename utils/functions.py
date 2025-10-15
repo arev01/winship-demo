@@ -42,7 +42,7 @@ def st_horizontal():
 
 import numpy as np
 
-@st.dialog(":material/energy_savings_leaf: Savings", width="large")
+@st.dialog("Savings", width="large")
 def predict(varA, varB):
     if 'ship' not in st.session_state:
         st.error("No ship selected")
@@ -164,7 +164,7 @@ def predict(varA, varB):
         hide_index=True,
     )
 
-@st.dialog("🧭 Navigation", width="large")
+@st.dialog("Navigation", width="large")
 def help():
     st.markdown(
         """
@@ -198,7 +198,7 @@ def menu(counter):
             st.switch_page("./pages/page_2.py")
         if st.button(":material/route:"):
             st.switch_page("./pages/page_3.py")
-        if st.button(":material/bolt:"):
+        if st.button(":material/energy_savings_leaf:"):
             predict(42, 12)
         if st.button(":material/explore:"):
             help()
