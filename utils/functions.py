@@ -65,10 +65,11 @@ def predict(varA, varB):
         #st.write("Energy wo/: " + "{:.1f}".format(ref_energy) + " kWh")
         #st.write("Fuel cons. wo/: " + "{:.f}".format(ref_fuel) + " L")
 
-        genre = st.radio(
-            "Choose type:",
-            ["True wind", "Apparent wind"]
-        )
+        #genre = st.radio(
+        #    "Choose type:",
+        #    ["True wind", "Apparent wind"]
+        #)
+        genre = "Apparent wind"
         
         new_energy = 0
         lst_speed, lst_angle, lst_frequency = ([] for i in range(3))
@@ -124,7 +125,7 @@ def predict(varA, varB):
         fig.update_layout(polar_radialaxis_ticksuffix='%')
                         #polar_angularaxis_ticks=np.linspace(0, 360, num=16, endpoint=False))
 
-        st.plotly_chart(fig)
+        #st.plotly_chart(fig)
 
         
         diff_energy = ref_energy - new_energy
@@ -145,24 +146,24 @@ def predict(varA, varB):
             col2.metric("Fuel savings", '{0:,.0f} L'.format(diff_fuel), '{0:.1f} %'.format(pc_fuel))
             col3.metric("Emission savings", '{0:,.0f} TCO2e'.format(diff_emissions), '{0:.1f} %'.format(pc_emissions))
 
-    import pandas as pd
+    #import pandas as pd
     
-    df = pd.DataFrame(
-        {
-            "Ship": ["Gross tonnage (tons): %s".format(st.session_state['ship'].gross_tonnage),
-                     "Length (m): %s".format(st.session_state['ship'].length),
-                     "Beam (m): %s".format(st.session_state['ship'].beam),
-                     "Draft (m): %s".format(st.session_state['ship'].draft),
-                     "Speed (kt): %s".format(st.session_state['ship'].speed)
-                    ],
-        },
-    )
+    #df = pd.DataFrame(
+    #    {
+    #        "Ship": ["Gross tonnage (tons): %s".format(st.session_state['ship'].gross_tonnage),
+    #                 "Length (m): %s".format(st.session_state['ship'].length),
+    #                 "Beam (m): %s".format(st.session_state['ship'].beam),
+    #                 "Draft (m): %s".format(st.session_state['ship'].draft),
+    #                 "Speed (kt): %s".format(st.session_state['ship'].speed)
+    #                ],
+    #    },
+    #)
 
-    st.dataframe(
-        data=df,
-        width="content",
-        hide_index=True,
-    )
+    #st.dataframe(
+    #    data=df,
+    #    width="content",
+    #    hide_index=True,
+    #)
 
 @st.dialog("Navigation", width="large")
 def help():
