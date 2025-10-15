@@ -24,7 +24,7 @@ def main():
     st.title("👋 Ahoy and welcome aboard!")
     app_path = 'http://localhost:8501'
     page_file = './pages/page_4.py'
-    page = page_file_path.split('/')[-1][0:-3]  # get "page_4"
+    page = page_file.split('/')[-1][0:-3]  # get "page_4"
     st.write(
         """
         Ready to explore how auxiliary wind propulsion can clean up the shipping industry?
