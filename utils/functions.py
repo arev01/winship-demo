@@ -42,7 +42,7 @@ def st_horizontal():
 
 import numpy as np
 
-@st.dialog("⚡ Savings", width="large")
+@st.dialog(":material/energy_savings_leaf: Savings", width="large")
 def predict(varA, varB):
     if 'ship' not in st.session_state:
         st.error("No ship selected")
@@ -176,7 +176,7 @@ def help():
         
         :material/route: Create shortest route. Choose ports of origin and destination.
         
-        ... and press :material/bolt: to estimate the savings.
+        ... and press :material/energy_savings_leaf: to estimate the savings.
         
         Click :material/explore: to show this page.
         """
