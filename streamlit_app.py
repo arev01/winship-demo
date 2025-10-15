@@ -40,7 +40,7 @@ def main():
 
     st.markdown(
         f'''
-        For more information, check out the <a href={url}/{page} target="_self">Resources</a> section.
+        For more information, check out the <a href="{url}/{page}" target="_self">Resources</a> section.
         ''',
         
         unsafe_allow_html=True
