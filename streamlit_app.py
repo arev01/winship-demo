@@ -2,8 +2,6 @@ import streamlit as st
 from streamlit_javascript import st_javascript
 
 url = st_javascript("await fetch('').then(r => window.parent.location.href)")[0:-5]
-st.write(url)
-
 
 st.set_page_config(initial_sidebar_state="collapsed")
 
