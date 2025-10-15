@@ -1,7 +1,7 @@
 import streamlit as st
 from streamlit_javascript import st_javascript
 
-url = st_javascript("await fetch('').then(r => window.parent.location.href)")
+url = st_javascript("await fetch('').then(r => window.parent.location.href)")[0:-5]
 st.write(url)
 
 
@@ -23,8 +23,8 @@ st.markdown(
 def main():
     st.title("👋 Ahoy and welcome aboard!")
     app_path = 'http://localhost:8501'
-    page_file_path = 'pages/page_4.py'
-    page = page_file_path.split('/')[1][0:-3]  # get "page_4"
+    page_file = './pages/page_4.py'
+    page = page_file_path.split('/')[-1][0:-3]  # get "page_4"
     st.write(
         """
         Ready to explore how auxiliary wind propulsion can clean up the shipping industry?
@@ -40,7 +40,7 @@ def main():
 
     st.markdown(
         f'''
-        For more information, check out the <a href="./pages/page_4.py" target="_self">Resources</a> section.
+        For more information, check out the <a href={url}/{page} target="_self">Resources</a> section.
         ''',
         
         unsafe_allow_html=True
